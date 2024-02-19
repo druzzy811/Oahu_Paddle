@@ -1,0 +1,62 @@
+
+
+
+const auth_link = "https://www.strava.com/oauth/token" 
+
+
+function getActivities(res){
+
+	const activities_link = `https://www.strava.com/api/v3/athlete/activities?access_token=${res.access_token}`
+	fetch(activities_link)
+		.then((res) => (res.json()))
+		.then(function (data){
+
+			var map = L.map('map').setView([21.306944, -157.858337], 11);
+			L.tileLayer('https://watercolormaps.collection.cooperhewitt.org/tile/watercolor/{z}/{x}/{y}.jpg', {
+    		maxZoom: 19,
+    		attribution: '© OpenStreetMap'
+			}).addTo(map);
+
+			for (var x=0; x<data.length; x++){
+				console.log(data[x].map.summary_polyline)
+				var coordinates = L.Polyline.fromEncoded(data[x].map.summary_polyline).getLatLngs()
+				console.log(coordinates)
+
+
+				L.polyline(
+					coordinates,
+					{
+						color: "Red",
+						weight: 5,
+						opacity: 1,
+						lineJoin: 'round'
+					}
+					).addTo(map);
+				// Add a popup to the polyline
+                polyline.bindPopup(`Activity ${x + 1}`);
+			}
+		})
+}
+
+
+function reAuthorize(){
+	fetch (auth_link,{
+		method: 'post',
+		headers: {
+			'Accept': 'application/json, text/plan, */*',
+			'Content-Type': 'application/json'
+		},
+
+		body: JSON.stringify({
+
+			client_id: '119993',
+			client_secret: '67840b78f22679aab9989426c78b87b597a102de',
+			refresh_token: 'ec624131076c98a1d017f6fe24047eff07fdb52a',
+			grant_type: 'refresh_token'
+		})
+	}).then(res => res.json())
+		.then(res => getActivities(res))
+
+}
+
+reAuthorize()
