@@ -32,7 +32,8 @@ function getActivities(res){
                 }).addTo(map);
 
                 // Add a popup to the polyline
-                polyline.bindPopup(`Activity ${x + 1}`).openPopup();			}
+                polyline.bindPopup(`Paddle ${x + 1}`).openPopup();			
+            }
 		})
 }
 
