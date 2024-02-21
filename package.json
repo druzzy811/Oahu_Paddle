@@ -1,0 +1,19 @@
+{
+  "name": "oahu_paddle",
+  "version": "1.0.0",
+  "description": "strava_mapping",
+  "main": "Polyline.encoded.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/druzzy811/Oahu_Paddle.git"
+  },
+  "author": "Drew Burrier",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/druzzy811/Oahu_Paddle/issues"
+  },
+  "homepage": "https://github.com/druzzy811/Oahu_Paddle#readme"
+}
