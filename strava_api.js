@@ -31,8 +31,11 @@ function getActivities(res){
                     lineJoin: 'round'
                 }).addTo(map);
 
-                // Add a popup to the polyline
-                polyline.bindPopup(`Paddle ${x + 1}`).openPopup();			
+                                // Extract the activity date from the data
+                var activityDate = new Date(data[x].start_date).toLocaleDateString();
+
+                // Add a popup to the polyline with paddle number and activity date
+                polyline.bindPopup(`Paddle ${x + 1}<br>Date: ${activityDate}`).openPopup();			
             }
 		})
 }
