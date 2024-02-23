@@ -48,10 +48,16 @@ function reAuthorize(){
 
 		body: JSON.stringify({
 
-			client_id: 'process.env.CLIENT_ID',
+			client_id: '119993',
+			client_secret: '67840b78f22679aab9989426c78b87b597a102de',
+			refresh_token: 'ec624131076c98a1d017f6fe24047eff07fdb52a',
+			grant_type: 'refresh_token'
+			
+/*			client_id: 'process.env.CLIENT_ID',
 			client_secret: 'process.env.CLIENT_SECRET',
 			refresh_token: 'process.env.REFRESH_TOKEN',
-			grant_type: 'refresh_token'
+			grant_type: 'refresh_token'*/
+			
 		})
 	}).then(res => res.json())
 		.then(res => getActivities(res))
