@@ -31,11 +31,15 @@ function getActivities(res){
                     lineJoin: 'round'
                 }).addTo(map);
 
-                                // Extract the activity date from the data
+                // Extract the activity date from the data
                 var activityDate = new Date(data[x].start_date).toLocaleDateString();
 
-                // Add a popup to the polyline with paddle number and activity date
-                polyline.bindPopup(`Paddle ${x + 1}<br>Date: ${activityDate}`).openPopup();			
+                  // Extract the activity distance from the data (assuming it's in meters)
+                var activityDistanceKm = data[x].distance / 1000;
+                var activityDistanceMiles = (activityDistanceKm * 0.621371).toFixed(2); // Convert to miles and round to 2 decimal places
+
+                // Add a popup to the polyline with paddle number, activity date, and activity distance in miles
+                polyline.bindPopup(`Paddle ${x + 1}<br>Date: ${activityDate}<br>Distance: ${activityDistanceMiles} miles`).openPopup();			
             }
 		})
 }

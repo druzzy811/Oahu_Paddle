@@ -1,14 +1,43 @@
 #map{
 
-    height: 900px;
-    width:  1000px;
+    height: 700px;
+    width:  900px;
     display: inline-block;
-        margin-bottom: 80px; /* Adjust margin to accommodate the banner height */
+    margin-top: 40px; /* Adjust margin to accommodate the top banner height */
+    margin-bottom: 80px; /* Adjust margin to accommodate the banner height */
 }
 
 
 body {
     text-align: center;
+}
+
+.top-banner {
+    background-color: #778899;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+.top-banner h2 {
+    margin: 0;
+}
+
+.top-banner nav {
+    display: flex;
+}
+
+.top-banner a {
+    margin: 0 10px;
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.top-banner a:hover {
+    color: #ddd;
 }
 
 .banner {
