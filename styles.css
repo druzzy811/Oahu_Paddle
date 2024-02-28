@@ -10,15 +10,22 @@
 
 body {
     text-align: center;
+    font-family: 'Copperplate', sans-serif;
+     margin: 0; /* Remove default margin for the body */
+}
+h1, h2 {
+    font-family: 'Copperplate', sans-serif; /* Specify Copperplate or a suitable fallback font */
+
 }
 
 .top-banner {
-    background-color: #778899;
+    background-color: #191970;
     padding: 10px;
     text-align: center;
     color: white;
     display: flex;
     justify-content: space-between;
+    font-family: 'Copperplate', sans-serif;
 }
 
 .top-banner h2 {
@@ -45,7 +52,7 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #778899;
+    background-color: #191970;
     padding: 10px;
     text-align: left; /* Align text to the left */
 }
