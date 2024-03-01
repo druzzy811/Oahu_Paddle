@@ -1,34 +1,32 @@
-#map{
+/* Update styles.css */
 
-    height: 700px;
-    width:  1000px;
-    display: inline-block;
-    margin-top: 40px; /* Adjust margin to accommodate the top banner height */
-    margin-bottom: 80px; /* Adjust margin to accommodate the banner height */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* Prevent default browser margin */
 }
 
-
-body {
-    text-align: center;
-    font-family: 'Copperplate', sans-serif;
-     margin: 0; /* Remove default margin for the body */
-}
-h1, h2 {
-    font-family: 'Copperplate', sans-serif; /* Specify Copperplate or a suitable fallback font */
-
+#map {
+    height: calc(100% - 120px); /* Adjust the value based on the combined height of the top and bottom banners */
+    width: 100%;
 }
 
 .top-banner {
-    background-color: #191970;
+    background-color: #778899;
     padding: 10px;
     text-align: center;
     color: white;
     display: flex;
     justify-content: space-between;
-    font-family: 'Copperplate', sans-serif;
 }
 
-.top-banner h2 {
+.top-banner img {
+    max-width: 100%;
+    max-height: 50px;
+}
+
+.top-banner h1 {
     margin: 0;
 }
 
@@ -52,26 +50,31 @@ h1, h2 {
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #191970;
+    background-color: #778899;
     padding: 10px;
-    text-align: left; /* Align text to the left */
+    text-align: left;
 }
 
 .banner h2 {
     margin: 0;
     color: white;
-    display: inline-block; /* Align h2 horizontally with hyperlinks */
+    display: inline-block;
 }
 
 .banner a {
-    display: inline-block; /* Align hyperlinks horizontally */
+    display: inline-block;
     margin: 0 10px;
     padding: 10px;
-    background-color: #fff; /* Adjust link background color */
-    color: #4169E1; /* Adjust link text color */
+    background-color: #fff;
+    color: #4169E1;
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
+}
+
+.banner a:hover {
+    background-color: #333;
+    color: #fff;
 }
 
 .banner a:hover {

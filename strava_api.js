@@ -4,26 +4,26 @@
 const auth_link = "https://www.strava.com/oauth/token" 
 
 
-function getActivities(res){
+function getActivities(res) {
+    const activities_link = `https://www.strava.com/api/v3/athlete/activities?access_token=${res.access_token}`;
+    fetch(activities_link)
+        .then((res) => (res.json()))
+        .then(function (data) {
 
-	const activities_link = `https://www.strava.com/api/v3/athlete/activities?access_token=${res.access_token}`
-	fetch(activities_link)
-		.then((res) => (res.json()))
-		.then(function (data){
+            var map = L.map('map').setView([21.4960, -157.0118], 11); // Set Oahu's coordinates here
+             // Add this line to ensure the map is centered correctly on desktop
+            map.invalidateSize();
 
-			var map = L.map('map').setView([21.4960, -157.0118], 11);
-			L.tileLayer('https://watercolormaps.collection.cooperhewitt.org/tile/watercolor/{z}/{x}/{y}.jpg', {
-    		maxZoom: 19,
-    		attribution: '© OpenStreetMap'
-			}).addTo(map);
+            L.tileLayer('https://watercolormaps.collection.cooperhewitt.org/tile/watercolor/{z}/{x}/{y}.jpg', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap'
+            }).addTo(map);
 
-			  for (var x = data.length - 1; x >= 0; x--) {
-				console.log(data[x].map.summary_polyline)
-				var coordinates = L.Polyline.fromEncoded(data[x].map.summary_polyline).getLatLngs()
-				console.log(coordinates)
+            for (var x = 0; x < data.length; x++) {
+                console.log(data[x].map.summary_polyline);
+                var coordinates = L.Polyline.fromEncoded(data[x].map.summary_polyline).getLatLngs();
+                console.log(coordinates);
 
-
-				 // Declare polyline outside the loop
                 var polyline = L.polyline(coordinates, {
                     color: "Red",
                     weight: 5,
@@ -34,15 +34,16 @@ function getActivities(res){
                 // Extract the activity date from the data
                 var activityDate = new Date(data[x].start_date).toLocaleDateString();
 
-                  // Extract the activity distance from the data (assuming it's in meters)
+                // Extract the activity distance from the data (assuming it's in meters)
                 var activityDistanceKm = data[x].distance / 1000;
                 var activityDistanceMiles = (activityDistanceKm * 0.621371).toFixed(2); // Convert to miles and round to 2 decimal places
 
-                 // Add a popup to the polyline with reversed paddle number, activity date, and activity distance in miles
-                polyline.bindPopup(`Paddle ${data.length - x}<br>Date: ${activityDate}<br>Distance: ${activityDistanceMiles} miles`).openPopup();		
+                // Add a popup to the polyline with reversed paddle number, activity date, and activity distance in miles
+                polyline.bindPopup(`Paddle ${data.length - x}<br>Date: ${activityDate}<br>Distance: ${activityDistanceMiles} miles`).openPopup();
             }
-		})
+        });
 }
+
 
 
 function reAuthorize(){
