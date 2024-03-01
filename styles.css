@@ -1,13 +1,48 @@
-#map {
-    height: 700px;
-    width: 100%;
-    display: inline-block;
-    margin-bottom: 80px; /* Adjust margin to accommodate the banner height */
+/* Update styles.css */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* Prevent default browser margin */
 }
 
-body {
+#map {
+    height: calc(100% - 120px); /* Adjust the value based on the combined height of the top and bottom banners */
+    width: 100%;
+}
+
+.top-banner {
+    background-color: #778899;
+    padding: 10px;
     text-align: center;
-    margin: 0; /* Remove default margin to eliminate extra space */
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+.top-banner img {
+    max-width: 100%;
+    max-height: 50px;
+}
+
+.top-banner h1 {
+    margin: 0;
+}
+
+.top-banner nav {
+    display: flex;
+}
+
+.top-banner a {
+    margin: 0 10px;
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.top-banner a:hover {
+    color: #ddd;
 }
 
 .banner {
@@ -17,46 +52,29 @@ body {
     width: 100%;
     background-color: #778899;
     padding: 10px;
-    text-align: left; /* Align text to the left */
+    text-align: left;
 }
 
 .banner h2 {
     margin: 0;
     color: white;
-    display: inline-block; /* Align h2 horizontally with hyperlinks */
+    display: inline-block;
 }
 
 .banner a {
-    display: inline-block; /* Align hyperlinks horizontally */
+    display: inline-block;
     margin: 0 10px;
     padding: 10px;
-    background-color: #fff; /* Adjust link background color */
-    color: #4169E1; /* Adjust link text color */
+    background-color: #fff;
+    color: #4169E1;
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
 }
 
 .banner a:hover {
-    background-color: #333; /* Adjust link background color on hover */
-    color: #fff; /* Adjust link text color on hover */
-}
-
-@media screen and (max-width: 767px) {
-    .banner {
-        position: static;
-        width: 100%;
-        margin-top: 80px; /* Add margin to create space for the banner */
-    }
-
-    .banner h2 {
-        display: block; /* Allow h2 to be displayed in multiple lines on small screens */
-    }
-
-    #map {
-        height: 400px; /* Adjust map height for smaller screens */
-        margin-bottom: 0; /* Remove margin to position the map above the banner */
-    }
+    background-color: #333;
+    color: #fff;
 }
 
 .banner a:hover {
