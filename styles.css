@@ -45,6 +45,7 @@ body {
 @media screen and (max-width: 767px) {
     .banner {
         position: static;
+        width: 100%;
         margin-top: 80px; /* Add margin to create space for the banner */
     }
 
@@ -57,7 +58,6 @@ body {
         margin-bottom: 0; /* Remove margin to position the map above the banner */
     }
 }
-
 
 .banner a:hover {
     background-color: #333; /* Adjust link background color on hover */
