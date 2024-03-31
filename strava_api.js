@@ -10,7 +10,7 @@ function getActivities(res) {
         .then((res) => (res.json()))
         .then(function (data) {
 
-            var map = L.map('map').setView([21.4960, -157.0118], 11); // Set Oahu's coordinates here
+            var map = L.map('map').setView([21.466883, -157.942441], 11); // Set Oahu's coordinates here
              // Add this line to ensure the map is centered correctly on desktop
             map.invalidateSize();
 
