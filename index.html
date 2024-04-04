@@ -13,21 +13,45 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    <!-- Top Banner -->
-    <div class="top-banner">
-        <div class="top-content">
-            <h1>My Oceanic Odyssey</h1>
-            <nav>
-                <!-- Placeholder links for a bio -->
-                <a href="#">About the Author</a>
-                <a href="#">Link 2</a>
-                <a href="#">Link 3</a>
-            </nav>
+    <!-- First Page - Map -->
+    <div class="page">
+        <!-- Top Banner -->
+        <div class="top-banner">
+            <div class="top-content">
+                <h1>My Oceanic Odyssey</h1>
+                <nav>
+                    <!-- Placeholder links for a bio -->
+                    <a href="#">About the Author</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                </nav>
+            </div>
+            <img src="top_banner.jpeg" alt="Banner Image">
         </div>
-        <img src="top_banner.jpeg" alt="Banner Image">
+        <div id="map"></div>
+        <div class="map-placeholder">
+            <!-- Placeholder text below the map -->
+            <p>This is a placeholder for content below the map on the first page.</p>
+        </div>
     </div>
-    <div id="map"></div>
-     
+
+    <!-- Second Page - Blog Posts -->
+    <div class="page">
+        <div class="blog-posts">
+            <h2>Blog Posts</h2>
+            <!-- Container for blog posts -->
+            <div class="blog-posts-container">
+                <button id="left-arrow" class="scroll-btn left-arrow">&lt;</button>
+                <div class="posts-wrapper">
+                    <!-- Dynamic blog posts will be inserted here -->
+                </div>
+                <button id="right-arrow" class="scroll-btn right-arrow">&gt;</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Bottom Banner -->
     <div class="banner">
         <h2>Planning Tools</h2>
         <!-- Links to Windy.com and Google Earth with target="_blank" to open in a new tab -->
