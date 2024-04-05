@@ -7,21 +7,32 @@ function createBlogPost(activity, index) {
     const blogContainer = document.createElement("div");
     blogContainer.className = "blog-post-container";
 
-    // Use a template literal to format the title with paddle number and date on separate lines
+    // Title
     const title = document.createElement("h2");
     title.innerHTML = `Paddle ${index + 1}<br><small>${new Date(activity.start_date).toLocaleDateString()}</small>`;
 
-    // Distance information on a new line
+    // Distance
     const distance = document.createElement("p");
     var activityDistanceKm = activity.distance / 1000;
     var activityDistanceMiles = (activityDistanceKm * 0.621371).toFixed(2);
     distance.textContent = `Distance: ${activityDistanceMiles} miles`;
 
+    // Image
+    const image = document.createElement("img");
+    image.src = `photos/paddle_${index + 1}.jpeg`; // Adjusted path
+    image.alt = `Paddle ${index + 1}`;
+    image.onerror = () => {
+        image.src = 'photos/placeholder.jpeg'; // Placeholder if specific paddle image doesn't exist
+    };
+
+    // Append children
     blogContainer.appendChild(title);
     blogContainer.appendChild(distance);
+    blogContainer.appendChild(image); // Append the image
 
-    document.querySelector('.posts-wrapper').appendChild(blogContainer); // Append to the posts wrapper
+    document.querySelector('.posts-wrapper').appendChild(blogContainer); // Ensure this is the right container
 }
+
 
 function renderActivities(startIndex) {
     document.querySelectorAll('.blog-post-container').forEach(el => el.remove()); // Clear current activities

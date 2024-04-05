@@ -117,9 +117,22 @@ body, html {
     transition: background-color 0.3s;
 }
 
+.blog-post-container img {
+    width: 100%; /* Make image width fit the container */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 300px; /* Adjust based on your preference */
+    object-fit: cover; /* This ensures the image covers the area, might crop if necessary */
+    border-radius: 8px; /* Optional: adds rounded corners to your images */
+    margin-top: 10px; /* Optional: adds some space above the image */
+}
+
 .blog-post-container a:hover {
     background-color: #0056b3;
 }
+.blog-posts-container {
+  padding-bottom: 100px; /* Adjust the value based on your needs */
+}
+
 #arrow-controls {
     position: fixed;
     bottom: 20px;
