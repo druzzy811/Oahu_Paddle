@@ -59,7 +59,7 @@ body, html {
 .banner {
     background-color: #778899;
     padding: 10px;
-    text-align: left;
+    text-align: center; /* Center the content */
     color: black;
     position: fixed;
     bottom: 0;
@@ -71,8 +71,9 @@ body, html {
 .banner h2 {
     margin: 0;
     color: black;
-    display: inline-block;
-    text-shadow: 1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white; /* White outline */
+    display: block; /* Change to block to ensure full width */
+    text-shadow: 1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white;
+    /* White outline */
 }
 
 .banner a {
@@ -84,13 +85,23 @@ body, html {
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
-    text-shadow: 1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white; /* White outline */
+    text-shadow: 1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white;
+    /* White outline */
 }
 
 .banner a:hover {
     background-color: #333;
     color: #fff;
 }
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .banner a {
+        margin: 0 5px; /* Reduce margin between links */
+        padding: 8px; /* Reduce padding */
+    }
+}
+
 
 /* Blog Post Container */
 .blog-post-container {
@@ -173,20 +184,20 @@ body, html {
     font-size: 50px;
 }
 
-
-
 /* About the Author Styles */
 .author-image {
     display: block;
     margin: 0 auto; /* Centers the image */
-    max-width: 500px; /* Makes the image smaller and more manageable */
+    margin-top: 40px;
+    max-width: 400px; /* Makes the image smaller and more manageable */
     height: auto; /* Keeps the aspect ratio of the image */
 }
 
 .author-description {
     text-align: center; /* Centers the text */
-    margin-top: 60px; /* Adds some space above the text */
+    margin-top: 40px; /* Adds some space above the text */
     max-width: 80%; /* Controls the text block width */
     margin-left: auto; /* Centers the text block */
     margin-right: auto; /* Centers the text block */
+
 }

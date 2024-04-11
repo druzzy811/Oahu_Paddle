@@ -87,7 +87,7 @@ function getActivities(res) {
 }
 
 function addPolylinesToMap(data) {
-    var map = L.map('map').setView([21.466883, -157.942441], 11);
+    var map = L.map('map').setView([21.466883, -157.942441], 10);
     map.invalidateSize();
 
     L.tileLayer('https://watercolormaps.collection.cooperhewitt.org/tile/watercolor/{z}/{x}/{y}.jpg', {
