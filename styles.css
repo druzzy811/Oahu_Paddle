@@ -101,7 +101,9 @@ body, html {
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 30%; /* Adjust the height based on your preference */
 }
+
 
 .blog-post-container h2, .blog-post-container p {
     margin-bottom: 20px;
@@ -126,8 +128,33 @@ body, html {
     margin-top: 10px; /* Optional: adds some space above the image */
 }
 
-.blog-post-container a:hover {
-    background-color: #0056b3;
+/* Scroll Button Adjustments for Vertical Navigation */
+#top-arrow, #bottom-arrow {
+    display: block; /* Ensure buttons are block level for stacking */
+    margin: 10px auto; /* Center buttons horizontally */
+    font-size: 20px; /* Adjust arrow size */
+    /* Additional styling */
+}
+
+#top-arrow {
+    /* Position at the top of the blog posts container */
+}
+
+#bottom-arrow {
+    /* Position at the bottom of the blog posts container */
+}
+
+.blog-posts-container {
+    position: relative; /* For absolute positioning of arrows within this container */
+    padding: 60px 0; /* Add padding to top and bottom for arrow visibility */
+}
+
+.posts-wrapper {
+    overflow-y: auto; /* Enable vertical scrolling within the posts */
+    height: 90%; /* Adjust the height based on your preference */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 .blog-posts-container {
   padding-bottom: 100px; /* Adjust the value based on your needs */
@@ -135,7 +162,7 @@ body, html {
 
 #arrow-controls {
     position: fixed;
-    bottom: 20px;
+    bottom: 50px;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -143,5 +170,23 @@ body, html {
 #arrow-controls button {
     padding: 10px;
     margin: 0 5px;
-    font-size: 16px;
+    font-size: 50px;
+}
+
+
+
+/* About the Author Styles */
+.author-image {
+    display: block;
+    margin: 0 auto; /* Centers the image */
+    max-width: 500px; /* Makes the image smaller and more manageable */
+    height: auto; /* Keeps the aspect ratio of the image */
+}
+
+.author-description {
+    text-align: center; /* Centers the text */
+    margin-top: 60px; /* Adds some space above the text */
+    max-width: 80%; /* Controls the text block width */
+    margin-left: auto; /* Centers the text block */
+    margin-right: auto; /* Centers the text block */
 }

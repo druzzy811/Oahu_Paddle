@@ -7,17 +7,14 @@ function createBlogPost(activity, index) {
     const blogContainer = document.createElement("div");
     blogContainer.className = "blog-post-container";
 
-    // Title
     const title = document.createElement("h2");
     title.innerHTML = `Paddle ${index + 1}<br><small>${new Date(activity.start_date).toLocaleDateString()}</small>`;
 
-    // Distance
     const distance = document.createElement("p");
     var activityDistanceKm = activity.distance / 1000;
     var activityDistanceMiles = (activityDistanceKm * 0.621371).toFixed(2);
     distance.textContent = `Distance: ${activityDistanceMiles} miles`;
 
-    // Image
     const image = document.createElement("img");
     image.src = `photos/paddle_${index + 1}.jpeg`; // Adjusted path
     image.alt = `Paddle ${index + 1}`;
@@ -25,14 +22,12 @@ function createBlogPost(activity, index) {
         image.src = 'photos/placeholder.jpeg'; // Placeholder if specific paddle image doesn't exist
     };
 
-    // Append children
     blogContainer.appendChild(title);
     blogContainer.appendChild(distance);
-    blogContainer.appendChild(image); // Append the image
+    blogContainer.appendChild(image);
 
     document.querySelector('.posts-wrapper').appendChild(blogContainer); // Ensure this is the right container
 }
-
 
 function renderActivities(startIndex) {
     document.querySelectorAll('.blog-post-container').forEach(el => el.remove()); // Clear current activities
@@ -62,18 +57,20 @@ function reAuthorize() {
     });
 }
 
-// Arrow click handlers
-document.getElementById('left-arrow').addEventListener('click', () => {
+// Arrow click handlers adapted for vertical scroll logic
+document.getElementById('top-arrow').addEventListener('click', () => {
     if (currentIndex > 0) {
         currentIndex -= 3;
         renderActivities(currentIndex);
+        document.querySelector('.posts-wrapper').scrollTop = 0; // Scroll to top of the posts container
     }
 });
 
-document.getElementById('right-arrow').addEventListener('click', () => {
+document.getElementById('bottom-arrow').addEventListener('click', () => {
     if (currentIndex + 3 < currentActivities.length) {
         currentIndex += 3;
         renderActivities(currentIndex);
+        document.querySelector('.posts-wrapper').scrollTop = 0; // Scroll to top of the posts container
     }
 });
 
@@ -123,4 +120,3 @@ function addPolylinesToMap(data) {
 
 // Call reAuthorize or your initial function to start the app
 reAuthorize();
-
