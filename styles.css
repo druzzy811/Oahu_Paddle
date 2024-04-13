@@ -5,7 +5,7 @@ body, html {
 }
 
 .page {
-    height: 100%;
+    height: 90%;
     overflow-y: auto; /* Enable vertical scrolling */
 }
 
@@ -51,6 +51,41 @@ body, html {
     width: 100%;
     height: auto;
 }
+
+/* Ensure social media links are positioned correctly and clickable */
+
+.top-banner {
+    position: relative;
+}
+
+.top-content {
+    position: absolute;
+    top: 10px; /* Adjust the top position as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 100%;
+    z-index: 1;
+}
+
+.social-media-links {
+    position: absolute;
+    top: 10px; /* Adjust the top position as needed */
+    right: 20px;
+    z-index: 1; /* Ensure links are above other elements */
+}
+
+.social-media-links a {
+    color: #000; /* Set link color */
+    text-decoration: none;
+    margin-right: 10px; /* Add spacing between links */
+    font-size: 32px; /* Adjust icon size */
+}
+
+.social-media-links a:hover {
+    color: #ddd; /* Change color on hover */
+}
+
 
 .map-placeholder {
     padding: 20px;
@@ -200,4 +235,8 @@ body, html {
     margin-left: auto; /* Centers the text block */
     margin-right: auto; /* Centers the text block */
 
+}
+
+.content-wrapper {
+    padding-bottom: 100px; /* Adjust the padding as needed */
 }
