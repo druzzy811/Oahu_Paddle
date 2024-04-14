@@ -12,11 +12,13 @@ body, html {
 #map {
     height: 500px; /* Adjust the value based on the desired height of the map */
     width: calc(100% - 40px); /* Adjusted width with 20px buffer on each side */
-    margin: 0 20px; /* Margin for buffer */
+    margin: 20px auto; /* Margin for buffer, auto centers the map */
 }
 
 .top-banner {
     position: relative;
+    width: 100%;
+    height: auto;
 }
 
 .top-content {
@@ -29,18 +31,19 @@ body, html {
     z-index: 1;
 }
 
-.top-content h1 {
-    margin: 0;
+.top-content h1, .top-content nav a {
     color: black;
     text-shadow: 1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white;
+    text-decoration: none;
+}
+
+.top-content h1 {
+    margin: 0;
 }
 
 .top-content nav a {
     margin: 0 10px;
-    color: black;
-    text-decoration: none;
     transition: color 0.3s;
-    text-shadow: 1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white;
 }
 
 .top-content a:hover {
@@ -52,93 +55,22 @@ body, html {
     height: auto;
 }
 
-/* Ensure social media links are positioned correctly and clickable */
-
-.top-banner {
-    position: relative;
-
-}
-
-.top-content {
-    position: absolute;
-    top: 20px; /* Adjust the top position as needed */
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    width: 100%;
-    z-index: 1;
-}
-
 .social-media-links {
-    position: absolute;
-    top: 10px; /* Adjust the top position as needed */
-    right: 20px;
-    z-index: 1; /* Ensure links are above other elements */
+    text-align: center; /* Center the social media links */
+    padding: 20px 0; /* Padding around the links for better spacing */
 }
 
 .social-media-links a {
-    color: #000; /* Set link color */
+    color: #000;
     text-decoration: none;
-    margin-right: 10px; /* Add spacing between links */
-    font-size: 32px; /* Adjust icon size */
+    font-size: 32px;
+    margin: 0 10px;
+    transition: color 0.3s;
 }
 
 .social-media-links a:hover {
-    color: #ddd; /* Change color on hover */
+    color: #ddd;
 }
-
-
-.map-placeholder {
-    padding: 20px;
-}
-
-.banner {
-    background-color: #778899;
-    padding: 10px;
-    text-align: center; /* Center the content */
-    color: black;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 2;
-}
-
-.banner h2 {
-    margin: 0;
-    color: black;
-    display: block; /* Change to block to ensure full width */
-    text-shadow: 1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white;
-    /* White outline */
-}
-
-.banner a {
-    display: inline-block;
-    margin: 0 10px;
-    padding: 10px;
-    background-color: #fff;
-    color: #4169E1;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
-    text-shadow: 1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white;
-    /* White outline */
-}
-
-.banner a:hover {
-    background-color: #333;
-    color: #fff;
-}
-
-/* Media query for smaller screens */
-@media (max-width: 768px) {
-    .banner a {
-        margin: 0 5px; /* Reduce margin between links */
-        padding: 8px; /* Reduce padding */
-    }
-}
-
-
 /* Blog Post Container */
 .blog-post-container {
     width: 80%;
@@ -148,11 +80,10 @@ body, html {
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    height: 30%; /* Adjust the height based on your preference */
 }
 
-
-.blog-post-container h2, .blog-post-container p {
+.blog-post-container h2,
+.blog-post-container p {
     margin-bottom: 20px;
 }
 
@@ -167,102 +98,121 @@ body, html {
 }
 
 .blog-post-container img {
-    width: 100%; /* Make image width fit the container */
+    max-width: 100%; /* Ensure images don't exceed container width */
     height: auto; /* Maintain aspect ratio */
-    max-height: 300px; /* Adjust based on your preference */
-    object-fit: cover; /* This ensures the image covers the area, might crop if necessary */
     border-radius: 8px; /* Optional: adds rounded corners to your images */
     margin-top: 10px; /* Optional: adds some space above the image */
 }
-
-/* Scroll Button Adjustments for Vertical Navigation */
 #top-arrow, #bottom-arrow {
-    display: block; /* Ensure buttons are block level for stacking */
-    margin: 10px auto; /* Center buttons horizontally */
-    font-size: 20px; /* Adjust arrow size */
-    /* Additional styling */
+    display: block;
+    margin: 20px auto; /* Center arrows horizontally and add buffer */
+    font-size: 30px;
 }
 
 #top-arrow {
-    /* Position at the top of the blog posts container */
+    margin-bottom: 10px; /* Add space between top arrow and bottom of the banner */
 }
 
+/* Ensure the bottom arrow is positioned above the banner with vertical separation */
+/* Ensure the bottom arrow is positioned above the banner with vertical separation */
 #bottom-arrow {
-    /* Position at the bottom of the blog posts container */
+    position: relative;
+    z-index: 3;
+    margin-top: 20px; /* Adjust the margin-top value as needed for vertical separation */
+    margin-bottom: 100px;
 }
 
+
+}
+/* Move the blog post container and arrows above the banner */
 .blog-posts-container {
-    position: relative; /* For absolute positioning of arrows within this container */
-    padding: 60px 0; /* Add padding to top and bottom for arrow visibility */
+    position: relative; /* Return to relative positioning */
+    bottom: auto; /* Remove bottom positioning */
+    left: auto; /* Remove left positioning */
+    transform: none; /* Remove transform */
+    z-index: 3; /* Ensure the blog post container is above the banner */
+    padding-bottom: 10px; /* Add padding to create space between elements */
 }
 
-.posts-wrapper {
-    overflow-y: auto; /* Enable vertical scrolling within the posts */
-    height: 90%; /* Adjust the height based on your preference */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-.blog-posts-container {
-  padding-bottom: 100px; /* Adjust the value based on your needs */
-}
 
-#arrow-controls {
-    position: fixed;
-    bottom: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-}
 
-#arrow-controls button {
+.banner {
+    background-color: #2F4F4F;
     padding: 10px;
-    margin: 0 5px;
-    font-size: 50px;
+    text-align: center;
+    color: black;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
 }
 
-/* About the Author Styles */
-.author-image {
+.banner h2 {
+    margin: 0;
+    color: black;
     display: block;
-    margin: 0 auto; /* Centers the image */
-    margin-top: 40px;
-    max-width: 400px; /* Makes the image smaller and more manageable */
-    height: auto; /* Keeps the aspect ratio of the image */
+    text-shadow: 1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white;
 }
 
-.author-description {
-    text-align: center; /* Centers the text */
-    margin-top: 40px; /* Adds some space above the text */
-    max-width: 80%; /* Controls the text block width */
-    margin-left: auto; /* Centers the text block */
-    margin-right: auto; /* Centers the text block */
-
+.banner a {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 10px;
+    background-color: #fff;
+    color: #4169E1;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    text-shadow: 1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white;
 }
 
-.content-wrapper {
-    padding-bottom: 100px; /* Adjust the padding as needed */
+.banner a:hover {
+    background-color: #333;
+    color: #fff;
 }
 
-}
 
-/* Responsive styles for screens 768px and below */
 @media (max-width: 768px) {
-    .top-content {
-        flex-direction: column;  /* Stack elements vertically on small screens */
+    .banner a {
+        padding: 8px;
+        margin: 0 5px;
     }
 
-    .social-media-links {
-        flex-direction: column;  /* Stack social links vertically */
-        align-items: flex-start;  /* Align links to the start */
-        padding: 10px 0;  /* Add some vertical padding */
-    }
-
-    .social-media-links a {
-        margin: 5px 0;  /* Add margin between links */
-    }
+.map-container {
+    position: relative;
+    height: 500px; /* Adjust the height of the map container */
 }
 
-/* Additional styling to ensure the changes are picked up */
+..map-container {
+    position: relative;
+    height: 500px; /* Adjust the height of the map container */
+}
+
+.map-container {
+    position: relative;
+    height: 500px; /* Adjust the height of the map container */
+}
+
+.social-media-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background-color: #C0C0C0 /* Semi-transparent background for better visibility */
+    padding: 10px 0; /* Adjust vertical padding as needed */
+    box-sizing: border-box;
+}
+
 .social-media-links a {
-    display: block;
-    width: 100%;  /* Make each link full width to handle touch better */
+    color: #black; /* White color for better visibility */
+    text-decoration: none;
+    margin: 0 10px; /* Adjust spacing between links */
+    font-size: 24px; /* Adjust font size as needed */
+}
+
+.social-media-links a:hover {
+    color: #ddd; /* Change color on hover */
 }
