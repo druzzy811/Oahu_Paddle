@@ -10,9 +10,16 @@ body, html {
 }
 
 #map {
-    height: 500px; /* Adjust the value based on the desired height of the map */
-    width: calc(100% - 40px); /* Adjusted width with 20px buffer on each side */
-    margin: 20px auto; /* Margin for buffer, auto centers the map */
+    height: 550px; /* Adjust the value based on the desired height of the map */
+    width: calc(100% - 20px); /* Adjusted width with 20px buffer on each side */
+    margin: 1px auto; /* Margin for buffer, auto centers the map */
+}
+
+/* Media Query for Mobile Screens */
+@media (max-width: 768px) {
+    #map {
+        height: 410px; /* Reduced height for mobile screens */
+    }
 }
 
 .top-banner {
@@ -57,7 +64,7 @@ body, html {
 
 .social-media-links {
     text-align: center; /* Center the social media links */
-    padding: 20px 0; /* Padding around the links for better spacing */
+    padding: 1px 0; /* Padding around the links for better spacing */
 }
 
 .social-media-links a {
@@ -82,10 +89,6 @@ body, html {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.blog-post-container h2,
-.blog-post-container p {
-    margin-bottom: 20px;
-}
 
 .blog-post-container a {
     display: inline-block;
@@ -117,7 +120,6 @@ body, html {
 /* Ensure the bottom arrow is positioned above the banner with vertical separation */
 #bottom-arrow {
     position: relative;
-    z-index: 3;
     margin-top: 20px; /* Adjust the margin-top value as needed for vertical separation */
     margin-bottom: 100px;
 }
@@ -138,7 +140,7 @@ body, html {
 
 .banner {
     background-color: #2F4F4F;
-    padding: 10px;
+    padding: 5px;
     text-align: center;
     color: black;
     position: fixed;
@@ -157,14 +159,14 @@ body, html {
 
 .banner a {
     display: inline-block;
-    margin: 0 10px;
-    padding: 10px;
+    margin: 0 5px;
+    padding: 5px;
     background-color: #fff;
     color: #4169E1;
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
-    text-shadow: 1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white;
+
 }
 
 .banner a:hover {
@@ -175,24 +177,9 @@ body, html {
 
 @media (max-width: 768px) {
     .banner a {
-        padding: 8px;
-        margin: 0 5px;
+        padding: 3px;
+        margin: 0 3px;
     }
-
-.map-container {
-    position: relative;
-    height: 500px; /* Adjust the height of the map container */
-}
-
-..map-container {
-    position: relative;
-    height: 500px; /* Adjust the height of the map container */
-}
-
-.map-container {
-    position: relative;
-    height: 500px; /* Adjust the height of the map container */
-}
 
 .social-media-links {
     display: flex;
@@ -215,4 +202,17 @@ body, html {
 
 .social-media-links a:hover {
     color: #ddd; /* Change color on hover */
+}
+
+.content-wrapper {
+    padding-bottom: 100px; /* Adjust the padding as needed */
+}
+
+.author-image {
+    width: 200px;  /* Fixed width */
+    height: 200px; /* Fixed height */
+    object-fit: cover; /* Cover the frame without distortion */
+    border-radius: 50%; /* Circular image */
+    margin: 0 auto; /* Centering the image */
+    display: block; /* Block display to handle margins correctly */
 }
