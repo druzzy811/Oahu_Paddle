@@ -1,0 +1,17 @@
+{
+    "paddles": [
+        {
+            "index": 1,
+            "link": "https://www.medium.com/paddle-1"
+        },
+        {
+            "index": 2,
+            "link": "https://www.medium.com/paddle-2"
+        },
+        {
+            "index": 3,
+            "link": "https://www.medium.com/paddle-3"
+        }
+        // Add more entries as needed
+    ]
+}

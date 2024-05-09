@@ -2,6 +2,14 @@ const auth_link = "https://www.strava.com/oauth/token";
 let currentActivities = []; // This will store the fetched activities
 let currentIndex = 0; // Start with the most recent activities
 let lastPolyline = null; // Variable to hold the last polyline
+let linksData = {
+    0: "https://www.medium.com/post1",
+    1: "https://www.medium.com/post2",
+    2: "https://www.medium.com/post3",
+    3: "https://www.medium.com/post4",
+    4: "https://www.medium.com/post5",
+    5: "https://www.medium.com/post6"
+};
 
 function createBlogPost(activity, index) {
     const blogContainer = document.createElement("div");
@@ -22,11 +30,18 @@ function createBlogPost(activity, index) {
         image.src = 'photos/placeholder.jpeg'; // Placeholder if specific paddle image doesn't exist
     };
 
+    const mediumLink = document.createElement("a");
+    mediumLink.href = linksData[index] || '#'; // Using linksData object
+    mediumLink.textContent = "Read on Medium";
+    mediumLink.target = "_blank";
+
     blogContainer.appendChild(title);
     blogContainer.appendChild(distance);
+    blogContainer.appendChild(mediumLink);
     blogContainer.appendChild(image);
+    
 
-    document.querySelector('.posts-wrapper').appendChild(blogContainer); // Ensure this is the right container
+    document.querySelector('.posts-wrapper').appendChild(blogContainer);
 }
 
 function renderActivities(startIndex) {
@@ -81,7 +96,7 @@ function getActivities(res) {
         .then(function (data) {
             // Store fetched activities and render the first three
             currentActivities = data;
-            renderActivities(0);
+            renderActivities(currentIndex); // Render activities after fetching data
             addPolylinesToMap(data);
         });
 }
@@ -120,3 +135,4 @@ function addPolylinesToMap(data) {
 
 // Call reAuthorize or your initial function to start the app
 reAuthorize();
+
