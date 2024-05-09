@@ -39,18 +39,21 @@ body, html {
 }
 
 .top-content h1, .top-content nav a {
-    color: black;
+    color: 354649;
     text-shadow: 1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white;
     text-decoration: none;
 }
 
 .top-content h1 {
     margin: 0;
+    color: #354649;
 }
 
 .top-content nav a {
     margin: 0 10px;
     transition: color 0.3s;
+    color: #354649;
+
 }
 
 .top-content a:hover {
@@ -78,26 +81,34 @@ body, html {
 .social-media-links a:hover {
     color: #ddd;
 }
+
+/* Blog Posts */
+.blog-posts {
+    text-align: center; /* Center the content horizontally */
+    padding: 50px 0; /* Add padding for spacing */
+}
+
+.blog-posts h2 {
+    margin: 0; /* Remove default margin */
+    margin-bottom: 50px; /* Add margin at the bottom to create space */
+    color: #354649; /* Change the color of the blog post header */
+}
+
+.blog-posts p,
+.blog-post-container,
+.blog-post-container a {
+    color: #354649; /* Change the color of the text inside the blog posts and links */
+}
+
 /* Blog Post Container */
 .blog-post-container {
     width: 80%;
     margin: 20px auto;
-    background-color: #f4f4f4;
-    border: 1px solid #ddd;
+    background-color: #E0E7E9;
+    border: 1px solid #354649; /* Change the border color */
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-
-.blog-post-container a {
-    display: inline-block;
-    background-color: #007bff;
-    color: #ffffff;
-    padding: 10px 15px;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
 }
 
 .blog-post-container img {
@@ -106,23 +117,52 @@ body, html {
     border-radius: 8px; /* Optional: adds rounded corners to your images */
     margin-top: 10px; /* Optional: adds some space above the image */
 }
-#top-arrow, #bottom-arrow {
-    display: block;
-    margin: 20px auto; /* Center arrows horizontally and add buffer */
-    font-size: 30px;
+
+/* Change color of links inside the blog post container */
+.blog-post-container a {
+    display: inline-block;
+    background-color: #007bff;
+    color: #354649; /* Change the color of the links */
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
 }
 
-#top-arrow {
-    margin-bottom: 10px; /* Add space between top arrow and bottom of the banner */
+.blog-post-container a:hover {
+    background-color: #333;
+    color: #fff;
 }
 
-/* Ensure the bottom arrow is positioned above the banner with vertical separation */
-/* Ensure the bottom arrow is positioned above the banner with vertical separation */
-#bottom-arrow {
+.scroll-btn {
+    background-color: #6C7A89;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
     position: relative;
-    margin-top: 20px; /* Adjust the margin-top value as needed for vertical separation */
-    margin-bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
 }
+
+.scroll-btn:hover {
+    background-color: #A3C6C4;
+}
+
+.top-arrow {
+    position: absolute;
+    top: -30px; /* Adjust the distance from the top */
+
+}
+
+.bottom-arrow {
+    position: absolute;
+    bottom: -5px; /* Adjust the distance from the bottom */
+
 
 
 }
@@ -139,10 +179,10 @@ body, html {
 
 
 .banner {
-    background-color: #2F4F4F;
+    background-color: #A3C6C4;
     padding: 5px;
     text-align: center;
-    color: black;
+    color: 354649;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -152,7 +192,8 @@ body, html {
 
 .banner h2 {
     margin: 0;
-    color: black;
+    color: #354649;
+;
     display: block;
     text-shadow: 1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white;
 }
@@ -161,8 +202,8 @@ body, html {
     display: inline-block;
     margin: 0 5px;
     padding: 5px;
-    background-color: #fff;
-    color: #4169E1;
+    background-color: #E0E7E9;
+    color: #354649;
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
@@ -171,7 +212,7 @@ body, html {
 
 .banner a:hover {
     background-color: #333;
-    color: #fff;
+    color: #A3C6C4;
 }
 
 
@@ -194,7 +235,7 @@ body, html {
 }
 
 .social-media-links a {
-    color: #black; /* White color for better visibility */
+    color: #354649; /* White color for better visibility */
     text-decoration: none;
     margin: 0 10px; /* Adjust spacing between links */
     font-size: 24px; /* Adjust font size as needed */
