@@ -19,29 +19,6 @@ function loadLatestActivityId() {
     return localStorage.getItem('latestActivityId');
 }
 
-function savePaddleData(activityId, data, paddleNumber) {
-    const filename = `paddle_${paddleNumber}.json`;
-
-    // Check if the paddle data already exists in local storage
-    if (!localStorage.getItem(filename)) {
-        localStorage.setItem(filename, activityId); // Store the activity ID to avoid duplicate saves
-        downloadJSON(data, filename); // Save the new activities data to a file
-    }
-}
-
-function downloadJSON(data, filename) {
-    const jsonStr = JSON.stringify(data);
-    const blob = new Blob([jsonStr], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-}
-
 function createBlogPost(activity, index) {
     const blogContainer = document.createElement("div");
     blogContainer.className = "blog-post-container";
@@ -128,17 +105,11 @@ function getActivities(res) {
             const storedActivityId = loadLatestActivityId(); // Load the stored latest activity ID
             
             if (latestActivityId !== storedActivityId) {
-                const latestPaddleNumber = data.length; // Calculate the paddle number based on the length of activities
                 saveLatestActivityId(latestActivityId); // Save the new latest activity ID
-                savePaddleData(latestActivityId, data, latestPaddleNumber); // Save the new activities data to a file
-                currentActivities = data; // Store fetched activities
-                renderActivities(currentIndex); // Render activities after fetching data
-                addPolylinesToMap(data);
-            } else {
-                currentActivities = data; // Store fetched activities
-                renderActivities(currentIndex); // Render activities
-                addPolylinesToMap(currentActivities); // Add polylines to map
             }
+            currentActivities = data; // Store fetched activities
+            renderActivities(currentIndex); // Render activities after fetching data
+            addPolylinesToMap(data);
         });
 }
 
