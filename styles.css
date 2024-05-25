@@ -39,8 +39,8 @@ body, html {
 }
 
 .top-content h1, .top-content nav a {
-    color: 354649;
-    text-shadow: 1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white;
+    color: #354649;
+    text-shadow: 1px 1px 0 beige, -1px -1px 0 beige, 1px -1px 0 beige, -1px 1px 0 beige;
     text-decoration: none;
 }
 
@@ -53,7 +53,6 @@ body, html {
     margin: 0 10px;
     transition: color 0.3s;
     color: #354649;
-
 }
 
 .top-content a:hover {
@@ -163,16 +162,13 @@ body, html {
 .top-arrow {
     position: absolute;
     top: -30px; /* Adjust the distance from the top */
-
 }
 
 .bottom-arrow {
     position: absolute;
     bottom: -5px; /* Adjust the distance from the bottom */
-
-
-
 }
+
 /* Move the blog post container and arrows above the banner */
 .blog-posts-container {
     position: relative; /* Return to relative positioning */
@@ -183,13 +179,11 @@ body, html {
     padding-bottom: 10px; /* Add padding to create space between elements */
 }
 
-
-
 .banner {
     background-color: #A3C6C4;
     padding: 5px;
     text-align: center;
-    color: 354649;
+    color: #354649;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -200,9 +194,8 @@ body, html {
 .banner h2 {
     margin: 0;
     color: #354649;
-;
     display: block;
-    text-shadow: 1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white;
+    text-shadow: 1px 1px 0 beige, -1px -1px 0 beige, 1px -1px 0 beige, -1px 1px 0 beige;
 }
 
 .banner a {
@@ -214,7 +207,6 @@ body, html {
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
-
 }
 
 .banner a:hover {
@@ -222,12 +214,12 @@ body, html {
     color: #A3C6C4;
 }
 
-
 @media (max-width: 768px) {
     .banner a {
         padding: 3px;
         margin: 0 3px;
     }
+}
 
 .social-media-links {
     display: flex;
@@ -236,7 +228,7 @@ body, html {
     position: relative;
     bottom: 0;
     width: 100%;
-    background-color: #C0C0C0 /* Semi-transparent background for better visibility */
+    background-color: #C0C0C0; /* Semi-transparent background for better visibility */
     padding: 10px 0; /* Adjust vertical padding as needed */
     box-sizing: border-box;
 }
@@ -252,7 +244,8 @@ body, html {
     color: #ddd; /* Change color on hover */
 }
 
-.content-wrapper {
+.content {
+    padding: 20px; /* Add padding to the content */
     padding-bottom: 100px; /* Adjust the padding as needed */
 }
 
@@ -263,4 +256,59 @@ body, html {
     border-radius: 50%; /* Circular image */
     margin: 0 auto; /* Centering the image */
     display: block; /* Block display to handle margins correctly */
+}
+
+/* New styles for author-description */
+.author-description {
+    text-align: center; /* Center text */
+    margin: 0 auto; /* Center block element */
+    padding: 10px 20px; /* Add padding for spacing */
+    line-height: 1.6; /* Improve line spacing */
+    max-width: 600px; /* Set a max width to keep text readable */
+}
+
+@media (max-width: 768px) {
+    .author-description {
+        padding: 10px; /* Adjust padding for mobile devices */
+    }
+}
+
+
+/* Introduction photos section */
+.introduction-photos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.author-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Link button styling */
+/* Link button styling */
+.link-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #A3C6C4;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.link-button:hover {
+    background-color: #0056b3;
 }

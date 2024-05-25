@@ -11,6 +11,37 @@ let linksData = {
     5: "https://www.medium.com/post6"
 };
 
+function saveLatestActivityId(activityId) {
+    localStorage.setItem('latestActivityId', activityId);
+}
+
+function loadLatestActivityId() {
+    return localStorage.getItem('latestActivityId');
+}
+
+function savePaddleData(activityId, data, paddleNumber) {
+    const filename = `paddle_${paddleNumber}.json`;
+
+    // Check if the paddle data already exists in local storage
+    if (!localStorage.getItem(filename)) {
+        localStorage.setItem(filename, activityId); // Store the activity ID to avoid duplicate saves
+        downloadJSON(data, filename); // Save the new activities data to a file
+    }
+}
+
+function downloadJSON(data, filename) {
+    const jsonStr = JSON.stringify(data);
+    const blob = new Blob([jsonStr], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
 function createBlogPost(activity, index) {
     const blogContainer = document.createElement("div");
     blogContainer.className = "blog-post-container";
@@ -40,7 +71,6 @@ function createBlogPost(activity, index) {
     blogContainer.appendChild(mediumLink);
     blogContainer.appendChild(image);
     
-
     document.querySelector('.posts-wrapper').appendChild(blogContainer);
 }
 
@@ -94,10 +124,21 @@ function getActivities(res) {
     fetch(activities_link)
         .then((res) => res.json())
         .then(function (data) {
-            // Store fetched activities and render the first three
-            currentActivities = data;
-            renderActivities(currentIndex); // Render activities after fetching data
-            addPolylinesToMap(data);
+            const latestActivityId = data[0].id; // Get the ID of the most recent activity
+            const storedActivityId = loadLatestActivityId(); // Load the stored latest activity ID
+            
+            if (latestActivityId !== storedActivityId) {
+                const latestPaddleNumber = data.length; // Calculate the paddle number based on the length of activities
+                saveLatestActivityId(latestActivityId); // Save the new latest activity ID
+                savePaddleData(latestActivityId, data, latestPaddleNumber); // Save the new activities data to a file
+                currentActivities = data; // Store fetched activities
+                renderActivities(currentIndex); // Render activities after fetching data
+                addPolylinesToMap(data);
+            } else {
+                currentActivities = data; // Store fetched activities
+                renderActivities(currentIndex); // Render activities
+                addPolylinesToMap(currentActivities); // Add polylines to map
+            }
         });
 }
 
@@ -113,7 +154,7 @@ function addPolylinesToMap(data) {
     data.forEach((activity, index) => {
         var coordinates = L.Polyline.fromEncoded(activity.map.summary_polyline).getLatLngs();
         var polyline = L.polyline(coordinates, {
-            color: "Red",
+            color: "Magenta",
             weight: 5,
             opacity: 1,
             lineJoin: 'round'
@@ -135,4 +176,3 @@ function addPolylinesToMap(data) {
 
 // Call reAuthorize or your initial function to start the app
 reAuthorize();
-
