@@ -22,6 +22,11 @@ body, html {
     }
 }
 
+.map-container {
+    padding-top: 20px; /* Add padding above the map */
+    width: calc(100% - 20px); /* Adjusted width with 20px buffer on each side */
+    margin: 0 auto; /* Center the map container */
+}
 .top-banner {
     position: relative;
     width: 100%;
