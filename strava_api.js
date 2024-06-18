@@ -3,12 +3,12 @@ let currentActivities = []; // This will store the fetched activities
 let currentIndex = 0; // Start with the most recent activities
 let lastPolyline = null; // Variable to hold the last polyline
 let linksData = {
-    0: "https://www.medium.com/post1",
-    1: "https://www.medium.com/post2",
-    2: "https://www.medium.com/post3",
-    3: "https://www.medium.com/post4",
-    4: "https://www.medium.com/post5",
-    5: "https://www.medium.com/post6"
+    0: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-1-735333d7ceac",
+    1: "https://medium.com/@drew.burrier",
+    2: "https://medium.com/@drew.burrier",
+    3: "https://medium.com/@drew.burrier",
+    4: "https://medium.com/@drew.burrier",
+    5: "https://medium.com/@drew.burrier"
 };
 
 function saveLatestActivityId(activityId) {
