@@ -233,7 +233,7 @@ body, html {
     position: relative;
     bottom: 0;
     width: 100%;
-    background-color: #C0C0C0; /* Semi-transparent background for better visibility */
+    background-color: #A3C6C4; /* Semi-transparent background for better visibility */
     padding: 10px 0; /* Adjust vertical padding as needed */
     box-sizing: border-box;
 }
