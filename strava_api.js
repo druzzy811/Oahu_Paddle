@@ -5,7 +5,7 @@ let lastPolyline = null; // Variable to hold the last polyline
 let linksData = {
     0: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-1-735333d7ceac",
     1: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-2-charting-paths-e8defcab9e6a",
-    2: "https://medium.com/@drew.burrier",
+    2: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-3-respecting-limits-6db2507fc650",
     3: "https://medium.com/@drew.burrier",
     4: "https://medium.com/@drew.burrier",
     5: "https://medium.com/@drew.burrier",
