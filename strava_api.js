@@ -114,20 +114,29 @@ function getActivities(res) {
             addPolylinesToMap(data);
         });
 }
+    function addPolylinesToMap(data) {
+   var map = L.map('map').setView([21.466883, -157.942441], 10);
+    map.invalidateSize();
+    
+    // Add the Google Satellite tile layer to the map
+    L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+        maxZoom: 20,
+        subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+        attribution: '© Google'
+    }).addTo(map); 
 
-function addPolylinesToMap(data) {
+/*function addPolylinesToMap(data) {
     var map = L.map('map').setView([21.466883, -157.942441], 10);
     map.invalidateSize();
-
-    L.tileLayer('https://watercolormaps.collection.cooperhewitt.org/tile/watercolor/{z}/{x}/{y}.jpg', {
+   L.tileLayer('https://watercolormaps.collection.cooperhewitt.org/tile/watercolor/{z}/{x}/{y}.jpg', {
         maxZoom: 19,
         attribution: '© OpenStreetMap'
-    }).addTo(map);
+    }).addTo(map);*/
 
     data.forEach((activity, index) => {
         var coordinates = L.Polyline.fromEncoded(activity.map.summary_polyline).getLatLngs();
         var polyline = L.polyline(coordinates, {
-            color: "Magenta",
+            color: "orange",
             weight: 5,
             opacity: 1,
             lineJoin: 'round'
