@@ -325,3 +325,52 @@ body, html {
 .link-button:hover {
     background-color: #0056b3;
 }
+
+/* Science section styling */
+.science-section {
+    text-align: center;
+    padding: 20px;
+}
+
+/* Responsive video container */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    background: #000;
+    margin: 0 auto 20px;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.blog-posts {
+    margin-top: 20px;
+}
+
+.blog-posts ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.blog-posts li {
+    margin: 10px 0;
+}
+
+.blog-posts a {
+    text-decoration: none;
+    color: #007BFF;
+    transition: color 0.3s ease;
+}
+
+.blog-posts a:hover {
+    color: #0056b3;
+}
