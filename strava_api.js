@@ -7,9 +7,8 @@ let linksData = {
     1: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-2-charting-paths-e8defcab9e6a",
     2: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-3-respecting-limits-6db2507fc650",
     3: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-4-be-patient-d63aa25284f8",
-    4: "https://medium.com/@drew.burrier",
-    5: "https://medium.com/@drew.burrier",
-    6: "https://medium.com/@drew.burrier"
+    4: "https://medium.com/@drew.burrier/"
+
 
 };
 
@@ -21,46 +20,6 @@ function loadLatestActivityId() {
     return localStorage.getItem('latestActivityId');
 }
 
-function createBlogPost(activity, index) {
-    const blogContainer = document.createElement("div");
-    blogContainer.className = "blog-post-container";
-
-    const title = document.createElement("h2");
-    title.innerHTML = `Paddle ${index + 1}<br><small>${new Date(activity.start_date).toLocaleDateString()}</small>`;
-
-    const distance = document.createElement("p");
-    var activityDistanceKm = activity.distance / 1000;
-    var activityDistanceMiles = (activityDistanceKm * 0.621371).toFixed(2);
-    distance.textContent = `Distance: ${activityDistanceMiles} miles`;
-
-    const image = document.createElement("img");
-    image.src = `photos/paddle_${index + 1}.jpeg`; // Adjusted path
-    image.alt = `Paddle ${index + 1}`;
-    image.onerror = () => {
-        image.src = 'photos/placeholder.jpeg'; // Placeholder if specific paddle image doesn't exist
-    };
-
-    const mediumLink = document.createElement("a");
-    mediumLink.href = linksData[index] || '#'; // Using linksData object
-    mediumLink.textContent = "Read on Medium";
-    mediumLink.target = "_blank";
-
-    blogContainer.appendChild(title);
-    blogContainer.appendChild(distance);
-    blogContainer.appendChild(mediumLink);
-    blogContainer.appendChild(image);
-    
-    document.querySelector('.posts-wrapper').appendChild(blogContainer);
-}
-
-function renderActivities(startIndex) {
-    document.querySelectorAll('.blog-post-container').forEach(el => el.remove()); // Clear current activities
-
-    const endIndex = startIndex + 3; // Show 3 activities at a time
-    currentActivities.slice(startIndex, endIndex).forEach((activity, index) => {
-        createBlogPost(activity, startIndex + index);
-    });
-}
 
 function reAuthorize() {
     fetch(auth_link, {
@@ -81,23 +40,6 @@ function reAuthorize() {
     });
 }
 
-// Arrow click handlers adapted for vertical scroll logic
-document.getElementById('top-arrow').addEventListener('click', () => {
-    if (currentIndex > 0) {
-        currentIndex -= 3;
-        renderActivities(currentIndex);
-        document.querySelector('.posts-wrapper').scrollTop = 0; // Scroll to top of the posts container
-    }
-});
-
-document.getElementById('bottom-arrow').addEventListener('click', () => {
-    if (currentIndex + 3 < currentActivities.length) {
-        currentIndex += 3;
-        renderActivities(currentIndex);
-        document.querySelector('.posts-wrapper').scrollTop = 0; // Scroll to top of the posts container
-    }
-});
-
 function getActivities(res) {
     const activities_link = `https://www.strava.com/api/v3/athlete/activities?access_token=${res.access_token}`;
     fetch(activities_link)
@@ -110,7 +52,7 @@ function getActivities(res) {
                 saveLatestActivityId(latestActivityId); // Save the new latest activity ID
             }
             currentActivities = data; // Store fetched activities
-            renderActivities(currentIndex); // Render activities after fetching data
+           // renderActivities(currentIndex); // Render activities after fetching data
             addPolylinesToMap(data);
         });
 }
@@ -142,7 +84,15 @@ function getActivities(res) {
             lineJoin: 'round'
         }).addTo(map);
 
-        polyline.bindPopup(`Paddle ${data.length - index}<br>Date: ${new Date(activity.start_date).toLocaleDateString()}<br>Distance: ${(activity.distance / 1000 * 0.621371).toFixed(2)} miles`);
+        polyline.bindPopup(`
+        <h3>Paddle ${data.length - index}</h3>
+        <img src="photos/paddle_${data.length - index}.jpeg" alt="Paddle ${data.length - index}" style="width:100%; height:auto;">
+        ${new Date(activity.start_date).toLocaleDateString()}<br>
+        Distance: ${(activity.distance / 1000 * 0.621371).toFixed(2)} miles
+        <div style="text-align: center; margin-top: 10px;">
+        <a href="${linksData[data.length - index - 1] || 'https://medium.com/@drew.burrier'}" target="_blank" style="display: inline-block; padding: 5px 5px; background-color: #A3C6C4; color: #354649; text-decoration: none; border-radius: 5px;">Read on Medium</a>
+        </div>
+        `);
 
         // Remember the last polyline
         if (index === 0) {

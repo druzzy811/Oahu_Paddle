@@ -10,7 +10,7 @@ body, html {
 }
 
 #map {
-    height: 550px; /* Adjust the value based on the desired height of the map */
+    height: 700px; /* Adjust the value based on the desired height of the map */
     width: calc(100% - 20px); /* Adjusted width with 20px buffer on each side */
     margin: 1px auto; /* Margin for buffer, auto centers the map */
 }
@@ -18,7 +18,7 @@ body, html {
 /* Media Query for Mobile Screens */
 @media (max-width: 768px) {
     #map {
-        height: 410px; /* Reduced height for mobile screens */
+        height: 700px; /* Reduced height for mobile screens */
     }
 }
 
@@ -86,103 +86,7 @@ body, html {
     color: #ddd;
 }
 
-/* Blog Posts */
-.blog-posts {
-    text-align: center; /* Center the content horizontally */
-    padding: 30px 0; /* Add padding for spacing */
-}
 
-.blog-posts h1 {
-    margin: 0; /* Remove default margin */
-    margin-bottom: 30px; /* Add margin at the bottom to create space */
-    color: #354649; /* Change the color of the blog post header */
-}
-.blog-posts h2 {
-    margin: 0; /* Remove default margin */
-    margin-bottom: 5px; /* Add margin at the bottom to create space */
-    color: #354649; /* Change the color of the blog post header */
-}
-
-.blog-posts p,
-.blog-post-container,
-.blog-post-container a {
-    color: #354649; /* Change the color of the text inside the blog posts and links */
-    margin-top: 1px;
-    margin-bottom: 1px; /* Reduce the margin between distance and date */
-}
-
-/* Blog Post Container */
-.blog-post-container {
-    width: 80%;
-    margin: 20px auto;
-    background-color: #E0E7E9;
-    border: 1px solid #354649; /* Change the border color */
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.blog-post-container img {
-    max-width: 100%; /* Ensure images don't exceed container width */
-    height: auto; /* Maintain aspect ratio */
-    border-radius: 8px; /* Optional: adds rounded corners to your images */
-    margin-top: 10px; /* Optional: adds some space above the image */
-}
-
-/* Change color of links inside the blog post container */
-.blog-post-container a {
-    display: inline-block;
-    background-color: #A3C6C4;
-    color: #354649; /* Change the color of the links */
-    padding: 10px 15px;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.blog-post-container a:hover {
-    background-color: #333;
-    color: #fff;
-}
-
-.scroll-btn {
-    background-color: #6C7A89;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    font-size: 24px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.scroll-btn:hover {
-    background-color: #A3C6C4;
-}
-
-.top-arrow {
-    position: absolute;
-    top: -30px; /* Adjust the distance from the top */
-}
-
-.bottom-arrow {
-    position: absolute;
-    bottom: -5px; /* Adjust the distance from the bottom */
-}
-
-/* Move the blog post container and arrows above the banner */
-.blog-posts-container {
-    position: relative; /* Return to relative positioning */
-    bottom: auto; /* Remove bottom positioning */
-    left: auto; /* Remove left positioning */
-    transform: none; /* Remove transform */
-    z-index: 3; /* Ensure the blog post container is above the banner */
-    padding-bottom: 10px; /* Add padding to create space between elements */
-}
 
 .banner {
     background-color: #A3C6C4;
