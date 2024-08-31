@@ -18,7 +18,7 @@ body, html {
 /* Media Query for Mobile Screens */
 @media (max-width: 768px) {
     #map {
-        height: 700px; /* Reduced height for mobile screens */
+        height: 600px; /* Reduced height for mobile screens */
     }
 }
 
@@ -129,7 +129,6 @@ body, html {
         margin: 0 3px;
     }
 }
-
 .social-media-links {
     display: flex;
     justify-content: center;
@@ -137,20 +136,30 @@ body, html {
     position: relative;
     bottom: 0;
     width: 100%;
-    background-color: #A3C6C4; /* Semi-transparent background for better visibility */
+    background-color: #A3C6C4; /* Background color for the banner */
     padding: 10px 0; /* Adjust vertical padding as needed */
     box-sizing: border-box;
 }
 
 .social-media-links a {
-    color: #354649; /* White color for better visibility */
+    color: #354649; /* Icon color */
     text-decoration: none;
     margin: 0 10px; /* Adjust spacing between links */
     font-size: 24px; /* Adjust font size as needed */
+    background-color: transparent; /* Ensure no background color */
+    border: none; /* Ensure no border */
+    padding: 0; /* Remove any padding */
 }
 
 .social-media-links a:hover {
     color: #ddd; /* Change color on hover */
+    background-color: transparent; /* No background color on hover */
+    outline: none; /* Remove any outline on focus */
+}
+
+.social-media-links i {
+    display: inline-block;
+    font-size: 24px; /* Adjust icon size */
 }
 
 .content {
@@ -277,4 +286,80 @@ body, html {
 
 .blog-posts a:hover {
     color: #0056b3;
+}
+.hamburger-menu {
+    font-size: 24px;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 20px;
+    vertical-align: middle;
+}
+
+.planning-tools {
+    display: none; /* Ensure it's hidden by default */
+    position: fixed; /* Ensures z-index works properly */
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+    z-index: 1001; /* Higher z-index to overlay the map */
+    display: flex;
+    flex-direction: column;
+    transform: translateX(-100%); /* Move off-screen initially */
+    transition: transform 0.3s ease-in-out; /* Smooth transition */
+}
+
+.planning-tools.open {
+    transform: translateX(0); /* Slide in when open */
+}
+
+.map-container {
+    position: relative;
+    z-index: 0; /* Ensure the map is below the menu */
+}
+
+.leaflet-container {
+    z-index: 0; /* Ensures the map tiles are below the menu */
+}
+
+.planning-tools h2 {
+    font-size: 18px; /* Adjust size if needed */
+    margin-bottom: 10px;
+    color: #354649; /* or any other color */
+    margin-top: 0; /* Remove top margin */
+}
+
+.planning-tools a {
+    display: block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #354649; /* or any color you prefer */
+}
+
+.planning-tools a:hover {
+    color: #ffffff; /* Change on hover */
+}
+
+.planning-tools .close-btn {
+    font-size: 24px;
+    cursor: pointer;
+    color: #ffcc00; /* Button color */
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+.planning-tools .links-container {
+    margin-top: auto; /* Push the container to the bottom */
+    margin-bottom: 100px; /* Adjust spacing above the links */
+}
+
+.banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

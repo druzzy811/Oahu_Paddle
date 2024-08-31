@@ -12,6 +12,12 @@ let linksData = {
 
 };
 
+function toggleMenu() {
+    var tools = document.getElementById('planning-tools');
+    tools.classList.toggle('open');
+}
+
+
 function saveLatestActivityId(activityId) {
     localStorage.setItem('latestActivityId', activityId);
 }
