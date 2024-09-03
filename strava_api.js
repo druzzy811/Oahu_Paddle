@@ -7,7 +7,7 @@ let linksData = {
     1: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-2-charting-paths-e8defcab9e6a",
     2: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-3-respecting-limits-6db2507fc650",
     3: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-4-be-patient-d63aa25284f8",
-    4: "https://medium.com/@drew.burrier/"
+    4: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-5-pushing-boundaries-63fc4b555cc7?source=friends_link&sk=4c060cedb51cf8b5ec3c4bb1f32c9364"
 
 
 };
