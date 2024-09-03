@@ -18,7 +18,7 @@ body, html {
 /* Media Query for Mobile Screens */
 @media (max-width: 768px) {
     #map {
-        height: 600px; /* Reduced height for mobile screens */
+        height: 500px; /* Reduced height for mobile screens */
     }
 }
 
