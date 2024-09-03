@@ -31,6 +31,8 @@ body, html {
     position: relative;
     width: 100%;
     height: auto;
+    background-color: #A3C6C4; /* Same color as the bottom banner */
+    padding: 50px 0; /* Add some padding if needed */
 }
 
 .top-content {
@@ -50,12 +52,12 @@ body, html {
 }
 
 .top-content h1 {
-    margin: 0;
+    margin: 8px;
     color: #354649;
 }
 
 .top-content nav a {
-    margin: 0 10px;
+    margin: 20px 8px;
     transition: color 0.3s;
     color: #354649;
 }
@@ -174,7 +176,7 @@ body, html {
     border-radius: 50%; /* Circular image */
     margin: 0 auto; /* Centering the image */
     display: block; /* Block display to handle margins correctly */
-    padding-bottom: 50px; /* Adjust the padding as needed */
+    padding-bottom: 10px; /* Adjust the padding as needed */
 }
 
 /* New styles for author-description */
