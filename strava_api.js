@@ -63,6 +63,11 @@ function getActivities(res) {
         });
 }
     function addPolylinesToMap(data) {
+            // Check if the map element exists on the page
+    if (!document.getElementById('map')) {
+        return; // If there's no map, do nothing
+    }
+
    var map = L.map('map').setView([21.466883, -157.942441], 10);
     map.invalidateSize();
     

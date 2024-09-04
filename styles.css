@@ -9,6 +9,7 @@ body, html {
     overflow-y: auto; /* Enable vertical scrolling */
 }
 
+
 #map {
     height: 700px; /* Adjust the value based on the desired height of the map */
     width: calc(100% - 20px); /* Adjusted width with 20px buffer on each side */
@@ -166,6 +167,7 @@ body, html {
 }
 
 .content {
+    color: #354649;
     padding: 20px; /* Add padding to the content */
     padding-bottom: 100px; /* Adjust the padding as needed */
 }
@@ -187,6 +189,7 @@ body, html {
     padding: 10px 20px; /* Add padding for spacing */
     line-height: 1.6; /* Improve line spacing */
     max-width: 600px; /* Set a max width to keep text readable */
+    color: #354649;
 }
 
 @media (max-width: 768px) {
@@ -212,8 +215,6 @@ body, html {
     height: auto; /* Maintain aspect ratio */
     border-radius: 10px; /* Optional: adds rounded corners to your images */
 }
-
-
 
 .author-image {
     max-width: 100%;
@@ -243,11 +244,19 @@ body, html {
 }
 
 /* Science section styling */
-.science-section {
+.science-section h2 {
+    color: #354649;
     text-align: center;
-    padding: 20px;
+    padding: 10px;
 }
-
+.science-section p {
+    color: #354649;
+    text-align: center; /* Center text */
+    margin: 0 auto; /* Center block element */
+    padding: 0px 20px; /* Add padding for spacing */
+    line-height: 1.6; /* Improve line spacing */
+    max-width: 600px; /* Set a max width to keep text readable */
+}
 /* Responsive video container */
 .video-container {
     position: relative;
