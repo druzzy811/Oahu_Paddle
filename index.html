@@ -51,6 +51,49 @@
     </div>
     
 </div>
+<div class="email-list-container">
+    <h3>Join My Oceanic Odyssey Newsletter</h3>
+    <p>Stay updated with our latest adventures and ocean stories. Enter your email below:</p>
+    <form id="emailForm">
+        <input type="email" id="emailInput" name="email" placeholder="Enter your email address" required>
+        <button type="submit">Subscribe</button>
+    </form>
+    <p id="emailResponse" style="display: none;"></p>
+</div>
+
+<script>
+document.getElementById('emailForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    const emailInput = document.getElementById('emailInput').value;
+    const emailResponse = document.getElementById('emailResponse');
+    
+    fetch('https://script.google.com/macros/s/AKfycbyIE-pLcN8F2r8L4H-D9OQa5wieZeb03rhjgWUA7O1U1jv_PPzDe0-sV1F8JswQoCTSNg/exec', { // Replace with the URL of your Google Apps Script web app
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded' // For Google Apps Script
+        },
+        body: new URLSearchParams({ email: emailInput })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            emailResponse.textContent = "Thank you for subscribing!";
+            emailResponse.style.display = "block";
+            emailInput.value = ''; // Reset the form input
+        } else {
+            emailResponse.textContent = "There was an error. Please try again.";
+            emailResponse.style.display = "block";
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        emailResponse.textContent = "There was an error. Please try again.";
+        emailResponse.style.display = "block";
+    });
+});
+</script>
+
 
 
     <!-- Bottom Banner -->
