@@ -56,7 +56,7 @@
     <p>Stay updated with our latest adventures and ocean stories. Enter your email below:</p>
     <form id="emailForm">
         <input type="email" id="emailInput" name="email" placeholder="Enter your email address" required>
-        <button type="submit">Subscribe</button>
+        <button type="submit" id="submitButton">Subscribe</button>
     </form>
     <p id="emailResponse" style="display: none;"></p>
 </div>
@@ -65,34 +65,48 @@
 document.getElementById('emailForm').addEventListener('submit', function(event) {
     event.preventDefault();
     
-    const emailInput = document.getElementById('emailInput').value;
+    const emailInput = document.getElementById('emailInput');
     const emailResponse = document.getElementById('emailResponse');
+    const submitButton = document.getElementById('submitButton');
     
+    // Disable the submit button to prevent multiple submissions
+    submitButton.disabled = true;
+
     fetch('https://script.google.com/macros/s/AKfycbyIE-pLcN8F2r8L4H-D9OQa5wieZeb03rhjgWUA7O1U1jv_PPzDe0-sV1F8JswQoCTSNg/exec', { // Replace with the URL of your Google Apps Script web app
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded' // For Google Apps Script
         },
-        body: new URLSearchParams({ email: emailInput })
+        body: new URLSearchParams({ email: emailInput.value })
     })
     .then(response => response.json())
     .then(data => {
         if (data.success) {
             emailResponse.textContent = "Thank you for subscribing!";
+            emailResponse.style.color = "green";
             emailResponse.style.display = "block";
-            emailInput.value = ''; // Reset the form input
+            emailInput.value = ''; // Clear the input field
         } else {
-            emailResponse.textContent = "There was an error. Please try again.";
+            emailResponse.textContent = "This email is already subscribed!";
+            emailResponse.style.color = "red";
             emailResponse.style.display = "block";
         }
     })
     .catch(error => {
         console.error('Error:', error);
         emailResponse.textContent = "There was an error. Please try again.";
+        emailResponse.style.color = "red";
         emailResponse.style.display = "block";
+    })
+    .finally(() => {
+        // Re-enable the submit button after a few seconds, so the user can submit again if necessary
+        setTimeout(() => {
+            submitButton.disabled = false;
+        }, 5000); // Enable after 5 seconds
     });
 });
 </script>
+
 
 
 
