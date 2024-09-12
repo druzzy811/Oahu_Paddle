@@ -130,20 +130,43 @@ function createPopupContent(index) {
 
 // Function to navigate between activities
 function navigateActivity(newIndex) {
-  // Check if the new index is valid (i.e., within range)
-  if (newIndex < 0 || newIndex >= currentActivities.length) return;
+    // Check if the new index is valid (i.e., within range)
+    if (newIndex < 0 || newIndex >= currentActivities.length) return;
 
-  // Close the current popup
-  lastPolyline.closePopup();
+    // Close the current popup
+    if (lastPolyline) {
+        lastPolyline.closePopup();
+    }
 
-  // Update the lastPolyline to the new activity's polyline
-  lastPolyline = polylines[newIndex];
+    // Update the lastPolyline to the new activity's polyline
+    lastPolyline = polylines[newIndex];
 
-  // Open the popup for the new activity
-  const newContent = createPopupContent(newIndex);
-  lastPolyline.bindPopup(newContent).openPopup();
+    // Get the coordinates of the new polyline
+    const coordinates = lastPolyline.getLatLngs();
+
+    const lastCoord = coordinates[coordinates.length - 1]; // Get the last coordinate (finish of the paddle)
+
+    // Calculate a new point 1 mile north of the last coordinate
+    const mileInDegrees = 4 / 69; // 1 mile north in degrees of latitude
+    const offsetCoord = {
+        lat: lastCoord.lat + mileInDegrees, // Move 1 mile north
+        lng: lastCoord.lng // Longitude stays the same
+    };
+
+    // Create and bind the popup at the last coordinate
+    const newContent = createPopupContent(newIndex);
+    const popup = L.popup()
+        .setLatLng(lastCoord) // Set the popup to the last coordinate
+        .setContent(newContent); // Set the popup content
+
+    // Open the popup
+    popup.openOn(lastPolyline._map);
+
+    // Center the map 1 mile north of the last coordinate
+    setTimeout(() => {
+        lastPolyline._map.setView(offsetCoord, 11, { animate: true });
+    }, 300); // Add a slight delay to ensure the popup opens first
 }
-
 // Call reAuthorize or your initial function to start the app
 reAuthorize();
 
