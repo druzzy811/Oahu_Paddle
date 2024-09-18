@@ -19,28 +19,26 @@
             </nav>
         </div>
     </div>
-
+        <!-- Load photos.js first, as it defines the photoData variable -->
+    <script src="Gallery/photos.js"></script>
     <!-- Photo Gallery Section -->
-    <div class="gallery">
-        <h2>My Oceanic Adventures</h2>
-        <!-- Large Image Viewer -->
-        <div class="large-image-viewer">
-            <img id="largeImage" src="" alt="Click on a thumbnail to view the image">
-        </div>
-        <!-- Thumbnail Scroll Container -->
-        <div class="thumbnail-scroll">
-            <div class="gallery-grid" id="galleryGrid">
-                <!-- Thumbnails will be dynamically inserted here -->
-            </div>
-        </div>
+    <div class="content">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+    <script src="scripts.js"></script> <!-- Your custom script -->
+
+    <div class="map-container">
+    <div id="map"></div>
     </div>
 
+        </div>
+    </div>
     <!-- Footer or Bottom Banner (optional) -->
     <div class="banner">
         <p>&copy; 2024 My Oceanic Odyssey</p>
     </div>
 
-    <script src="scripts.js"></script> <!-- Link to the JavaScript file -->
 
 
      <!-- Bottom Banner -->
@@ -82,6 +80,5 @@
         </div>
 </div>
 
-<script src="strava_api.js"></script>
 </body>
 </html>

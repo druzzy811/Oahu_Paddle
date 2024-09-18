@@ -130,8 +130,12 @@ function createPopupContent(index) {
 
 // Function to navigate between activities
 function navigateActivity(newIndex) {
-    // Check if the new index is valid (i.e., within range)
-    if (newIndex < 0 || newIndex >= currentActivities.length) return;
+    // Wrap around if the user reaches the end or start of the paddles
+    if (newIndex >= currentActivities.length) {
+        newIndex = 0; // Go to the first paddle if on the last one
+    } else if (newIndex < 0) {
+        newIndex = currentActivities.length - 1; // Go to the last paddle if on the first one
+    }
 
     // Close the current popup
     if (lastPolyline) {
@@ -167,6 +171,7 @@ function navigateActivity(newIndex) {
         lastPolyline._map.setView(offsetCoord, 11, { animate: true });
     }, 300); // Add a slight delay to ensure the popup opens first
 }
+
 // Call reAuthorize or your initial function to start the app
 reAuthorize();
 
