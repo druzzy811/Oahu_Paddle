@@ -10,11 +10,26 @@ document.addEventListener('DOMContentLoaded', function() {
     }).addTo(map);
     map.invalidateSize();
 
+
+
     // Function to calculate 2 miles in degrees of latitude
     function calculateOffset(lat) {
-        var mileInDegrees = 20 / 69; // Convert 2 miles to degrees
+        var mileInDegrees = 15 / 69; // Convert 2 miles to degrees
         return lat + mileInDegrees; // Return new latitude 2 miles north
     }
+
+    function toggleMenu() {
+    var tools = document.getElementById('planning-tools');
+    tools.classList.toggle('open');
+    }
+
+    // Custom icon for the marker
+    var customIcon = L.icon({
+        iconUrl: 'custom-icon.png', // Path to your custom icon image
+        iconSize: [20, 20], // Size of the icon
+        iconAnchor: [20, 40], // Point of the icon which will correspond to marker's location
+        popupAnchor: [0, -40] // Point from which the popup should open relative to the iconAnchor
+    });
 
     // Function to create the popup content dynamically
     function createPopupContent(index) {
@@ -25,13 +40,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div style="width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 10px solid #A3C6C4; cursor: pointer; margin-left: -5px; margin-right: 5px;" onclick="navigatePhoto(${index + 1})"></div>
                 
                 <div style="text-align: center; flex-grow: 1; margin: 0;">
-                    <h3 style="margin: 0;">Photo ${photo.datetime}</h3>
-                    <img src="Gallery/${photo.filename}" alt="Photo ${photo.datetime}" style="width: 100%; height: auto; max-height: 400px; object-fit: cover;">
+                    <img src="Gallery/${photo.filename}" alt="Photo ${photo.datetime}" style="width: 100%; height: auto; max-height: 300px; object-fit: cover;">
                 </div>
                 
                 <div style="width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 10px solid #A3C6C4; cursor: pointer; margin-right: -5px; margin-left: 5px;" onclick="navigatePhoto(${index - 1})"></div>
             </div>
         `;
+    }
+
+    // Add persistent markers for all photos on the map
+    function addPersistentMarkers() {
+        photoData.forEach(function(photo, index) {
+            var lat = photo.gps.latitude;
+            var lon = photo.gps.longitude;
+
+            // Add a custom marker for each photo location
+            var marker = L.marker([lat, lon], { icon: customIcon }).addTo(map);
+
+            // Create the popup content
+            var popupContent = createPopupContent(index);
+
+            // Bind the popup to the marker
+            marker.bindPopup(popupContent);
+        });
     }
 
     // Function to update the popup and re-center the map
@@ -75,4 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Center the map 2 miles north of the first photo on page load
     updatePopupAndCenter(currentPhotoIndex);
+
+    // Add persistent markers to the map
+    addPersistentMarkers();
 });
