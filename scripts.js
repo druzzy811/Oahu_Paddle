@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Custom icon for the marker
     var customIcon = L.icon({
         iconUrl: 'custom-icon.png', // Path to your custom icon image
-        iconSize: [20, 20], // Size of the icon
+        iconSize: [10, 10], // Size of the icon
         iconAnchor: [20, 40], // Point of the icon which will correspond to marker's location
         popupAnchor: [0, -40] // Point from which the popup should open relative to the iconAnchor
     });
@@ -36,17 +36,18 @@ document.addEventListener('DOMContentLoaded', function() {
         const photo = photoData[index];
 
         return `
-            <div style="display: flex; align-items: center; justify-content: space-between; width: 300px; margin: 0; padding: 0;">
+            <div style="display: flex; align-items: center; justify-content: space-between; width: 280px; margin: 0; padding: 0; background-color: rgba(255, 255, 255, 0.5)">
                 <div style="width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 10px solid #A3C6C4; cursor: pointer; margin-left: -5px; margin-right: 5px;" onclick="navigatePhoto(${index + 1})"></div>
                 
                 <div style="text-align: center; flex-grow: 1; margin: 0;">
-                    <img src="Gallery/${photo.filename}" alt="Photo ${photo.datetime}" style="width: 100%; height: auto; max-height: 300px; object-fit: cover;">
+                    <img src="Gallery/${photo.filename}" alt="Photo ${photo.datetime}" style="width: 100%; height: auto; max-height: 350px; object-fit: cover;">
                 </div>
                 
                 <div style="width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 10px solid #A3C6C4; cursor: pointer; margin-right: -5px; margin-left: 5px;" onclick="navigatePhoto(${index - 1})"></div>
             </div>
         `;
     }
+
 
     // Add persistent markers for all photos on the map
     function addPersistentMarkers() {
