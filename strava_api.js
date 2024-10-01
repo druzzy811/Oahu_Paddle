@@ -11,6 +11,15 @@ let linksData = {
     4: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-5-pushing-boundaries-63fc4b555cc7?source=friends_link&sk=4c060cedb51cf8b5ec3c4bb1f32c9364"
 };
 
+let paddle_titles = {
+    0: "Genesis",
+    1: "Charting Paths",
+    2: "Respecting Limits",
+    3: "Be Patient",
+    4: "Pushing Boundaries"
+
+}
+
 function toggleMenu() {
     var tools = document.getElementById('planning-tools');
     tools.classList.toggle('open');
@@ -83,25 +92,43 @@ function addPolylinesToMap(data) {
     // Store the polyline in the array for later use
     polylines.push(polyline);
 
-    // Create the popup content for the initial paddle
+    // Create the popup content for the current paddle
     var popupContent = createPopupContent(index);
 
     // Bind the popup to the polyline
     polyline.bindPopup(popupContent);
 
-    // On the first polyline, save it as the last active one
-    if (index === 0) {
+    // On the last polyline, save it as the last active one
+    if (index === currentActivities.length - 1) {
       lastPolyline = polyline;
-      polyline.openPopup(); // Automatically open the first popup
     }
   });
+
+  // Open the popup for the first paddle (index 0) on page load
+  if (polylines.length > 0) {
+    polylines[polylines.length - 1].openPopup(); // Open popup for the first paddle
+        var firstActivity = currentActivities[polylines.length - 1];
+    var firstCoordinates = L.Polyline.fromEncoded(firstActivity.map.summary_polyline).getLatLngs()[0];
+
+// Calculate the offset for 2 miles south of the point
+var mileInDegrees = 10 / 69; // 2 miles in degrees of latitude
+var offsetCoordinates = {
+    lat: firstCoordinates.lat + mileInDegrees, // Move 2 miles south (subtract latitude)
+    lng: firstCoordinates.lng // Longitude stays the same
+};
+
+// Center the map on the offset coordinates
+map.setView(offsetCoordinates, 10);
+  }
 }
+
 
 // Function to create popup content dynamically
 // Function to create popup content dynamically
 function createPopupContent(index) {
   const activity = currentActivities[index]; // Use the globally available currentActivities
   const mediumLink = linksData[currentActivities.length - index - 1] || 'https://medium.com/@drew.burrier'; // Use the corresponding link or fallback
+  const paddleTitle = paddle_titles[currentActivities.length - index - 1] || 'TBD'; // Get the corresponding paddle title
 
   return `
     <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; margin: 0; padding: 0;">
@@ -110,6 +137,7 @@ function createPopupContent(index) {
       
       <div style="text-align: center; flex-grow: 1; margin: 0;">
         <h3 style="margin: 0;">Paddle ${currentActivities.length - index}</h3>
+        <h4 style="margin: 0; color: #354649;">${paddleTitle}</h4> <!-- Paddle title added here -->
         <img src="photos/paddle_${currentActivities.length - index}.jpeg" alt="Paddle ${currentActivities.length - index}" style="width: 100%; height: auto; max-height: 300px; object-fit: cover;">
         <div style="font-size: 12px; margin-top: 5px;">
           ${new Date(activity.start_date).toLocaleDateString()}<br>
@@ -125,7 +153,6 @@ function createPopupContent(index) {
     </div>
   `;
 }
-
 
 
 // Function to navigate between activities
