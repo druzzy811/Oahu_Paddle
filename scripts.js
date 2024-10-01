@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to calculate 2 miles in degrees of latitude
     function calculateOffset(lat) {
-        var mileInDegrees = 15 / 69; // Convert 2 miles to degrees
+        var mileInDegrees = 15 / 69; // Convert miles to degrees
         return lat + mileInDegrees; // Return new latitude 2 miles north
     }
 
@@ -61,8 +61,16 @@ document.addEventListener('DOMContentLoaded', function() {
             // Create the popup content
             var popupContent = createPopupContent(index);
 
+                // Bind the popup to the marker and also center the map 2 miles north on marker click
+            marker.on('click', function() {
+            // Re-center the map miles north of the photo's coordinates
+            var newLat = calculateOffset(lat);
+            map.setView([newLat, lon], 10);
+
+
             // Bind the popup to the marker
             marker.bindPopup(popupContent);
+            });
         });
     }
 
