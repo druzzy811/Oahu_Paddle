@@ -17,7 +17,7 @@ let paddle_titles = {
     1: "Charting Paths",
     2: "Respecting Limits",
     3: "Be Patient",
-    4: "Pushing Boundaries"
+    4: "Pushing Boundaries",
     5: "Trust Yourself"
 
 }
