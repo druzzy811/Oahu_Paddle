@@ -6,47 +6,163 @@
     <title>Science</title>
     <link rel="stylesheet" href="styles.css"> <!-- Ensure the CSS file name is correct -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .science-section h2 {
+            margin-top: -15px; /* Reduce the top margin */
+            margin-bottom: -15px; /* Reduce the bottom margin */
+            font-size: 1.8rem; /* Optional: Adjust font size if needed */
+            text-align: center;
+        }
+        .carousel-container {
+            margin-top: 2px; /* Reduce the top margin */
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 10px;
+            gap: 10px;
+        }
+
+        .carousel-item {
+            flex:0 0 auto;
+            width: 100%;
+            max-width: 375px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .carousel-item h3 {
+            margin: 15px 0;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .modules-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center modules horizontally */
+            gap: 15px;
+            margin-top: 15px;
+            width: 100%; /* Ensure modules fit within the carousel-item */
+        }
+
+        .module {
+            width: 90%; /* Keep modules within the parent container with some padding */
+            text-align: left;
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .module h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: #354649;
+        }
+
+        /* Horizontal link buttons */
+        .module .link-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .link-button {
+            flex: 1; /* Ensure both buttons take equal space */
+            text-align: center;
+            padding: 2px;
+            background-color: #A3C6C4;
+            color: #354649;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .link-button:hover {
+            background-color: #0056b3;
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
     <div class="content-wrapper">
         <div class="top-banner">
             <div class="top-content">
-                <h1>My Oceanic Odyssey</h1>
+                <h1>Open Oceanography</h1>
                 <nav>
-                    <a href="index.html">Main Page</a>
+                    <a href="index.html">My Oceanic Odyssey</a>
                     <a href="about.html">About the Author</a>
-                    <a href="introduction.html">Introduction</a>
                     <a href="support.html">Support</a>
-                    
                 </nav>
             </div>
-            <!-- <img src="photos/top_banner.jpeg" alt="Banner Image"> -->
-
         </div>
         <div class="content">
             <div class="science-section">
-                
-                <h2>My Thesis Defense</h2>
-                <p>
-                    <!-- Your text about the science content goes here -->
-                    Check out my bona fides! I had actually never watched this until recently but there is a pretty good primer in oceanography in the first half of this talk. It gets more niche once I start talking about my research. 
-                </p>
-                <div class="video-container">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/WBj7cJQoSZE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-                <div class="blog-posts">
-                    <h3>Related Blog Posts</h3>
-                    <ul>
-                        <li><a href="#">Understanding Wave Dynamics</a></li>
-                        <li><a href="#">The Biomechanics of Paddling</a></li>
-                        <li><a href="#">Environmental Impact of Water Sports</a></li>
-                    </ul>
+                <h2>Explore Topics</h2>
+                <div class="carousel-container">
+                    <div class="carousel-item">
+                        
+                        <h3>Introduction</h3>
+                        <img src="photos/support_1.jpeg" alt="Introduction">
+                        <div class="modules-container">
+                            <div class="module">
+                                <h4>What is Open Oceanography</h4>
+                                <div class="link-container">
+                                    <a href="#" class="link-button">Medium</a>
+                                    <a href="#" class="link-button">YouTube</a>
+                                </div>
+                            </div>
+                            <div class="module">
+                                <h4>Data Sources</h4>
+                                <div class="link-container">
+                                    <a href="#" class="link-button">Medium</a>
+                                    <a href="#" class="link-button">YouTube</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        
+                        <h3>Sea Surface Temperature</h3>
+                        <img src="photos/sea_surface_temperature.jpg" alt="Sea Surface Temperature">
+                        <div class="modules-container">
+                            <div class="module">
+                                <h4>Heat Engine of the Ocean</h4>
+                                <div class="link-container">
+                                    <a href="#" class="link-button">Medium</a>
+                                    <a href="#" class="link-button">YouTube</a>
+                                </div>
+                            </div>
+                            <div class="module">
+                                <h4>Temperature Trends</h4>
+                                <div class="link-container">
+                                    <a href="#" class="link-button">Medium</a>
+                                    <a href="#" class="link-button">YouTube</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Additional topics can be added here in the same format -->
                 </div>
             </div>
         </div>
     </div>
-</body>
-   <!-- Bottom Banner -->
+<!-- Bottom Banner -->
 <div class="banner">
     <div class="hamburger-menu" onclick="toggleMenu()">
         &#9776; <!-- Hamburger Icon -->
@@ -69,8 +185,8 @@
             <i class="fab fa-medium"></i> <!-- Assuming FontAwesome has a Medium icon -->
             </a>
 
-            <a href="https://twitter.com/drewarlenb" target="_blank" aria-label="Twitter">
-            <i class="fab fa-twitter"></i>
+            <a href="https://substack.com/@drewburrier" target="_blank" aria-label="Substack">
+            <i class="fas fa-newspaper"></i>  <!-- Replace with an appropriate Substack icon if needed -->
             </a>
             <a href="https://www.linkedin.com/in/drew-burrier-90092067/" target="_blank" aria-label="LinkedIn">
                 <i class="fab fa-linkedin-in"></i>
@@ -84,5 +200,8 @@
 
         </div>
 </div>
+
 <script src="strava_api.js"></script>
+</html>
+</body>
 </html>
