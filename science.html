@@ -46,30 +46,38 @@
 
         .carousel-item h3 {
             font-size: 1.2rem;
-            margin: 10px 0 5px;
+            margin: 10px 0 15px; /* Increase bottom margin to separate from first lesson */
+            padding-bottom: 5px;
+            border-bottom: 2px solid #ccc; /* Add a subtle separator */
         }
 
         .lesson {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
+            flex-direction: column; /* Stack elements vertically */
+            align-items: flex-start; /* Align text and links to the left */
+            margin-bottom: 15px; /* Increase space between lessons */
+            padding-bottom: 10px; /* Add some padding */
+            border-bottom: 1px solid #ccc; /* Add a subtle separator */
+        }
+
+        .lesson:last-child {
+            border-bottom: none; /* Remove border for last item */
         }
 
         .lesson h4 {
             font-size: 0.9rem;
-            margin: 0;
-            flex: 2; /* Take up more space for the topic */
-            white-space: nowrap; /* Prevent wrapping */
-            overflow: hidden; /* Trim long text */
-            text-overflow: ellipsis; /* Add ellipsis for long text */
+            margin: 0 0 3px 0; /* Reduce space between title and links */
+            white-space: normal; /* Allow text to wrap */
+            overflow: visible;
+            text-overflow: unset;
+            width: 100%; /* Ensure it takes full width */
         }
 
         .lesson .link-container {
-            flex: 1; /* Keep buttons aligned */
             display: flex;
-            justify-content: flex-end;
-            gap: 5px;
+            justify-content: flex-start; /* Align links to the left */
+            gap: 3px; /* Reduce gap between buttons */
+            width: 100%;
         }
 
         .link-button {
@@ -110,16 +118,16 @@
                         <img src="photos/support_1.jpeg" alt="Introduction to Open Oceanography">
                         <h3>Introduction to Open Oceanography</h3>
                         <div class="lesson">
-                            <h4>What is Open Oceanography?</h4>
+                            <h4>An Introduction</h4>
                             <div class="link-container">
-                                <a href="#" class="link-button">Medium</a>
+                                <a href="https://medium.com/open-oceanography/open-oceanography-an-introduction-a64f286aa266?sk=43e96af8c21bd0224aac3d535c36d28a" class="link-button">Medium</a>
                                 <a href="#" class="link-button">YouTube</a>
                             </div>
                         </div>
                         <div class="lesson">
-                            <h4>The Power of Public Data</h4>
+                            <h4>Oceanography For Everyone: A Beginner's Guide</h4>
                             <div class="link-container">
-                                <a href="#" class="link-button">Medium</a>
+                                <a href="https://medium.com/@drew.burrier/oceanography-for-everyone-a-beginners-guide-to-open-oceanography-e554f27c950a?sk=38d34784080710bd997a953f68e7a67d" class="link-button">Medium</a>
                                 <a href="#" class="link-button">YouTube</a>
                             </div>
                         </div>
