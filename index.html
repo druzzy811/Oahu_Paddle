@@ -48,34 +48,44 @@
     <div class="map-container">
     <div id="map"></div>
     </div>
-    
+    <!-- Map Guide Overlay -->
+<div id="mapGuide" class="map-guide">
+    <p>Click on markers to explore paddle routes and cycle through my adventure!</p>
 </div>
-<div class="email-list-container">
-    <h3>Join My Oceanic Odyssey Newsletter</h3>
-    <p>Stay updated with our latest adventures and ocean stories. Enter your email below:</p>
-    <form id="emailForm">
-        <input type="email" id="emailInput" name="email" placeholder="Enter your email address" required>
-        <button type="submit" id="submitButton">Subscribe</button>
-    </form>
-    <p id="emailResponse" style="display: none;"></p>
+    
+<!-- Email Subscription Popup -->
+<div id="emailPopup" class="popup-overlay">
+    <div class="popup-content">
+        <span class="close-btn" onclick="closePopup()">&times;</span>
+        <h2>Join My Oceanic Odyssey Newsletter</h2>
+        <p>Stay updated with our latest paddling adventures and ocean stories.</p>
+        <form id="popupEmailForm">
+             <input type="email" id="popupEmailInput" name="email" placeholder="Enter your email address" required style="width: calc(100% - 20px); max-width: 100%; box-sizing: border-box;">
+            <button type="submit">Subscribe</button>
+        </form>
+        <p id="popupEmailResponse" style="display: none;"></p>
+    </div>
 </div>
 
 <script>
-document.getElementById('emailForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    
-    const emailInput = document.getElementById('emailInput');
-    const emailResponse = document.getElementById('emailResponse');
-    const submitButton = document.getElementById('submitButton');
-    
-    // Disable the submit button to prevent multiple submissions
-    submitButton.disabled = true;
+document.addEventListener("DOMContentLoaded", function () {
+    document.body.style.overflow = "hidden"; // Prevent scrolling
+});
 
-    fetch('https://script.google.com/macros/s/AKfycbyIE-pLcN8F2r8L4H-D9OQa5wieZeb03rhjgWUA7O1U1jv_PPzDe0-sV1F8JswQoCTSNg/exec', { // Replace with the URL of your Google Apps Script web app
+function closePopup() {
+    document.getElementById("emailPopup").style.display = "none";
+    document.body.style.overflow = "auto";
+}
+
+document.getElementById("popupEmailForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const emailInput = document.getElementById("popupEmailInput");
+    const emailResponse = document.getElementById("popupEmailResponse");
+
+    fetch('https://script.google.com/macros/s/AKfycbyIE-pLcN8F2r8L4H-D9OQa5wieZeb03rhjgWUA7O1U1jv_PPzDe0-sV1F8JswQoCTSNg/exec', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded' // For Google Apps Script
-        },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams({ email: emailInput.value })
     })
     .then(response => response.json())
@@ -84,7 +94,7 @@ document.getElementById('emailForm').addEventListener('submit', function(event) 
             emailResponse.textContent = "Thank you for subscribing!";
             emailResponse.style.color = "green";
             emailResponse.style.display = "block";
-            emailInput.value = ''; // Clear the input field
+            setTimeout(closePopup, 2000); // Close popup after 2 seconds
         } else {
             emailResponse.textContent = "This email is already subscribed!";
             emailResponse.style.color = "red";
@@ -96,14 +106,9 @@ document.getElementById('emailForm').addEventListener('submit', function(event) 
         emailResponse.textContent = "There was an error. Please try again.";
         emailResponse.style.color = "red";
         emailResponse.style.display = "block";
-    })
-    .finally(() => {
-        // Re-enable the submit button after a few seconds, so the user can submit again if necessary
-        setTimeout(() => {
-            submitButton.disabled = false;
-        }, 5000); // Enable after 5 seconds
     });
 });
+
 </script>
 
 
@@ -118,6 +123,8 @@ document.getElementById('emailForm').addEventListener('submit', function(event) 
         <span class="close-btn" onclick="toggleMenu()">&times;</span> <!-- Close Button -->
        
         <div class="links-container">
+            <h2>Work With Me</h2>
+            <a href="freelance.html">Let's Connect</a>
             <h2>Landing Page</h2>
             <a href="landing.html">Main Page</a>
             <h2>Open Oceanography</h2>

@@ -119,3 +119,46 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add persistent markers to the map
     addPersistentMarkers();
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const mapGuide = document.getElementById("mapGuide");
+    const map = document.getElementById("map");
+
+    if (!mapGuide || !map) {
+        console.error("Error: Map guide or map element not found.");
+        return;
+    }
+
+    console.log("Map guide found. Script is running.");
+
+    // Function to hide the map guide
+    function hideMapGuide() {
+        console.log("Hiding map guide...");
+        mapGuide.style.opacity = "0";  // Apply fade-out effect
+        setTimeout(() => {
+            mapGuide.style.display = "none"; // Fully remove from layout
+            console.log("Map guide is now hidden.");
+        }, 500);
+    }
+
+    // Hide after 10 seconds automatically
+    setTimeout(hideMapGuide, 10000);
+
+    // Hide when the user clicks on the map
+    map.addEventListener("click", function () {
+        console.log("Map clicked.");
+        hideMapGuide();
+    });
+
+    // Hide when the user taps on the map (for mobile)
+    map.addEventListener("touchstart", function () {
+        console.log("Map touched.");
+        hideMapGuide();
+    });
+
+    // Hide when the user moves the mouse over the map
+    map.addEventListener("mousemove", function () {
+        console.log("Mouse moved over map.");
+        hideMapGuide();
+    });
+});

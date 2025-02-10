@@ -206,3 +206,12 @@ function navigateActivity(newIndex) {
 // Call reAuthorize or your initial function to start the app
 reAuthorize();
 
+document.addEventListener("DOMContentLoaded", function () {
+    const mapGuide = document.getElementById("mapGuide");
+
+    // Hide map guide after 10 seconds
+    setTimeout(() => {
+        mapGuide.style.display = "none";
+    }, 6000);
+});
+
