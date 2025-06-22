@@ -24,7 +24,7 @@ let paddle_titles = {
     5: "Trust Yourself",
     6: "Worlds Collide",
     7: "Trust the Process",
-    8: "A year in Review"
+    8: "A year in Review",
     9: "Survive"
 
 }
