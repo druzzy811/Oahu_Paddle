@@ -1,158 +1,244 @@
+<!-- freelance.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Freelance Services | Drew Burrier</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Freelance — My Oceanic Odyssey</title>
 
-    <!-- Top Banner -->
-    <div class="top-banner">
-        <div class="top-content">
-            <h1>Freelance Services</h1>
-            <nav>
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="support.html">SUPport</a>
-            </nav>
-        </div>
+  <meta name="description" content="Hire Drew Burrier for data science, ocean education, writing, and web/story design." />
+
+  <!-- Shared fonts/vendor CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Shared site stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<!-- GA -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZKS4VZRVKZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)}
+  gtag('js', new Date()); gtag('config', 'G-ZKS4VZRVKZ');
+</script>
+
+<body>
+  <!-- Shared ocean backdrop -->
+  <div class="ocean-bg" aria-hidden="true"></div>
+  <div class="ocean-noise" aria-hidden="true"></div>
+
+  <!-- Shared header -->
+  <header class="site-header">
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <a class="brand" href="index.html" aria-label="My Oceanic Odyssey">
+      <svg class="brand-icon" viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M14,40 C10,36 8,32 10,28 c2-4 6-7 10-9 c5-2 11-3 16-1 c4,2 7,5 9,9 c2,4 2,8 0,11 c-2,3 -6,5 -10,6 c-5,1 -10,1 -15-1 c-3-1 -5-2 -6-3 z"
+              fill="none" vector-effect="non-scaling-stroke" />
+      </svg>
+      <span class="brand-text">My Oceanic Odyssey</span>
+    </a>
+
+    <nav class="main-nav">
+      <a href="introduction.html">Introduction</a>
+      <a href="science.html">Science</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="support.html">Support</a>
+      <a href="freelance.html" aria-current="page">Freelance</a>
+    </nav>
+  </header>
+
+  <!-- Shared drawer (your updated link set) -->
+  <aside id="drawer" class="drawer" role="dialog" aria-modal="true" aria-label="Site menu" hidden>
+    <div class="drawer-header">
+      <strong>Navigate</strong>
+      <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
     </div>
 
-    <!-- Services Section -->
-    <section class="content">
-        <h2>Hire Me for Expert Services</h2>
-        <p>Support my work by hiring me as a data scientist, blog designer, ocean educator, or writer.</p>
+    <div class="drawer-section">
+      <a href="introduction.html">Introduction</a>
+      <a href="about.html">About the Author</a>
+      <a href="landing.html">Landing Page</a>
+      <a href="science.html">Open Oceanography</a>
+      <a href="gallery.html">Photo Map</a>
+      <a href="freelance.html" aria-current="page">Work With Me</a>
+      <a class="sponsor-cta" href="support.html">Sponsor the Journey</a>
+    </div>
+  </aside>
+  <div id="backdrop" class="backdrop" hidden></div>
 
-        <div class="service-grid">
-            <div class="service">
-                <h3>Data Science & Analysis</h3>
-                <p>Custom analytics, dashboards, and insights for businesses, researchers, and creators.</p>
-            </div>
-            <div class="service">
-                <h3>Blog & Website Design</h3>
-                <p>Custom blog setups, SEO optimization, and sleek digital experiences for brands.</p>
-            </div>
-            <div class="service">
-                <h3>Ocean Science Education</h3>
-                <p>Workshops, guest lectures, and online content creation about the ocean.</p>
-            </div>
-            <div class="service">
-                <h3>Writing & Editorial</h3>
-                <p>Adventure storytelling, technical writing, and ghostwriting for blogs and media.</p>
-            </div>
-        </div>
+  <!-- Main -->
+  <main class="wrap">
+    <!-- Hero -->
+    <section class="card intro-hero">
+      <div class="intro-hero__content">
+        <h1>Freelance / Work With Me</h1>
+        <p class="lead">
+          Bring ocean sense, data, and story craft to your project — from analysis and dashboards to education,
+          web experiences, and narrative.
+        </p>
+      </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="content contact-section">
-        <h2>Work With Me</h2>
-        <p>Fill out the form below to discuss your project.</p>
-        <form id="contactForm">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
+    <!-- Services -->
+    <section class="card" style="padding: clamp(18px,3.6vw,28px);">
+      <h2 style="margin: 0 0 10px;">Hire Me for Expert Services</h2>
+      <p class="prose" style="padding:0;">
+        Support the Odyssey by hiring me for focused engagements. Clear scope, reliable delivery, and open communication.
+      </p>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+      <div class="service-grid" style="margin-top: 14px;">
+        <div class="service">
+          <h3>Data Science & Analysis</h3>
+          <p>Custom analytics, dashboards, and insights for teams, researchers, and creators.</p>
+        </div>
+        <div class="service">
+          <h3>Blog & Website Design</h3>
+          <p>Fast, clean builds with a story-first approach, SEO, and performance in mind.</p>
+        </div>
+        <div class="service">
+          <h3>Ocean Science Education</h3>
+          <p>Workshops, guest lectures, and curriculum content about wind, waves, currents, and coasts.</p>
+        </div>
+        <div class="service">
+          <h3>Writing & Editorial</h3>
+          <p>Adventure storytelling, technical writing, and ghostwriting for publications and brands.</p>
+        </div>
+      </div>
+    </section>
 
-        <label for="service">Service:</label>
+    <!-- Contact -->
+    <section class="card" style="padding: clamp(18px,3.6vw,28px);">
+      <h2 style="margin: 0 0 10px;">Work With Me</h2>
+      <p class="prose" style="padding:0;">Tell me a bit about your project and timeline.</p>
+
+      <form id="contactForm" style="max-width: 720px;">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="service">Service</label>
         <select id="service" name="service">
-            <option value="data-science">Data Science & Analysis</option>
-            <option value="blog-design">Blog & Website Design</option>
-            <option value="ocean-education">Ocean Science Education</option>
-            <option value="writing">Writing & Editorial</option>
+          <option value="data-science">Data Science & Analysis</option>
+          <option value="blog-design">Blog & Website Design</option>
+          <option value="ocean-education">Ocean Science Education</option>
+          <option value="writing">Writing & Editorial</option>
         </select>
 
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" rows="4" required></textarea>
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
 
-        <button type="submit">Send Inquiry</button>
-        </form>
-
-<p id="confirmationMessage" style="display:none; color: green; margin-top: 10px;">Your message has been sent!</p>
-
+        <button type="submit" class="btn btn-sun" style="margin-top:12px;">Send Inquiry</button>
+        <p id="confirmationMessage" style="display:none; color: #7CFC9A; margin-top: 10px;">Your message has been sent!</p>
+      </form>
     </section>
+  </main>
 
-    <!-- Bottom Banner -->
-<div class="banner">
-    <div class="hamburger-menu" onclick="toggleMenu()">
-        &#9776; <!-- Hamburger Icon -->
+  <!-- Shared footer -->
+  <footer class="site-footer">
+    <div class="social">
+      <a aria-label="Instagram" href="https://www.instagram.com/drewski1003" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a aria-label="Medium" href="https://medium.com/my-oceanic-odyssey" target="_blank"><i class="fab fa-medium"></i></a>
+      <a aria-label="Substack" href="https://substack.com/@drewburrier" target="_blank"><i class="fas fa-newspaper"></i></a>
+      <a aria-label="LinkedIn" href="https://www.linkedin.com/in/drew-burrier-90092067/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+      <a aria-label="Spotify" href="https://open.spotify.com/user/12148616871" target="_blank"><i class="fab fa-spotify"></i></a>
     </div>
-    <div id="planning-tools" class="planning-tools">
-        <span class="close-btn" onclick="toggleMenu()">&times;</span> <!-- Close Button -->
-       
-        <div class="links-container">
+    <div class="legal">© My Oceanic Odyssey</div>
+  </footer>
 
-            <h2>Landing Page</h2>
-            <a href="landing.html">Main Page</a>
-            <h2>Open Oceanography</h2>
-            <a href="science.html">Main Page</a>
-            <h2>Photo Gallery</h2>
-             <a href="gallery.html">Photo Map</a> <!-- New link to the gallery -->
-             <h2>Planning Tools</h2>
-            <a href="https://www.windy.com/21.305/-157.856?2024022418,21.311,-158.159,10,m:egUaLQ" target="_blank">Windy.com</a>
-            <a href="https://earth.google.com/web/@21.26186347,-157.81431259,47.74905754a,5624.30629881d,35y,360h,0t,0r" target="_blank">Google Earth</a>
-        </div>
-    </div>
-     <div class="social-media-links">
-            <a href="https://www.instagram.com/drewski1003" target="_blank" aria-label="Instagram">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://medium.com/my-oceanic-odyssey" target="_blank" aria-label="Medium">
-            <i class="fab fa-medium"></i> <!-- Assuming FontAwesome has a Medium icon -->
-            </a>
+  <!-- Drawer controls (same as other pages) -->
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const hamburger = document.getElementById('hamburger');
+      const drawer    = document.getElementById('drawer');
+      const closeBtn  = document.getElementById('drawerClose');
+      const backdrop  = document.getElementById('backdrop');
+      const main      = document.querySelector('main');
+      const footer    = document.querySelector('footer');
 
-            <a href="https://substack.com/@drewburrier" target="_blank" aria-label="Substack">
-            <i class="fas fa-newspaper"></i>  <!-- Replace with an appropriate Substack icon if needed -->
-            </a>
-            <a href="https://www.linkedin.com/in/drew-burrier-90092067/" target="_blank" aria-label="LinkedIn">
-                <i class="fab fa-linkedin-in"></i>
-            </a>
-            <!--  <a href="https://www.strava.com/athletes/yourusername" target="_blank" aria-label="Strava">
-                <i class="fab fa-strava"></i>
-            </a> -->
-             <a href="https://open.spotify.com/user/12148616871" target="_blank" aria-label="Spotify">
-                <i class="fab fa-spotify"></i>
-            </a>
+      let lastFocused = null;
 
-        </div>
-</div>
-<script>
-    document.getElementById("contactForm").addEventListener("submit", function(event) {
-    event.preventDefault();
+      function setInert(on) {
+        if (on) { main?.setAttribute('inert',''); footer?.setAttribute('inert',''); }
+        else    { main?.removeAttribute('inert'); footer?.removeAttribute('inert'); }
+      }
 
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const service = document.getElementById("service").value;
-    const message = document.getElementById("message").value;
+      function openDrawer() {
+        lastFocused = document.activeElement;
+        drawer.hidden = false;
+        backdrop.hidden = false;
+        drawer.classList.add('open');
+        setInert(true);
+        hamburger.setAttribute('aria-expanded','true');
+        closeBtn.focus();
+        document.addEventListener('keydown', trapFocus);
+      }
 
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("service", service);
-    formData.append("message", message);
+      function closeDrawer() {
+        (lastFocused || hamburger).focus();
+        drawer.classList.remove('open');
+        drawer.hidden = true;
+        backdrop.hidden = true;
+        setInert(false);
+        hamburger.setAttribute('aria-expanded','false');
+        document.removeEventListener('keydown', trapFocus);
+      }
 
-    fetch("https://script.google.com/macros/s/AKfycbwcDyS2Bs7b-PX96_tNWzxOAJ-8r1nWWXkURA5S47hZmOEr6UEKKgWmarNIAHq-55YQ/exec", { // 🔴 Replace with your actual Web App URL from Step 1
-        method: "POST",
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            document.getElementById("confirmationMessage").style.display = "block";
-            document.getElementById("contactForm").reset();
-        } else {
-            alert("Error sending message. Please try again.");
-        }
-    })
-    .catch(error => {
-        console.error("Error:", error);
-        alert("Something went wrong. Please try again.");
+      function trapFocus(e) {
+        if (e.key !== 'Tab' || drawer.hidden) return;
+        const focusables = drawer.querySelectorAll(
+          'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+        );
+        if (!focusables.length) return;
+        const first = focusables[0];
+        const last  = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+
+      hamburger.addEventListener('click', openDrawer);
+      closeBtn.addEventListener('click', closeDrawer);
+      backdrop.addEventListener('click', closeDrawer);
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDrawer(); });
     });
-});
 
-</script>
-    <script src="strava_api.js"></script>
+    // Contact form -> Apps Script
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById("contactForm");
+      const conf = document.getElementById("confirmationMessage");
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(form);
+
+        fetch("https://script.google.com/macros/s/AKfycbwcDyS2Bs7b-PX96_tNWzxOAJ-8r1nWWXkURA5S47hZmOEr6UEKKgWmarNIAHq-55YQ/exec", {
+          method: "POST",
+          body: formData
+        })
+        .then(r => r.json())
+        .then(data => {
+          if (data.success) {
+            conf.style.display = "block";
+            form.reset();
+          } else {
+            alert("Error sending message. Please try again.");
+          }
+        })
+        .catch(err => {
+          console.error("Error:", err);
+          alert("Something went wrong. Please try again.");
+        });
+      });
+    });
+  </script>
 </body>
 </html>

@@ -1,184 +1,198 @@
+<!-- support.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Support</title>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Support</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Ensure the CSS file name is correct -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* Reset link styles */
-        a.sponsor-inquiry {
-            display: inline-block;
-            padding: 10px 20px;
-            margin-top: 20px;
-            background-color: #A3C6C4;
-            color: #354649;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            text-align: center;
-            transition: background-color 0.3s ease;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Support — My Oceanic Odyssey</title>
 
-        a.sponsor-inquiry:hover {
-            background-color: #0056b3;
-            color: #354649;
-        }
+  <meta name="description" content="Support My Oceanic Odyssey through Ko‑fi contributions or brand sponsorships." />
 
-        a.sponsor-inquiry:visited {
-            color: #354649;
-        }
+  <!-- Shared fonts/vendor CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-        a.sponsor-inquiry:focus {
-            outline: none;
-        }
-
-        .introduction-photos {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            margin-bottom: 20px;
-            padding: 0 20px; /* Adjust horizontal padding */
-        }
-
-        .introduction-photos img {
-            max-width: 100%; /* Ensure images fill the container */
-            height: auto; /* Maintain aspect ratio */
-            border-radius: 10px; /* Optional: adds rounded corners to your images */
-        }
-        .link-container a {
-            display: inline-block;
-            padding: 10px 20px;
-            margin-top: 20px;
-            background-color: #A3C6C4;
-            color: #354649;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            text-align: center;
-            transition: background-color 0.3s ease;
-        }
-
-        .link-container a:hover {
-            background-color: #0056b3;
-            color: #354649;
-        }
-
-        .link-container a:visited {
-            color: #354649;
-        }
-
-        .link-container a:focus {
-            outline: none;
-        }
-
-        .link-container {
-            display: flex;
-            justify-content: center; /* Center the links horizontally */
-            gap: 20px; /* Space between the links */
-            flex-wrap: wrap; /* Ensure links wrap on smaller screens */
-        }
-
-    </style>
+  <!-- Shared site stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<!-- Google tag (gtag.js) -->
+
+<!-- GA -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZKS4VZRVKZ"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-ZKS4VZRVKZ');
+  function gtag(){dataLayer.push(arguments)}
+  gtag('js', new Date()); gtag('config', 'G-ZKS4VZRVKZ');
 </script>
+
 <body>
-    <div class="content-wrapper">
-        <div class="top-banner">
-            <div class="top-content">
-                <h1>My Oceanic Odyssey</h1>
-                <nav>
-                    <a href="index.html">Main Page</a>
-                    <a href="introduction.html">Introduction</a>
-                    <a href="about.html">About the Author</a>
-                </nav>
-            </div>
-            <!-- <img src="photos/top_banner.jpeg" alt="Banner Image"> -->
-           
-        </div>
-        <div class="content">
-            <div class="author-profile">
-                <div class="introduction-photos">
-                    <img src="photos/support_1.jpeg" alt="Support" class="author-image"> <!-- Support image 1 -->
-                    <p class="author-description">
-                    As I embark on an ambitious project to document my journey Stand Up Paddling around the captivating island of Oahu, I am reaching out for your generous support. While I'm fueled by passion and determination, the success of this endeavor hinges greatly on having the right equipment to navigate the ocean safely. Your contributions through Ko-fi donations will directly aid in acquiring and maintaining the necessary gear, ensuring both my safety and the quality of the content produced. Moreover, as I strive to push the boundaries of my website and blogging format, there are inherent costs associated with enhancing user experience and expanding the reach of my narrative. Your support not only enables me to improve the platform but also fosters innovation in storytelling, allowing me to share this extraordinary journey in the most immersive and engaging manner possible. Additionally, I welcome sponsorships from businesses and brands aligned with my values and the spirit of exploration, offering them valuable exposure to a diverse and engaged audience. Together, let's embark on this adventure and push the limits of what's possible.<br><br>
-                    With gratitude,<br><br>
-                    Drew Arlen Burrier
-                    </p>
-                     <div class="link-container">
-                        <a href="https://ko-fi.com/drewburrier" target="_blank" class="link-button">Become A SUPporter</a>
-                        <a href="mailto:drew.burrier@gmail.com?subject=Sponsor Inquiry" class="sponsor-inquiry">Sponsor Inquiries</a>
-                    </div>
-                    <img src="photos/support_2.jpg" alt="Support" class="author-image"> <!-- Support image 2 -->
-                </div>
-                <p class="author-description">
-                    <!-- Your text about supporting the author goes here -->
-                </p>
-            </div>
-        </div>
+  <!-- Shared ocean backdrop -->
+  <div class="ocean-bg" aria-hidden="true"></div>
+  <div class="ocean-noise" aria-hidden="true"></div>
+
+  <!-- Shared header -->
+  <header class="site-header">
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <a class="brand" href="index.html" aria-label="My Oceanic Odyssey">
+      <svg class="brand-icon" viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M14,40 C10,36 8,32 10,28 c2-4 6-7 10-9 c5-2 11-3 16-1 c4,2 7,5 9,9 c2,4 2,8 0,11 c-2,3 -6,5 -10,6 c-5,1 -10,1 -15-1 c-3-1 -5-2 -6-3 z"
+              fill="none" vector-effect="non-scaling-stroke" />
+      </svg>
+      <span class="brand-text">My Oceanic Odyssey</span>
+    </a>
+
+    <nav class="main-nav">
+      <a href="introduction.html">Introduction</a>
+      <a href="science.html">Science</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="support.html" aria-current="page">Support</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <!-- Shared drawer (your updated link set with Sponsor here too) -->
+  <aside id="drawer" class="drawer" role="dialog" aria-modal="true" aria-label="Site menu" hidden>
+    <div class="drawer-header">
+      <strong>Navigate</strong>
+      <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
     </div>
+
+    <div class="drawer-section">
+      <a href="introduction.html">Introduction</a>
+      <a href="about.html">About the Author</a>
+      <a href="landing.html">Landing Page</a>
+      <a href="science.html">Open Oceanography</a>
+      <a href="gallery.html">Photo Map</a>
+      <a href="freelance.html">Work With Me</a>
+      <a class="sponsor-cta" href="support.html" aria-current="page">Sponsor the Journey</a>
+    </div>
+  </aside>
+  <div id="backdrop" class="backdrop" hidden></div>
+
+  <!-- Main -->
+  <main class="wrap">
+    <!-- Hero -->
+    <section class="card intro-hero">
+      <div class="intro-hero__content">
+        <h1>Support the Journey</h1>
+        <p class="lead">
+          Help fuel an open, living expedition around Oʻahu — essays, maps, data, and the miles between wind and swell.
+        </p>
+      </div>
+    </section>
+      <div class="intro-grid">
+        <figure class="intro-photo">
+          <img src="photos/support_1.jpeg" alt="SUP gear ready on the beach">
+        </figure>
+        </div>
+    <!-- Body -->
+    <section class="card intro-body">
+      <div class="prose">
+        <p>
+          I’m documenting my attempt to circumnavigate Oʻahu by stand‑up paddle — not just the miles,
+          but the learning. Your support directly funds safe equipment, field time, and the open tools
+          that turn conditions into shared knowledge.
+        </p>
+        <p>
+          Contributions via Ko‑fi keep the project independent and generous. Sponsorships from aligned
+          brands help us expand essays, maps, and educational pieces for a wider audience. If our values
+          match, let’s talk about a sponsorship that feels authentic and meaningful.
+        </p>
+      </div>
+
+      <!-- Photo duo (shared grid pattern from intro page) -->
+
+      <div class="intro-grid">
+        <figure class="intro-photo">
+          <img src="photos/support_2.jpg" alt="Blue water stretch off Oʻahu">
+        </figure>
+      </div>
+
+      <!-- CTAs matched to shared button styles -->
+      <div class="intro-cta">
+        <a class="btn btn-sun" href="https://ko-fi.com/drewburrier" target="_blank" rel="noopener">
+          Become a SUPporter
+        </a>
+        <a class="btn btn-sun" href="mailto:drew.burrier@gmail.com?subject=Sponsor%20Inquiry">
+          Sponsor inquiries
+
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Shared footer -->
+  <footer class="site-footer">
+    <div class="social">
+      <a aria-label="Instagram" href="https://www.instagram.com/drewski1003" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a aria-label="Medium" href="https://medium.com/my-oceanic-odyssey" target="_blank"><i class="fab fa-medium"></i></a>
+      <a aria-label="Substack" href="https://substack.com/@drewburrier" target="_blank"><i class="fas fa-newspaper"></i></a>
+      <a aria-label="LinkedIn" href="https://www.linkedin.com/in/drew-burrier-90092067/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+      <a aria-label="Spotify" href="https://open.spotify.com/user/12148616871" target="_blank"><i class="fab fa-spotify"></i></a>
+    </div>
+    <div class="legal">© My Oceanic Odyssey</div>
+  </footer>
+
+  <!-- Shared drawer controls -->
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const hamburger = document.getElementById('hamburger');
+      const drawer    = document.getElementById('drawer');
+      const closeBtn  = document.getElementById('drawerClose');
+      const backdrop  = document.getElementById('backdrop');
+      const main      = document.querySelector('main');
+      const footer    = document.querySelector('footer');
+
+      let lastFocused = null;
+
+      function setInert(on) {
+        if (on) { main?.setAttribute('inert',''); footer?.setAttribute('inert',''); }
+        else    { main?.removeAttribute('inert'); footer?.removeAttribute('inert'); }
+      }
+
+      function openDrawer() {
+        lastFocused = document.activeElement;
+        drawer.hidden = false;
+        backdrop.hidden = false;
+        drawer.classList.add('open');
+        setInert(true);
+        hamburger.setAttribute('aria-expanded','true');
+        closeBtn.focus();
+        document.addEventListener('keydown', trapFocus);
+      }
+
+      function closeDrawer() {
+        (lastFocused || hamburger).focus();
+        drawer.classList.remove('open');
+        drawer.hidden = true;
+        backdrop.hidden = true;
+        setInert(false);
+        hamburger.setAttribute('aria-expanded','false');
+        document.removeEventListener('keydown', trapFocus);
+      }
+
+      function trapFocus(e) {
+        if (e.key !== 'Tab' || drawer.hidden) return;
+        const focusables = drawer.querySelectorAll(
+          'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+        );
+        if (!focusables.length) return;
+        const first = focusables[0];
+        const last  = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+
+      hamburger.addEventListener('click', openDrawer);
+      closeBtn.addEventListener('click', closeDrawer);
+      backdrop.addEventListener('click', closeDrawer);
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDrawer(); });
+    });
+  </script>
 </body>
-   <!-- Bottom Banner -->
-   <!-- Bottom Banner -->
-<div class="banner">
-    <div class="hamburger-menu" onclick="toggleMenu()">
-        &#9776; <!-- Hamburger Icon -->
-    </div>
-    <div id="planning-tools" class="planning-tools">
-        <span class="close-btn" onclick="toggleMenu()">&times;</span> <!-- Close Button -->
-       
-        <div class="links-container">
-            <h2>Open Oceanography</h2>
-            <a href="science.html">Main Page</a>
-            <h2>Photo Gallery</h2>
-             <a href="gallery.html">Photo Map</a> <!-- New link to the gallery -->
-             <h2>Planning Tools</h2>
-            <a href="https://www.windy.com/21.305/-157.856?2024022418,21.311,-158.159,10,m:egUaLQ" target="_blank">Windy.com</a>
-            <a href="https://earth.google.com/web/@21.26186347,-157.81431259,47.74905754a,5624.30629881d,35y,360h,0t,0r" target="_blank">Google Earth</a>
-        </div>
-    </div>
-     <div class="social-media-links">
-            <a href="https://www.instagram.com/drewski1003" target="_blank" aria-label="Instagram">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://medium.com/my-oceanic-odyssey" target="_blank" aria-label="Medium">
-            <i class="fab fa-medium"></i> <!-- Assuming FontAwesome has a Medium icon -->
-            </a>
-
-            <a href="https://substack.com/@drewburrier" target="_blank" aria-label="Substack">
-            <i class="fas fa-newspaper"></i>  <!-- Replace with an appropriate Substack icon if needed -->
-            </a>
-            <a href="https://www.linkedin.com/in/drew-burrier-90092067/" target="_blank" aria-label="LinkedIn">
-                <i class="fab fa-linkedin-in"></i>
-            </a>
-            <!--  <a href="https://www.strava.com/athletes/yourusername" target="_blank" aria-label="Strava">
-                <i class="fab fa-strava"></i>
-            </a> -->
-             <a href="https://open.spotify.com/user/12148616871" target="_blank" aria-label="Spotify">
-                <i class="fab fa-spotify"></i>
-            </a>
-
-        </div>
-</div>
-
-
-
-<script src="strava_api.js"></script>
 </html>
 

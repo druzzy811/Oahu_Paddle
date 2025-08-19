@@ -1,270 +1,289 @@
+<!-- science.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Science</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* Global text color matches header */
-        body, h1, h2, h3, h4, p, a {
-            color: #354649;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Open Oceanography — My Oceanic Odyssey</title>
 
-        .science-section h2 {
-            margin-top: -15px;
-            margin-bottom: 5px;
-            font-size: 1.5rem;
-            text-align: center;
-        }
+  <meta name="description" content="Open Oceanography: approachable lessons, references, and tools that ride along with the expedition." />
 
-        .carousel-container {
-            display: flex;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            padding: 10px;
-            gap: 10px;
-        }
+  <!-- Shared fonts/vendor CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-        .carousel-item {
-            flex: 0 0 auto;
-            width: 300px;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 10px;
-            text-align: left;
-        }
-
-        .carousel-item img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 5px;
-        }
-
-        .carousel-item h3 {
-            font-size: 1.2rem;
-            margin: 10px 0 15px; /* Increase bottom margin to separate from first lesson */
-            padding-bottom: 5px;
-            border-bottom: 2px solid #ccc; /* Add a subtle separator */
-        }
-
-        .lesson {
-            display: flex;
-            flex-direction: column; /* Stack elements vertically */
-            align-items: flex-start; /* Align text and links to the left */
-            margin-bottom: 15px; /* Increase space between lessons */
-            padding-bottom: 10px; /* Add some padding */
-            border-bottom: 1px solid #ccc; /* Add a subtle separator */
-        }
-
-        .lesson:last-child {
-            border-bottom: none; /* Remove border for last item */
-        }
-
-        .lesson h4 {
-            font-size: 0.9rem;
-            margin: 0 0 3px 0; /* Reduce space between title and links */
-            white-space: normal; /* Allow text to wrap */
-            overflow: visible;
-            text-overflow: unset;
-            width: 100%; /* Ensure it takes full width */
-        }
-
-        .lesson .link-container {
-            display: flex;
-            justify-content: flex-start; /* Align links to the left */
-            gap: 3px; /* Reduce gap between buttons */
-            width: 100%;
-        }
-
-        .link-button {
-            padding: 3px 6px;
-            font-size: 0.8rem;
-            text-align: center;
-            text-decoration: none;
-            color: #354649;
-            background-color: #A3C6C4;
-            border-radius: 3px;
-            transition: background-color 0.3s ease;
-        }
-
-        .link-button:hover {
-            background-color: #0056b3;
-            color: #fff;
-        }
-    </style>
+  <!-- Shared site stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
 </head>
+
+<!-- GA -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZKS4VZRVKZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)}
+  gtag('js', new Date()); gtag('config', 'G-ZKS4VZRVKZ');
+</script>
+
 <body>
-    <div class="content-wrapper">
-        <div class="top-banner">
-            <div class="top-content">
-                <h1>Open Oceanography</h1>
-                <nav>
-                    <a href="index.html">My Oceanic Odyssey</a>
-                    <a href="about.html">About the Author</a>
-                    <a href="support.html">Support</a>
-                </nav>
+  <!-- Shared ocean backdrop -->
+  <div class="ocean-bg" aria-hidden="true"></div>
+  <div class="ocean-noise" aria-hidden="true"></div>
+
+  <!-- Shared header -->
+  <header class="site-header">
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <a class="brand" href="index.html" aria-label="My Oceanic Odyssey">
+      <svg class="brand-icon" viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M14,40 C10,36 8,32 10,28 c2-4 6-7 10-9 c5-2 11-3 16-1 c4,2 7,5 9,9 c2,4 2,8 0,11 c-2,3 -6,5 -10,6 c-5,1 -10,1 -15-1 c-3-1 -5-2 -6-3 z"
+              fill="none" vector-effect="non-scaling-stroke" />
+      </svg>
+      <span class="brand-text">My Oceanic Odyssey</span>
+    </a>
+
+    <nav class="main-nav">
+      <a href="introduction.html">Introduction</a>
+      <a href="science.html" aria-current="page">Science</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="support.html">Support</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <!-- Shared drawer (your updated link set) -->
+  <aside id="drawer" class="drawer" role="dialog" aria-modal="true" aria-label="Site menu" hidden>
+    <div class="drawer-header">
+      <strong>Navigate</strong>
+      <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    </div>
+
+    <div class="drawer-section">
+      <a href="introduction.html">Introduction</a>
+      <a href="about.html">About the Author</a>
+      <a href="landing.html">Landing Page</a>
+      <a href="science.html" aria-current="page">Open Oceanography</a>
+      <a href="gallery.html">Photo Map</a>
+      <a href="freelance.html">Work With Me</a>
+      <a class="sponsor-cta" href="support.html">Sponsor the Journey</a>
+    </div>
+  </aside>
+  <div id="backdrop" class="backdrop" hidden></div>
+
+  <!-- Main -->
+  <main class="wrap">
+    <!-- Hero -->
+    <section class="card intro-hero">
+      <div class="intro-hero__content">
+        <h1>Open Oceanography</h1>
+        <p class="lead">
+          Field‑driven lessons you can actually use — wind, swell, currents, water masses, and the physics that shape the coast.
+        </p>
+      </div>
+    </section>
+
+    <!-- Topics row (horizontal scroll; no new CSS file needed) -->
+    <section class="card" style="padding: clamp(18px,3.6vw,28px);">
+      <h2 style="margin:0 0 12px;">Explore Topics</h2>
+
+      <!-- Scroll track -->
+      <div class="science-track"
+           style="display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory; padding:6px 2px 2px;">
+        <!-- Card template for each topic -->
+        <!-- 1) Intro to Open Oceanography -->
+        <article class="topic"
+          style="flex:0 0 320px; scroll-snap-align:start; border:1px solid var(--stroke); border-radius:12px; background:rgba(255,255,255,.04); box-shadow:var(--shadow); overflow:hidden;">
+          <img src="photos/support_1.jpeg" alt="Introduction to Open Oceanography"
+               style="display:block; width:100%; height:160px; object-fit:cover;">
+          <div style="padding:12px;">
+            <h3 style="margin:0 0 10px; font-size:18px; border-bottom:1px solid rgba(255,255,255,.12); padding-bottom:8px;">
+              Introduction to Open Oceanography
+            </h3>
+
+            <div class="prose" style="padding:0; margin-bottom:10px;">
+              <p style="margin:0; color:var(--muted); font-size:14px;">
+                What this series is, how to use it, and how it rides along with the expedition.
+              </p>
             </div>
-        </div>
-        <div class="content">
-            <div class="science-section">
-                <h2>Explore Topics</h2>
-                <div class="carousel-container">
-                    <!-- Introduction to Open Oceanography -->
-                    <div class="carousel-item">
-                        <img src="photos/support_1.jpeg" alt="Introduction to Open Oceanography">
-                        <h3>Introduction to Open Oceanography</h3>
-                        <div class="lesson">
-                            <h4>An Introduction</h4>
-                            <div class="link-container">
-                                <a href="https://medium.com/open-oceanography/open-oceanography-an-introduction-a64f286aa266?sk=43e96af8c21bd0224aac3d535c36d28a" class="link-button">Medium</a>
-                                <a href="#" class="link-button">YouTube</a>
-                            </div>
-                        </div>
-                        <div class="lesson">
-                            <h4>Oceanography For Everyone: A Beginner's Guide</h4>
-                            <div class="link-container">
-                                <a href="https://medium.com/@drew.burrier/oceanography-for-everyone-a-beginners-guide-to-open-oceanography-e554f27c950a?sk=38d34784080710bd997a953f68e7a67d" class="link-button">Medium</a>
-                                <a href="#" class="link-button">YouTube</a>
-                            </div>
-                        </div>
-                        <div class="lesson">
-                            <h4>How to Use Open Oceanography</h4>
-                            <div class="link-container">
-                                <a href="#" class="link-button">Medium</a>
-                                <a href="#" class="link-button">YouTube</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Week 1: Plate tectonics and the shape of ocean basins -->
-                    <div class="carousel-item">
-                        <img src="photos/Plate_techtonics.jpg" alt="Introduction to Oceanography">
-                        <h3>Plate tectonics and the shape of ocean basins</h3>
-                        <div class="lesson">
-                            <h4>?</h4>
-                            <div class="link-container">
-                                <a href="#" class="link-button">Medium</a>
-                                <a href="#" class="link-button">YouTube</a>
-                            </div>
-                        </div>
-                        <div class="lesson">
-                            <h4>?</h4>
-                            <div class="link-container">
-                                <a href="#" class="link-button">Medium</a>
-                                <a href="#" class="link-button">YouTube</a>
-                            </div>
-                        </div>
-                        <div class="lesson">
-                            <h4>?</h4>
-                            <div class="link-container">
-                                <a href="#" class="link-button">Medium</a>
-                                <a href="#" class="link-button">YouTube</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Week 3: The Physical Properties of Seawater -->
-                    <div class="carousel-item">
-                        <img src="photos/water_masses.jpg" alt="Ocean Data 101">
-                        <h3>The Physical Properties of Seawater</h3>
-                        <div class="lesson">
-                            <h4>Temperature and salinity distributions</h4>
-                            <div class="link-container">
-                                <a href="#" class="link-button">Medium</a>
-                                <a href="#" class="link-button">YouTube</a>
-                            </div>
-                        </div>
-                        <div class="lesson">
-                            <h4>Seawater density and stratification</h4>
-                            <div class="link-container">
-                                <a href="#" class="link-button">Medium</a>
-                                <a href="#" class="link-button">YouTube</a>
-                            </div>
-                        </div>
-                        <div class="lesson">
-                            <h4>Water Masses</h4>
-                            <div class="link-container">
-                                <a href="#" class="link-button">Medium</a>
-                                <a href="#" class="link-button">YouTube</a>
 
-                                </div>
-                            </div>
-                        </div>
-                                        <!-- Week 4: Air/sea interaction and atmospheric circulation -->
-                    <div class="carousel-item">
-                        <img src="photos/air_sea_interactions.jpg" alt="Ocean Data 101">
-                        <h3>The Physical Properties of Seawater</h3>
-                        <div class="lesson">
-                            <h4>Temperature and salinity distributions</h4>
-                            <div class="link-container">
-                                <a href="#" class="link-button">Medium</a>
-                                <a href="#" class="link-button">YouTube</a>
-                            </div>
-                        </div>
-                        <div class="lesson">
-                            <h4>Seawater density and stratification</h4>
-                            <div class="link-container">
-                                <a href="#" class="link-button">Medium</a>
-                                <a href="#" class="link-button">YouTube</a>
-                            </div>
-                        </div>
-                        <div class="lesson">
-                            <h4>Water Masses</h4>
-                            <div class="link-container">
-                                <a href="#" class="link-button">Medium</a>
-                                <a href="#" class="link-button">YouTube</a>
-                            </div>
-                        </div>
-                    </div>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <a class="btn btn-outline"
+                 href="https://medium.com/open-oceanography/open-oceanography-an-introduction-a64f286aa266?sk=43e96af8c21bd0224aac3d535c36d28a"
+                 target="_blank" rel="noopener">
+                Medium
+              </a>
+              <a class="btn" href="#" aria-disabled="true">YouTube (soon)</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2) Oceanography for Everyone -->
+        <article class="topic"
+          style="flex:0 0 320px; scroll-snap-align:start; border:1px solid var(--stroke); border-radius:12px; background:rgba(255,255,255,.04); box-shadow:var(--shadow); overflow:hidden;">
+          <img src="photos/introduction_1.jpg" alt="Oceanography for Everyone"
+               style="display:block; width:100%; height:160px; object-fit:cover;">
+          <div style="padding:12px;">
+            <h3 style="margin:0 0 10px; font-size:18px; border-bottom:1px solid rgba(255,255,255,.12); padding-bottom:8px;">
+              Oceanography for Everyone
+            </h3>
+            <div class="prose" style="padding:0; margin-bottom:10px;">
+              <p style="margin:0; color:var(--muted); font-size:14px;">
+                A beginner’s guide to the essential ideas and tools you’ll see on the map.
+              </p>
+            </div>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <a class="btn btn-outline"
+                 href="https://medium.com/@drew.burrier/oceanography-for-everyone-a-beginners-guide-to-open-oceanography-e554f27c950a?sk=38d34784080710bd997a953f68e7a67d"
+                 target="_blank" rel="noopener">
+                Medium
+              </a>
+              <a class="btn" href="#" aria-disabled="true">YouTube (soon)</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3) Plate Tectonics & Basin Shape -->
+        <article class="topic"
+          style="flex:0 0 320px; scroll-snap-align:start; border:1px solid var(--stroke); border-radius:12px; background:rgba(255,255,255,.04); box-shadow:var(--shadow); overflow:hidden;">
+          <img src="photos/Plate_techtonics.jpg" alt="Plate tectonics and ocean basins"
+               style="display:block; width:100%; height:160px; object-fit:cover;">
+          <div style="padding:12px;">
+            <h3 style="margin:0 0 10px; font-size:18px; border-bottom:1px solid rgba(255,255,255,.12); padding-bottom:8px;">
+              Plate Tectonics & Basin Shape
+            </h3>
+            <div class="prose" style="padding:0; margin-bottom:10px;">
+              <p style="margin:0; color:var(--muted); font-size:14px;">
+                Ridges, trenches, islands, and shelves: why the map looks the way it does.
+              </p>
+            </div>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <a class="btn btn-outline" href="#" aria-disabled="true">Medium (soon)</a>
+              <a class="btn" href="#" aria-disabled="true">YouTube (soon)</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4) Physical Properties of Seawater -->
+        <article class="topic"
+          style="flex:0 0 320px; scroll-snap-align:start; border:1px solid var(--stroke); border-radius:12px; background:rgba(255,255,255,.04); box-shadow:var(--shadow); overflow:hidden;">
+          <img src="photos/water_masses.jpg" alt="Physical properties of seawater"
+               style="display:block; width:100%; height:160px; object-fit:cover;">
+          <div style="padding:12px;">
+            <h3 style="margin:0 0 10px; font-size:18px; border-bottom:1px solid rgba(255,255,255,.12); padding-bottom:8px;">
+              Physical Properties of Seawater
+            </h3>
+            <div class="prose" style="padding:0; margin-bottom:10px;">
+              <p style="margin:0; color:var(--muted); font-size:14px;">
+                Temperature, salinity, density, and why stratification matters for paddlers.
+              </p>
+            </div>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <a class="btn btn-outline" href="#" aria-disabled="true">Medium (soon)</a>
+              <a class="btn" href="#" aria-disabled="true">YouTube (soon)</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 5) Air–Sea Interaction -->
+        <article class="topic"
+          style="flex:0 0 320px; scroll-snap-align:start; border:1px solid var(--stroke); border-radius:12px; background:rgba(255,255,255,.04); box-shadow:var(--shadow); overflow:hidden;">
+          <img src="photos/air_sea_interactions.jpg" alt="Air–sea interaction and atmospheric circulation"
+               style="display:block; width:100%; height:160px; object-fit:cover;">
+          <div style="padding:12px;">
+            <h3 style="margin:0 0 10px; font-size:18px; border-bottom:1px solid rgba(255,255,255,.12); padding-bottom:8px;">
+              Air–Sea Interaction & Winds
+            </h3>
+            <div class="prose" style="padding:0; margin-bottom:10px;">
+              <p style="margin:0; color:var(--muted); font-size:14px;">
+                Trades, sea breezes, swell generation, and how atmosphere drives the ocean.
+              </p>
+            </div>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <a class="btn btn-outline" href="#" aria-disabled="true">Medium (soon)</a>
+              <a class="btn" href="#" aria-disabled="true">YouTube (soon)</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Optional helper text -->
+      <p class="prose" style="padding:10px 0 0; color:var(--muted); font-size:14px;">
+        Tip: swipe/drag sideways to browse topics. New lessons will roll out alongside the expedition.
+      </p>
+    </section>
+  </main>
+
+  <!-- Shared footer -->
+  <footer class="site-footer">
+    <div class="social">
+      <a aria-label="Instagram" href="https://www.instagram.com/drewski1003" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a aria-label="Medium" href="https://medium.com/my-oceanic-odyssey" target="_blank"><i class="fab fa-medium"></i></a>
+      <a aria-label="Substack" href="https://substack.com/@drewburrier" target="_blank"><i class="fas fa-newspaper"></i></a>
+      <a aria-label="LinkedIn" href="https://www.linkedin.com/in/drew-burrier-90092067/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+      <a aria-label="Spotify" href="https://open.spotify.com/user/12148616871" target="_blank"><i class="fab fa-spotify"></i></a>
     </div>
-  <!-- Bottom Banner -->
-<div class="banner">
-    <div class="hamburger-menu" onclick="toggleMenu()">
-        &#9776; <!-- Hamburger Icon -->
-    </div>
-    <div id="planning-tools" class="planning-tools">
-        <span class="close-btn" onclick="toggleMenu()">&times;</span> <!-- Close Button -->
-       
-        <div class="links-container">
-            <h2>Landing Page</h2>
-            <a href="landing.html">Main Page</a>
-            <h2>Photo Gallery</h2>
-             <a href="gallery.html">Photo Map</a> <!-- New link to the gallery -->
-             <h2>Planning Tools</h2>
-            <a href="https://www.windy.com/21.305/-157.856?2024022418,21.311,-158.159,10,m:egUaLQ" target="_blank">Windy.com</a>
-            <a href="https://earth.google.com/web/@21.26186347,-157.81431259,47.74905754a,5624.30629881d,35y,360h,0t,0r" target="_blank">Google Earth</a>
-        </div>
-    </div>
-     <div class="social-media-links">
-            <a href="https://www.instagram.com/drewski1003" target="_blank" aria-label="Instagram">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://medium.com/my-oceanic-odyssey" target="_blank" aria-label="Medium">
-            <i class="fab fa-medium"></i> <!-- Assuming FontAwesome has a Medium icon -->
-            </a>
+    <div class="legal">© My Oceanic Odyssey</div>
+  </footer>
 
-            <a href="https://substack.com/@drewburrier" target="_blank" aria-label="Substack">
-            <i class="fas fa-newspaper"></i>  <!-- Replace with an appropriate Substack icon if needed -->
-            </a>
-            <a href="https://www.linkedin.com/in/drew-burrier-90092067/" target="_blank" aria-label="LinkedIn">
-                <i class="fab fa-linkedin-in"></i>
-            </a>
-            <!--  <a href="https://www.strava.com/athletes/yourusername" target="_blank" aria-label="Strava">
-                <i class="fab fa-strava"></i>
-            </a> -->
-             <a href="https://open.spotify.com/user/12148616871" target="_blank" aria-label="Spotify">
-                <i class="fab fa-spotify"></i>
-            </a>
+  <!-- Shared drawer controls -->
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const hamburger = document.getElementById('hamburger');
+      const drawer    = document.getElementById('drawer');
+      const closeBtn  = document.getElementById('drawerClose');
+      const backdrop  = document.getElementById('backdrop');
+      const main      = document.querySelector('main');
+      const footer    = document.querySelector('footer');
 
-        </div>
-</div>
+      let lastFocused = null;
 
+      function setInert(on) {
+        if (on) { main?.setAttribute('inert',''); footer?.setAttribute('inert',''); }
+        else    { main?.removeAttribute('inert'); footer?.removeAttribute('inert'); }
+      }
 
-    <script src="strava_api.js"></script>
+      function openDrawer() {
+        lastFocused = document.activeElement;
+        drawer.hidden = false;
+        backdrop.hidden = false;
+        drawer.classList.add('open');
+        setInert(true);
+        hamburger.setAttribute('aria-expanded','true');
+        closeBtn.focus();
+        document.addEventListener('keydown', trapFocus);
+      }
+
+      function closeDrawer() {
+        (lastFocused || hamburger).focus();
+        drawer.classList.remove('open');
+        drawer.hidden = true;
+        backdrop.hidden = true;
+        setInert(false);
+        hamburger.setAttribute('aria-expanded','false');
+        document.removeEventListener('keydown', trapFocus);
+      }
+
+      function trapFocus(e) {
+        if (e.key !== 'Tab' || drawer.hidden) return;
+        const focusables = drawer.querySelectorAll(
+          'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+        );
+        if (!focusables.length) return;
+        const first = focusables[0];
+        const last  = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+
+      hamburger.addEventListener('click', openDrawer);
+      closeBtn.addEventListener('click', closeDrawer);
+      backdrop.addEventListener('click', closeDrawer);
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDrawer(); });
+    });
+  </script>
 </body>
 </html>
-</body>
-</html>
+
