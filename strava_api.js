@@ -5,7 +5,7 @@ const auth_link = "https://www.strava.com/oauth/token";
 /** ======================= CONFIG ===================================== **/
 const COASTLINE_URL = "coastline_oahu_linestring.geojson"; // same folder or GitHub Pages
 const COVERAGE_RADIUS_KM = 0.8;   // how close a track must be to count as "coast coverage"
-let RENDER_COVERAGE_SEGMENTS = true;
+let RENDER_COVERAGE_SEGMENTS = false;
 
 /* Exclusion areas: any coastline segments with midpoints inside these polygons
  * will NOT count toward total length *or* covered length.
