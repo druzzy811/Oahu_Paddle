@@ -63,9 +63,16 @@ html,body{
   display:flex; align-items:center; gap:10px; text-decoration:none; color: var(--foam);
   font-weight:800; letter-spacing:.2px;
 }
-.brand-icon{ width:30px; height:30px; display:block; }
+.brand-icon {
+  width: 75px;   /* try 80px–120px */
+  height: 75px;
+  stroke: #2DD4BF;
+  stroke-width: 3;
+}
+
 .brand-icon path{ stroke: var(--aqua); stroke-width: 2.5; filter: drop-shadow(0 0 6px rgba(0,179,198,.45)); }
-.brand-text{ text-shadow: 0 1px 0 rgba(0,0,0,.25); }
+.brand-text{ text-shadow: 0 1px 0 rgba(0,0,0,.25);
+          font-size: calc(0.35 * var(--brand-icon-size, 80px)) }
 
 /* Top nav (minimal) */
 .main-nav{ display:flex; gap: 16px; justify-content:flex-end; }
@@ -242,6 +249,5 @@ html,body{
   margin: 0 auto;
 }
 
-/* Optional: taller map specifically on gallery page */
-body .card #map { height: clamp(520px, 65vh, 880px); }
+
 
