@@ -176,8 +176,8 @@ function setHUD(coveredKmIn, totalKmIn){
   const pct = totalKmIn > 0 ? (coveredKmIn/totalKmIn*100) : 0;
   coverageNums.innerHTML = `
     <span class="big">${mi(coveredKmIn).toFixed(1)} mi covered</span>
-    <span class="small">${mi(totalKmIn).toFixed(2)} mi total (excl. Pearl Harbor)</span>
-    <span class="small">${pct.toFixed(1)}% complete (≤ ${COVERAGE_RADIUS_KM} km to coast)</span>
+    <span class="small">${mi(totalKmIn).toFixed(2)} mi total </span>
+    <span class="small">${pct.toFixed(1)}% complete</span>
   `;
   coverageBarFill.style.width = `${Math.max(0, Math.min(100, pct))}%`;
 }

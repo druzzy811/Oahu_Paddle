@@ -45,7 +45,7 @@ html,body{
   position: sticky; top: 0; z-index: 1000;
   display: grid; grid-template-columns: auto 1fr auto;
   align-items: center; gap: 14px;
-  padding: 12px 16px;
+  padding: 1px 2px;
   background: linear-gradient(180deg, rgba(2,24,40,.74), rgba(2,24,40,.45));
   backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(255,255,255,.08);
@@ -113,7 +113,7 @@ html,body{
 .backdrop{ position: fixed; inset: 0; background: rgba(0,0,0,.35); z-index: 1090; }
 
 /* Map card */
-.wrap{ max-width: 1200px; margin: 28px auto 90px; padding: 0 14px; }
+.wrap{ max-width: 1200px; margin: 8px auto 90px; padding: 0 14px; }
 .card{
   position: relative; border-radius: var(--radius);
   background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
@@ -123,7 +123,7 @@ html,body{
 }
 
 /* Keep your map sizing */
-#map{ height: clamp(440px, 62vh, 740px); width: 100%; }
+#map{ height: clamp(440px, 62vh, 740px); width: 100%; margin-top: 0; }
 
 /* Map guide chip */
 .map-guide{
