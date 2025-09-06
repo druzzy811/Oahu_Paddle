@@ -73,7 +73,7 @@ const linksData = {
   5: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-6-trust-yourself-1f95d2e8411e?sk=944d5a6f7664c5f134a23b5c9649255a",
   6: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-7-worlds-collide-8c962574e2c4?sk=80c26d0e3fdc50a98c933b5731e0d213",
   7: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-8-trust-the-process-c9e2c3d5cdff?sk=ea18e46234fac08a7bc5a5da6d9a5a6e",
-  8: "https://medium.com/my-oceanic-odyssey/my-oceanic-odyssey-paddle-9-a-year-in-review-c1f858d1e6ab?sk=139c46cce2081306ee7f7c931f6f23dcc"
+  8: "https://medium.com/my-oceanic-odyssey/my-oceanic-odyssey-paddle-9-a-year-in-review-c1f858d1e6ab?sk=139c46cce2081306ee7f7c931f6f23dcc",
   9: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-10-survive-793227ec80b4?sk=204b6b20ad86838be0f9cdb662709473"
 };
 
@@ -87,7 +87,8 @@ const paddle_titles = {
   6: "Worlds Collide",
   7: "Trust the Process",
   8: "A Year in Review",
-  9: "Survive"
+  9: "Survive",
+  10: "Take Pride"
 };
 
 /* ============== Leaflet + Turf helpers ==================== */
