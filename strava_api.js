@@ -1,75 +1,15 @@
-/* === strava_api.js (full, stable offshore coverage) ==================== */
+/* === strava_api.js (full) =============================================== */
 
 const auth_link = "https://www.strava.com/oauth/token";
 
 /** ======================= CONFIG ===================================== **/
 const COASTLINE_URL = "coastline_oahu_linestring.geojson"; // same folder or GitHub Pages
-let RENDER_COVERAGE_SEGMENTS = false;   // set true to visualize counted coast
+const COVERAGE_RADIUS_KM = 2;   // how close a track must be to count as "coast coverage"
+let RENDER_COVERAGE_SEGMENTS = false;
 
-// snap a sampled track point to the nearest coastline segment
-// and count it only if the snap distance is under this cap (km)
-const MAX_SNAP_KM = 8;
-
-// sample spacing along each track (km)
-const SAMPLE_STEP_KM = 0.25; // 250 m
-
-// optional periodic refresh in ms, set to 0 to disable
-const AUTO_REFRESH_MS = 0;
-/** ===================================================================== **/
-
-let currentActivities = [];
-let polylines = [];
-let lastPolyline = null;
-
-// coastline holders
-let coastlineLngLat = [];          // [[lng,lat], ...]
-let coastlineSegments = [];        // [{i0,i1,line,lengthKm,excluded}, ...]
-let coastlineLine = null;          // whole coastline as one LineString
-
-// tracks in turf form
-let trackLines = [];
-
-// coverage numbers
-let coveredKm = 0, totalKm = 0;
-
-// leaflet map and layers
-let map;
-let coverageLayerGroup = null;
-
-// summary panel DOM refs
-let coveragePanel, coverageNums, coverageBarFill;
-
-// Medium links + paddle titles
-const linksData = {
-  0: "https://medium.com/my-oceanic-odyssey/my-oceanic-odyssey-paddle-1-735333d7ceac?source=friends_link&sk=118db82e6e50c5652b2dd068630a2677",
-  1: "https://medium.com/my-oceanic-odyssey/my-oceanic-odyssey-paddle-2-charting-paths-e8defcab9e6a?source=friends_link&sk=8f0eb0cf25e7a395c7fd4f53958c3748",
-  2: "https://medium.com/my-oceanic-odyssey/my-oceanic-odyssey-paddle-3-respecting-limits-6db2507fc650?source=friends_link&sk=6018a3921560cb307e3c277038e18da8",
-  3: "https://medium.com/my-oceanic-odyssey/my-oceanic-odyssey-paddle-4-be-patient-d63aa25284f8?source=friends_link&sk=f56119232386c42f402572a81b53ba99",
-  4: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-5-pushing-boundaries-63fc4b555cc7?source=friends_link&sk=4c060cedb51cf8b5ec3c4bb1f32c9364",
-  5: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-6-trust-yourself-1f95d2e8411e?sk=944d5a6f7664c5f134a23b5c9649255a",
-  6: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-7-worlds-collide-8c962574e2c4?sk=80c26d0e3fdc50a98c933b5731e0d213",
-  7: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-8-trust-the-process-c9e2c3d5cdff?sk=ea18e46234fac08a7bc5a5da6d9a5a6e",
-  8: "https://medium.com/my-oceanic-odyssey/my-oceanic-odyssey-paddle-9-a-year-in-review-c1f858d1e6ab?sk=139c46cce2081306ee7f7c931f6f23dcc",
-  9: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-10-survive-793227ec80b4?sk=204b6b20ad86838be0f9cdb662709473"
-};
-
-const paddle_titles = {
-  0: "Genesis",
-  1: "Charting Paths",
-  2: "Respecting Limits",
-  3: "Be Patient",
-  4: "Pushing Boundaries",
-  5: "Trust Yourself",
-  6: "Worlds Collide",
-  7: "Trust the Process",
-  8: "A Year in Review",
-  9: "Survive",
-  10: "Take Pride"
-};
-
-/* ====================== EXCLUDE AREAS ==================== */
 /* Exclusion areas: any coastline segments with midpoints inside these polygons
- * will NOT count toward total length or covered length.
+ * will NOT count toward total length *or* covered length.
+ * Default is a reasonable Pearl Harbor envelope. Tweak as desired.
  * Coordinates are [lng, lat].
  */
 const EXCLUDE_AREAS = [
@@ -104,145 +44,70 @@ const EXCLUDE_AREAS = [
     }
   }
 ];
+/** ===================================================================== **/
 
-/* ============== helpers ==================== */
+let currentActivities = [];
+let currentIndex = 0;
+let lastPolyline = null;
+let polylines = [];
+
+// coverage data holders
+let coastlineLngLat = [];          // [[lng,lat], ...]
+let coastlineSegments = [];        // [{i0,i1, line, lengthKm, excluded}, ...]
+let trackLines = [];               // GeoJSON LineString features
+let trackBBoxes = [];              // [{bbox:[minX,minY,maxX,maxY], line:Feature}, ...]
+let coveredKm = 0, totalKm = 0;
+let coverageLayerGroup = null;
+let map;
+
+// summary panel DOM refs
+let coveragePanel, coverageNums, coverageBarFill;
+
+// Medium links + paddle titles
+const linksData = {
+  0: "https://medium.com/my-oceanic-odyssey/my-oceanic-odyssey-paddle-1-735333d7ceac?source=friends_link&sk=118db82e6e50c5652b2dd068630a2677",
+  1: "https://medium.com/my-oceanic-odyssey/my-oceanic-odyssey-paddle-2-charting-paths-e8defcab9e6a?source=friends_link&sk=8f0eb0cf25e7a395c7fd4f53958c3748",
+  2: "https://medium.com/my-oceanic-odyssey/my-oceanic-odyssey-paddle-3-respecting-limits-6db2507fc650?source=friends_link&sk=6018a3921560cb307e3c277038e18da8",
+  3: "https://medium.com/my-oceanic-odyssey/my-oceanic-odyssey-paddle-4-be-patient-d63aa25284f8?source=friends_link&sk=f56119232386c42f402572a81b53ba99",
+  4: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-5-pushing-boundaries-63fc4b555cc7?source=friends_link&sk=4c060cedb51cf8b5ec3c4bb1f32c9364",
+  5: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-6-trust-yourself-1f95d2e8411e?sk=944d5a6f7664c5f134a23b5c9649255a",
+  6: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-7-worlds-collide-8c962574e2c4?sk=80c26d0e3fdc50a98c933b5731e0d213",
+  7: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-8-trust-the-process-c9e2c3d5cdff?sk=ea18e46234fac08a7bc5a5da6d9a5a6e",
+  8: "https://medium.com/my-oceanic-odyssey/my-oceanic-odyssey-paddle-9-a-year-in-review-c1f858d1e6ab?sk=139c46cce2081306ee7f7c931f6f23dcc",
+  9: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-10-survive-793227ec80b4?sk=204b6b20ad86838be0f9cdb662709473"
+};
+
+const paddle_titles = {
+  0: "Genesis",
+  1: "Charting Paths",
+  2: "Respecting Limits",
+  3: "Be Patient",
+  4: "Pushing Boundaries",
+  5: "Trust Yourself",
+  6: "Worlds Collide",
+  7: "Trust the Process",
+  8: "A Year in Review",
+  9: "Survive",
+  10: "Take Pride"
+};
+
+/* ============== Leaflet + Turf helpers ==================== */
+function degBufferForKm(km){ return km/111.0; }
+
+function bboxOverlap(a,b){
+  return !(a[0] > b[2] || a[2] < b[0] || a[1] > b[3] || a[3] < b[1]);
+}
+
 function toLatLngsFromPolyline(encoded){
   const ll = L.Polyline.fromEncoded(encoded).getLatLngs();
   return ll.map(p => [p.lat, p.lng]);
 }
 
-function setHUD(coveredKmIn, totalKmIn){
-  if (!coverageNums || !coverageBarFill) return;
-  const mi = (km)=> km*0.621371;
-  const pct = totalKmIn > 0 ? (coveredKmIn/totalKmIn*100) : 0;
-  coverageNums.innerHTML = `
-    <span class="big">${mi(coveredKmIn).toFixed(1)} mi covered</span>
-    <span class="small">${mi(totalKmIn).toFixed(2)} mi total </span>
-    <span class="small">${pct.toFixed(1)}% complete</span>
-  `;
-  coverageBarFill.style.width = `${Math.max(0, Math.min(100, pct))}%`;
-}
+function ll_to_lnglat(ll){ return [ll[1], ll[0]]; }
+function latlng_to_lnglat(p){ return [p.lng, p.lat]; }
+function lnglat_to_latlng(c){ return [c[1], c[0]]; }
 
-/* ====================== COASTLINE ======================== */
-async function loadCoastline(){
-  try{
-    const resp = await fetch(COASTLINE_URL, {cache:"no-store"});
-    const gj = await resp.json();
-    let geom = null;
-    if (gj.type === "FeatureCollection" && gj.features && gj.features.length){
-      geom = gj.features[0].geometry;
-    } else if (gj.type === "Feature"){
-      geom = gj.geometry;
-    } else if (gj.type === "LineString"){
-      geom = gj;
-    }
-    if (!geom || geom.type !== "LineString"){
-      console.error("Unexpected coastline GeoJSON shape. Expecting a LineString geometry.");
-      return;
-    }
-    coastlineLngLat = geom.coordinates; // [lng,lat]
-    coastlineLine = turf.lineString(coastlineLngLat);
-    buildCoastlineSegments();
-    computeAndRenderCoverage();
-  }catch(e){
-    console.error("Failed to load coastline:", e);
-  }
-}
-
-function buildCoastlineSegments(){
-  coastlineSegments = [];
-  totalKm = 0;
-  const excludePolys = EXCLUDE_AREAS.map(a => a.polygon);
-
-  for (let i=0; i<coastlineLngLat.length-1; i++){
-    const a = coastlineLngLat[i], b = coastlineLngLat[i+1];
-    const line = turf.lineString([a,b]);
-    const mid = turf.midpoint(turf.point(a), turf.point(b));
-    const excluded = excludePolys.some(poly => turf.booleanPointInPolygon(mid, poly));
-    const lengthKm = turf.length(line, {units:"kilometers"});
-    coastlineSegments.push({i0:i, i1:i+1, line, lengthKm, excluded});
-    if (!excluded) totalKm += lengthKm;
-  }
-}
-
-/* ====================== STRAVA =========================== */
-function saveLatestActivityId(activityId){ localStorage.setItem('latestActivityId', activityId); }
-function loadLatestActivityId(){ return localStorage.getItem('latestActivityId'); }
-
-function reAuthorize(){
-  return fetch(auth_link, {
-    method: 'post',
-    headers: {'Accept': 'application/json, text/plan, */*', 'Content-Type': 'application/json'},
-    body: JSON.stringify({
-      client_id: '119993',
-      client_secret: '67840b78f22679aab9989426c78b87b597a102de',
-      refresh_token: 'ec624131076c98a1d017f6fe24047eff07fdb52a',
-      grant_type: 'refresh_token'
-    })
-  }).then(res=>res.json());
-}
-
-function fetchActivities(access_token){
-  const link = `https://www.strava.com/api/v3/athlete/activities?per_page=100&access_token=${access_token}`;
-  return fetch(link).then(r=>r.json());
-}
-
-/* ====================== TRACKS =========================== */
-function prepareTrackLines(activities){
-  trackLines = [];
-  for (const act of activities){
-    if (!act.map || !act.map.summary_polyline) continue;
-    const latlngs = toLatLngsFromPolyline(act.map.summary_polyline);
-    if (!latlngs.length) continue;
-    const lnglats = latlngs.map(([lat,lng]) => [lng, lat]);
-    const line = turf.lineString(lnglats);
-    trackLines.push(line);
-  }
-}
-
-/* ====================== COVERAGE (snapping) ============== */
-function computeAndRenderCoverage(){
-  if (!map || !coastlineLine || !coastlineSegments.length || !trackLines.length) return;
-
-  const coveredFlags = new Array(coastlineSegments.length).fill(false);
-
-  for (const tLine of trackLines){
-    const lenKm = turf.length(tLine, {units: "kilometers"});
-    for (let d = 0; d <= lenKm; d += SAMPLE_STEP_KM){
-      const pt = turf.along(tLine, d, {units: "kilometers"});
-      const snap = turf.nearestPointOnLine(coastlineLine, pt, {units: "kilometers"});
-      const idx = Number.isFinite(snap?.properties?.index) ? snap.properties.index : -1;
-      const distKm = Number.isFinite(snap?.properties?.dist) ? snap.properties.dist : Infinity;
-      if (idx < 0 || idx >= coastlineSegments.length) continue;
-      if (distKm > MAX_SNAP_KM) continue;
-      if (coastlineSegments[idx].excluded) continue;
-      coveredFlags[idx] = true;
-    }
-  }
-
-  coveredKm = 0;
-  const coveredSegments = [];
-  for (let i = 0; i < coastlineSegments.length; i++){
-    const seg = coastlineSegments[i];
-    if (seg.excluded) continue;
-    if (coveredFlags[i]){
-      coveredKm += seg.lengthKm;
-      coveredSegments.push(seg.line);
-    }
-  }
-
-  if (coverageLayerGroup){ map.removeLayer(coverageLayerGroup); }
-  coverageLayerGroup = L.layerGroup().addTo(map);
-
-  if (RENDER_COVERAGE_SEGMENTS && coveredSegments.length){
-    const fc = turf.featureCollection(coveredSegments);
-    L.geoJSON(fc, { style: { color: "#2DD4BF", weight: 4, opacity: 0.7 } }).addTo(coverageLayerGroup);
-  }
-
-  setHUD(coveredKm, totalKm);
-}
-
-/* ====================== MAP & UI ========================= */
+/* ====================== COVERAGE SUMMARY (below map) =================== */
 function addCoveragePanel(){
   if (!document.getElementById("coverage-summary-styles")){
     const css = document.createElement("style");
@@ -307,18 +172,166 @@ function addCoveragePanel(){
   coverageBarFill = panel.querySelector('.coverage-bar .fill');
 }
 
-function addPolylinesToMap(data) {
-  if (!map){
-    map = L.map('map').setView([21.466883, -157.942441], 10);
-    L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-      maxZoom: 20, subdomains: ['mt0', 'mt1', 'mt2', 'mt3'], attribution: '© Google'
-    }).addTo(map);
-    addCoveragePanel();
+function setHUD(coveredKmIn, totalKmIn){
+  if (!coverageNums || !coverageBarFill) return;
+  const mi = (km)=> km*0.621371;
+  const pct = totalKmIn > 0 ? (coveredKmIn/totalKmIn*100) : 0;
+  coverageNums.innerHTML = `
+    <span class="big">${mi(coveredKmIn).toFixed(1)} mi covered</span>
+    <span class="small">${mi(totalKmIn).toFixed(2)} mi total </span>
+    <span class="small">${pct.toFixed(1)}% complete</span>
+  `;
+  coverageBarFill.style.width = `${Math.max(0, Math.min(100, pct))}%`;
+}
+
+/* ====================== STRAVA =========================== */
+function saveLatestActivityId(activityId){ localStorage.setItem('latestActivityId', activityId); }
+function loadLatestActivityId(){ return localStorage.getItem('latestActivityId'); }
+
+function reAuthorize(){
+  fetch(auth_link, {
+    method: 'post',
+    headers: {'Accept': 'application/json, text/plan, */*', 'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      client_id: '119993',
+      client_secret: '67840b78f22679aab9989426c78b87b597a102de',
+      refresh_token: 'ec624131076c98a1d017f6fe24047eff07fdb52a',
+      grant_type: 'refresh_token'
+    })
+  }).then(res=>res.json()).then(res=>{ getActivities(res); });
+}
+
+function getActivities(res){
+  const link = `https://www.strava.com/api/v3/athlete/activities?access_token=${res.access_token}`;
+  fetch(link)
+    .then(r=>r.json())
+    .then(data=>{
+      const latestActivityId = data[0].id;
+      const storedActivityId = loadLatestActivityId();
+      if (latestActivityId !== storedActivityId) saveLatestActivityId(latestActivityId);
+      currentActivities = data;
+      addPolylinesToMap(data);
+      prepareTrackLines();
+      computeAndRenderCoverage();
+    });
+}
+
+/* ====================== COASTLINE ======================== */
+async function loadCoastline(){
+  try{
+    const resp = await fetch(COASTLINE_URL, {cache:"no-store"});
+    const gj = await resp.json();
+    let geom = null;
+    if (gj.type === "FeatureCollection" && gj.features && gj.features.length){
+      geom = gj.features[0].geometry;
+    } else if (gj.type === "Feature"){
+      geom = gj.geometry;
+    } else if (gj.type === "LineString"){
+      geom = gj;
+    }
+    if (!geom || geom.type !== "LineString"){
+      console.error("Unexpected coastline GeoJSON shape. Expecting a LineString geometry.");
+      return;
+    }
+    coastlineLngLat = geom.coordinates; // [lng,lat]
+    buildCoastlineSegments();
+    computeAndRenderCoverage();
+  }catch(e){
+    console.error("Failed to load coastline:", e);
+  }
+}
+
+function buildCoastlineSegments(){
+  coastlineSegments = [];
+  totalKm = 0;
+  const excludePolys = EXCLUDE_AREAS.map(a => a.polygon);
+
+  for (let i=0; i<coastlineLngLat.length-1; i++){
+    const a = coastlineLngLat[i], b = coastlineLngLat[i+1];
+    const line = turf.lineString([a,b]);
+    const mid = turf.midpoint(turf.point(a), turf.point(b));
+    const excluded = excludePolys.some(poly => turf.booleanPointInPolygon(mid, poly));
+    const lengthKm = turf.length(line, {units:"kilometers"});
+    coastlineSegments.push({i0:i, i1:i+1, line, lengthKm, excluded});
+    if (!excluded) totalKm += lengthKm;
+  }
+}
+
+/* ====================== TRACKS -> Turf =================== */
+function prepareTrackLines(){
+  trackLines = [];
+  trackBBoxes = [];
+  for (const act of currentActivities){
+    if (!act.map || !act.map.summary_polyline) continue;
+    const latlngs = toLatLngsFromPolyline(act.map.summary_polyline); // [[lat,lng],...]
+    if (!latlngs.length) continue;
+    const lnglats = latlngs.map(ll => ll_to_lnglat(ll)); // -> [[lng,lat],...]
+    const line = turf.lineString(lnglats);
+    trackLines.push(line);
+    trackBBoxes.push({bbox: turf.bbox(line), line});
+  }
+}
+
+/* ====================== COVERAGE ========================= */
+function computeAndRenderCoverage(){
+  if (!coastlineSegments.length || !trackLines.length) return;
+
+  const degPad = degBufferForKm(COVERAGE_RADIUS_KM);
+  let coveredSegments = [];
+  coveredKm = 0;
+
+  for (const seg of coastlineSegments){
+    if (seg.excluded) continue;
+
+    const bb = turf.bbox(seg.line);
+    const segBB = [bb[0]-degPad, bb[1]-degPad, bb[2]+degPad, bb[3]+degPad];
+
+    let isCovered = false;
+    for (const t of trackBBoxes){
+      const tb = t.bbox;
+      const tbPad = [tb[0]-degPad, tb[1]-degPad, tb[2]+degPad, tb[3]+degPad];
+      if (!bboxOverlap(segBB, tbPad)) continue;
+
+      const a = seg.line.geometry.coordinates[0];
+      const b = seg.line.geometry.coordinates[1];
+      const mid = turf.midpoint(turf.point(a), turf.point(b));
+      const dkm = turf.pointToLineDistance(mid, t.line, {units:"kilometers"});
+      if (dkm <= COVERAGE_RADIUS_KM){
+        isCovered = true;
+        break;
+      }
+    }
+
+    if (isCovered){
+      coveredKm += seg.lengthKm;
+      coveredSegments.push(seg.line);
+    }
   }
 
-  polylines.forEach(pl => pl.remove());
-  polylines = [];
-  lastPolyline = null;
+  if (coverageLayerGroup){ map.removeLayer(coverageLayerGroup); }
+  coverageLayerGroup = L.layerGroup().addTo(map);
+
+  if (RENDER_COVERAGE_SEGMENTS && coveredSegments.length){
+    const fc = turf.featureCollection(coveredSegments);
+    L.geoJSON(fc, {
+      style: { color: "#2DD4BF", weight: 4, opacity: 0.7 }
+    }).addTo(coverageLayerGroup);
+  }
+
+  setHUD(coveredKm, totalKm);
+}
+
+/* ====================== MAP & UI ========================= */
+function addPolylinesToMap(data) {
+  map = L.map('map').setView([21.466883, -157.942441], 10);
+  map.invalidateSize();
+
+  L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+    maxZoom: 20, subdomains: ['mt0', 'mt1', 'mt2', 'mt3'], attribution: '© Google'
+  }).addTo(map);
+
+  // create the below-map coverage panel instead of an on-map HUD
+  addCoveragePanel();
 
   data.forEach((activity, index) => {
     if (!activity.map || !activity.map.summary_polyline) return;
@@ -330,12 +343,12 @@ function addPolylinesToMap(data) {
     polylines.push(polyline);
     const popupContent = createPopupContent(index);
     polyline.bindPopup(popupContent);
-    if (index === data.length - 1) { lastPolyline = polyline; }
+    if (index === currentActivities.length - 1) { lastPolyline = polyline; }
   });
 
   if (polylines.length > 0) {
     polylines[polylines.length - 1].openPopup();
-    const firstActivity = data[polylines.length - 1];
+    const firstActivity = currentActivities[polylines.length - 1];
     const firstCoordinates = L.Polyline.fromEncoded(firstActivity.map.summary_polyline).getLatLngs()[0];
     const mileInDegrees = 10 / 69;
     const offsetCoordinates = { lat: firstCoordinates.lat + mileInDegrees, lng: firstCoordinates.lng };
@@ -388,57 +401,16 @@ function navigateActivity(newIndex) {
 }
 
 /* ================== Boot ===================== */
-function initMapOnce(){
-  if (!map){
-    map = L.map('map').setView([21.466883, -157.942441], 10);
-    L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-      maxZoom: 20, subdomains: ['mt0', 'mt1', 'mt2', 'mt3'], attribution: '© Google'
-    }).addTo(map);
-    addCoveragePanel();
-  }
+function toggleMenu(){
+  const tools = document.getElementById('planning-tools');
+  if (tools) tools.classList.toggle('open');
 }
 
-async function refreshAll(){
-  try{
-    const auth = await reAuthorize();
-    if (!auth || !auth.access_token) return;
-
-    const data = await fetchActivities(auth.access_token);
-    if (!Array.isArray(data)) return;
-
-    // remember latest id
-    const latestActivityId = data[0]?.id;
-    const storedActivityId = loadLatestActivityId();
-    if (latestActivityId && latestActivityId !== storedActivityId) saveLatestActivityId(latestActivityId);
-
-    currentActivities = data;
-
-    // draw routes
-    addPolylinesToMap(currentActivities);
-
-    // build track features for coverage math
-    prepareTrackLines(currentActivities);
-
-    // compute coverage
-    computeAndRenderCoverage();
-  }catch(e){
-    console.error("Refresh failed", e);
-  }
-}
+reAuthorize();   // fetch Strava + draw
+loadCoastline(); // fetch coastline
 
 document.addEventListener("DOMContentLoaded", function () {
-  initMapOnce();
-  // start both fetches
-  loadCoastline();
-  refreshAll();
-
-  if (AUTO_REFRESH_MS > 0){
-    setInterval(refreshAll, AUTO_REFRESH_MS);
-  }
-
   const mapGuide = document.getElementById("mapGuide");
   setTimeout(() => { if (mapGuide) mapGuide.style.display = "none"; }, 6000);
 });
-
-/* ====================================================================== */
-
+/* ======================================================== */
