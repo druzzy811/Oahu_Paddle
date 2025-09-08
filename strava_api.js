@@ -1,20 +1,20 @@
-/* === strava_api.js (fast offshore coverage, auto refresh) =============== */
+/* === strava_api.js (full, stable offshore coverage) ==================== */
 
 const auth_link = "https://www.strava.com/oauth/token";
 
 /** ======================= CONFIG ===================================== **/
 const COASTLINE_URL = "coastline_oahu_linestring.geojson"; // same folder or GitHub Pages
-let RENDER_COVERAGE_SEGMENTS = false;
+let RENDER_COVERAGE_SEGMENTS = false;   // set true to visualize counted coast
 
-// match radius cap for offshore mapping (km). anything farther is ignored.
-// set to a big value if you truly want any offshore parallel to count.
-const OFFSHORE_MAX_KM = 12;
+// snap a sampled track point to the nearest coastline segment
+// and count it only if the snap distance is under this cap (km)
+const MAX_SNAP_KM = 8;
 
-// sampling along each track (km)
-const SAMPLE_STEP_KM = 0.2; // 200 m
+// sample spacing along each track (km)
+const SAMPLE_STEP_KM = 0.25; // 250 m
 
-// auto refresh activities every N ms
-const AUTO_REFRESH_MS = 120000;
+// optional periodic refresh in ms, set to 0 to disable
+const AUTO_REFRESH_MS = 0;
 /** ===================================================================== **/
 
 let currentActivities = [];
@@ -23,11 +23,11 @@ let lastPolyline = null;
 
 // coastline holders
 let coastlineLngLat = [];          // [[lng,lat], ...]
-let coastlineSegments = [];        // [{i0,i1,line,lengthKm,excluded,bbox}, ...]
+let coastlineSegments = [];        // [{i0,i1,line,lengthKm,excluded}, ...]
+let coastlineLine = null;          // whole coastline as one LineString
 
 // tracks in turf form
 let trackLines = [];
-let trackBBoxes = [];
 
 // coverage numbers
 let coveredKm = 0, totalKm = 0;
@@ -49,7 +49,7 @@ const linksData = {
   5: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-6-trust-yourself-1f95d2e8411e?sk=944d5a6f7664c5f134a23b5c9649255a",
   6: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-7-worlds-collide-8c962574e2c4?sk=80c26d0e3fdc50a98c933b5731e0d213",
   7: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-8-trust-the-process-c9e2c3d5cdff?sk=ea18e46234fac08a7bc5a5da6d9a5a6e",
-  8: "https://medium.com/my-oceanic-odyssey/my-oceanic-odyssey-paddle-9-a-year-in-review-c1f8581e6ab?sk=139c46cce2081306ee7f7c931f6f23dcc",
+  8: "https://medium.com/my-oceanic-odyssey/my-oceanic-odyssey-paddle-9-a-year-in-review-c1f858d1e6ab?sk=139c46cce2081306ee7f7c931f6f23dcc",
   9: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-10-survive-793227ec80b4?sk=204b6b20ad86838be0f9cdb662709473"
 };
 
@@ -67,13 +67,49 @@ const paddle_titles = {
   10: "Take Pride"
 };
 
+/* ====================== EXCLUDE AREAS ==================== */
+/* Exclusion areas: any coastline segments with midpoints inside these polygons
+ * will NOT count toward total length or covered length.
+ * Coordinates are [lng, lat].
+ */
+const EXCLUDE_AREAS = [
+  {
+    name: "Pearl Harbor",
+    polygon: {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-157.9930, 21.4150],
+          [-157.9930, 21.3730],
+          [-157.9855, 21.3480],
+          [-157.9820, 21.3365],
+          [-157.9740, 21.3135],
+          [-157.9665, 21.3095],
+          [-157.9580, 21.3110],
+          [-157.9520, 21.3160],
+          [-157.9470, 21.3260],
+          [-157.9460, 21.3380],
+          [-157.9480, 21.3500],
+          [-157.9535, 21.3680],
+          [-157.9585, 21.3870],
+          [-157.9645, 21.4030],
+          [-157.9725, 21.4145],
+          [-157.9805, 21.4180],
+          [-157.9880, 21.4180],
+          [-157.9930, 21.4150]
+        ]]
+      },
+      "properties": {}
+    }
+  }
+];
+
 /* ============== helpers ==================== */
 function toLatLngsFromPolyline(encoded){
   const ll = L.Polyline.fromEncoded(encoded).getLatLngs();
   return ll.map(p => [p.lat, p.lng]);
 }
-
-function degForKm(km){ return km/111.0; }
 
 function setHUD(coveredKmIn, totalKmIn){
   if (!coverageNums || !coverageBarFill) return;
@@ -101,10 +137,11 @@ async function loadCoastline(){
       geom = gj;
     }
     if (!geom || geom.type !== "LineString"){
-      console.error("Unexpected coastline shape");
+      console.error("Unexpected coastline GeoJSON shape. Expecting a LineString geometry.");
       return;
     }
     coastlineLngLat = geom.coordinates; // [lng,lat]
+    coastlineLine = turf.lineString(coastlineLngLat);
     buildCoastlineSegments();
     computeAndRenderCoverage();
   }catch(e){
@@ -115,8 +152,6 @@ async function loadCoastline(){
 function buildCoastlineSegments(){
   coastlineSegments = [];
   totalKm = 0;
-
-  // exclusion polygons
   const excludePolys = EXCLUDE_AREAS.map(a => a.polygon);
 
   for (let i=0; i<coastlineLngLat.length-1; i++){
@@ -125,8 +160,7 @@ function buildCoastlineSegments(){
     const mid = turf.midpoint(turf.point(a), turf.point(b));
     const excluded = excludePolys.some(poly => turf.booleanPointInPolygon(mid, poly));
     const lengthKm = turf.length(line, {units:"kilometers"});
-    const bb = turf.bbox(line);
-    coastlineSegments.push({i0:i, i1:i+1, line, lengthKm, excluded, bbox: bb});
+    coastlineSegments.push({i0:i, i1:i+1, line, lengthKm, excluded});
     if (!excluded) totalKm += lengthKm;
   }
 }
@@ -148,15 +182,14 @@ function reAuthorize(){
   }).then(res=>res.json());
 }
 
-function getActivities(res){
-  const link = `https://www.strava.com/api/v3/athlete/activities?per_page=100&access_token=${res.access_token}`;
+function fetchActivities(access_token){
+  const link = `https://www.strava.com/api/v3/athlete/activities?per_page=100&access_token=${access_token}`;
   return fetch(link).then(r=>r.json());
 }
 
 /* ====================== TRACKS =========================== */
 function prepareTrackLines(activities){
   trackLines = [];
-  trackBBoxes = [];
   for (const act of activities){
     if (!act.map || !act.map.summary_polyline) continue;
     const latlngs = toLatLngsFromPolyline(act.map.summary_polyline);
@@ -164,42 +197,26 @@ function prepareTrackLines(activities){
     const lnglats = latlngs.map(([lat,lng]) => [lng, lat]);
     const line = turf.lineString(lnglats);
     trackLines.push(line);
-    trackBBoxes.push({bbox: turf.bbox(line), line});
   }
 }
 
-/* ====================== COVERAGE ========================= */
-/* For each sampled point along a track,
-   1) build a small search window
-   2) test only coastline segments whose bbox overlaps that window
-   3) mark segment covered if point to line distance <= OFFSHORE_MAX_KM
-*/
+/* ====================== COVERAGE (snapping) ============== */
 function computeAndRenderCoverage(){
-  if (!map || !coastlineSegments.length || !trackLines.length) return;
+  if (!map || !coastlineLine || !coastlineSegments.length || !trackLines.length) return;
 
   const coveredFlags = new Array(coastlineSegments.length).fill(false);
-  const degPad = degForKm(Math.max(OFFSHORE_MAX_KM, 1)); // pad window based on cap
 
   for (const tLine of trackLines){
     const lenKm = turf.length(tLine, {units: "kilometers"});
     for (let d = 0; d <= lenKm; d += SAMPLE_STEP_KM){
       const pt = turf.along(tLine, d, {units: "kilometers"});
-      const [px, py] = pt.geometry.coordinates;
-      const windowBB = [px - degPad, py - degPad, px + degPad, py + degPad];
-
-      for (let i=0; i<coastlineSegments.length; i++){
-        const seg = coastlineSegments[i];
-        if (seg.excluded || coveredFlags[i]) continue;
-
-        const bb = seg.bbox;
-        const overlaps = !(windowBB[0] > bb[2] || windowBB[2] < bb[0] || windowBB[1] > bb[3] || windowBB[3] < bb[1]);
-        if (!overlaps) continue;
-
-        const distKm = turf.pointToLineDistance(pt, seg.line, {units:"kilometers"});
-        if (distKm <= OFFSHORE_MAX_KM){
-          coveredFlags[i] = true;
-        }
-      }
+      const snap = turf.nearestPointOnLine(coastlineLine, pt, {units: "kilometers"});
+      const idx = Number.isFinite(snap?.properties?.index) ? snap.properties.index : -1;
+      const distKm = Number.isFinite(snap?.properties?.dist) ? snap.properties.dist : Infinity;
+      if (idx < 0 || idx >= coastlineSegments.length) continue;
+      if (distKm > MAX_SNAP_KM) continue;
+      if (coastlineSegments[idx].excluded) continue;
+      coveredFlags[idx] = true;
     }
   }
 
@@ -218,9 +235,8 @@ function computeAndRenderCoverage(){
   coverageLayerGroup = L.layerGroup().addTo(map);
 
   if (RENDER_COVERAGE_SEGMENTS && coveredSegments.length){
-    L.geoJSON(turf.featureCollection(coveredSegments), {
-      style: { color: "#2DD4BF", weight: 4, opacity: 0.7 }
-    }).addTo(coverageLayerGroup);
+    const fc = turf.featureCollection(coveredSegments);
+    L.geoJSON(fc, { style: { color: "#2DD4BF", weight: 4, opacity: 0.7 } }).addTo(coverageLayerGroup);
   }
 
   setHUD(coveredKm, totalKm);
@@ -232,16 +248,41 @@ function addCoveragePanel(){
     const css = document.createElement("style");
     css.id = "coverage-summary-styles";
     css.textContent = `
-      #coverage-panel { max-width:1100px; margin:12px auto 0; padding:0 12px; }
-      .coverage-card { background:#0b132b; color:#E6FFFA; border-radius:16px;
-        box-shadow:0 8px 24px rgba(0,0,0,.25); padding:12px 16px; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto;
-        display:grid; grid-template-columns:1fr minmax(160px,320px); gap:14px; align-items:center; }
-      .coverage-nums { font-weight:600; line-height:1.35; font-size:14px; }
-      .coverage-nums .big { font-size:18px; display:block; margin-bottom:2px; }
+      #coverage-panel {
+        max-width: 1100px;
+        margin: 12px auto 0 auto;
+        padding: 0 12px;
+      }
+      .coverage-card {
+        background: #0b132b;
+        color: #E6FFFA;
+        border-radius: 16px;
+        box-shadow: 0 8px 24px rgba(0,0,0,.25);
+        padding: 12px 16px;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto;
+        display: grid;
+        grid-template-columns: 1fr minmax(160px, 320px);
+        gap: 14px;
+        align-items: center;
+      }
+      .coverage-nums { font-weight: 600; line-height: 1.35; font-size: 14px; }
+      .coverage-nums .big { font-size: 18px; display:block; margin-bottom: 2px; }
       .coverage-nums .small { opacity:.85; display:block; }
-      .coverage-bar { height:10px; background:rgba(255,255,255,.12); border-radius:999px; overflow:hidden; }
-      .coverage-bar .fill { height:100%; width:0%; background:linear-gradient(90deg,#2DD4BF,#60A5FA); transition:width .4s ease; }
-      @media (max-width:640px){ .coverage-card { grid-template-columns:1fr; } }
+      .coverage-bar {
+        height: 10px;
+        background: rgba(255,255,255,.12);
+        border-radius: 999px;
+        overflow: hidden;
+      }
+      .coverage-bar .fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg,#2DD4BF,#60A5FA);
+        transition: width .4s ease;
+      }
+      @media (max-width: 640px){
+        .coverage-card { grid-template-columns: 1fr; }
+      }
     `;
     document.head.appendChild(css);
   }
@@ -275,7 +316,6 @@ function addPolylinesToMap(data) {
     addCoveragePanel();
   }
 
-  // clear old polylines
   polylines.forEach(pl => pl.remove());
   polylines = [];
   lastPolyline = null;
@@ -360,11 +400,18 @@ function initMapOnce(){
 
 async function refreshAll(){
   try{
-    // get activities
     const auth = await reAuthorize();
-    const data = await getActivities(auth);
+    if (!auth || !auth.access_token) return;
 
-    currentActivities = Array.isArray(data) ? data : [];
+    const data = await fetchActivities(auth.access_token);
+    if (!Array.isArray(data)) return;
+
+    // remember latest id
+    const latestActivityId = data[0]?.id;
+    const storedActivityId = loadLatestActivityId();
+    if (latestActivityId && latestActivityId !== storedActivityId) saveLatestActivityId(latestActivityId);
+
+    currentActivities = data;
 
     // draw routes
     addPolylinesToMap(currentActivities);
@@ -381,49 +428,17 @@ async function refreshAll(){
 
 document.addEventListener("DOMContentLoaded", function () {
   initMapOnce();
-  // hide any guide element after a moment if present
-  const mapGuide = document.getElementById("mapGuide");
-  setTimeout(() => { if (mapGuide) mapGuide.style.display = "none"; }, 6000);
-
   // start both fetches
   loadCoastline();
   refreshAll();
 
-  // auto refresh
-  setInterval(refreshAll, AUTO_REFRESH_MS);
+  if (AUTO_REFRESH_MS > 0){
+    setInterval(refreshAll, AUTO_REFRESH_MS);
+  }
+
+  const mapGuide = document.getElementById("mapGuide");
+  setTimeout(() => { if (mapGuide) mapGuide.style.display = "none"; }, 6000);
 });
 
-/* ====================== EXCLUDE AREAS ==================== */
-const EXCLUDE_AREAS = [
-  {
-    name: "Pearl Harbor",
-    polygon: {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [[
-          [-157.9930, 21.4150],
-          [-157.9930, 21.3730],
-          [-157.9855, 21.3480],
-          [-157.9820, 21.3365],
-          [-157.9740, 21.3135],
-          [-157.9665, 21.3095],
-          [-157.9580, 21.3110],
-          [-157.9520, 21.3160],
-          [-157.9470, 21.3260],
-          [-157.9460, 21.3380],
-          [-157.9480, 21.3500],
-          [-157.9535, 21.3680],
-          [-157.9585, 21.3870],
-          [-157.9645, 21.4030],
-          [-157.9725, 21.4145],
-          [-157.9805, 21.4180],
-          [-157.9880, 21.4180],
-          [-157.9930, 21.4150]
-        ]]
-      },
-      "properties": {}
-    }
-  }
-];
 /* ====================================================================== */
+
