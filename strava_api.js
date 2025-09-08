@@ -1,15 +1,14 @@
-/* === strava_api.js (full) =============================================== */
+/* === strava_api.js (updated) =========================================== */
 
 const auth_link = "https://www.strava.com/oauth/token";
 
 /** ======================= CONFIG ===================================== **/
 const COASTLINE_URL = "coastline_oahu_linestring.geojson"; // same folder or GitHub Pages
-const COVERAGE_RADIUS_KM = 0.8;   // how close a track must be to count as "coast coverage"
+const COVERAGE_RADIUS_KM = 0.8;   // debug only now, snapping does not rely on it
 let RENDER_COVERAGE_SEGMENTS = false;
 
 /* Exclusion areas: any coastline segments with midpoints inside these polygons
  * will NOT count toward total length *or* covered length.
- * Default is a reasonable Pearl Harbor envelope. Tweak as desired.
  * Coordinates are [lng, lat].
  */
 const EXCLUDE_AREAS = [
@@ -47,18 +46,24 @@ const EXCLUDE_AREAS = [
 /** ===================================================================== **/
 
 let currentActivities = [];
-let currentIndex = 0;
-let lastPolyline = null;
 let polylines = [];
+let lastPolyline = null;
 
-// coverage data holders
+// coastline holders
 let coastlineLngLat = [];          // [[lng,lat], ...]
-let coastlineSegments = [];        // [{i0,i1, line, lengthKm, excluded}, ...]
+let coastlineSegments = [];        // [{i0,i1,line,lengthKm,excluded}, ...]
+let coastlineLine = null;          // the whole coastline as one LineString
+
+// tracks in turf form
 let trackLines = [];               // GeoJSON LineString features
-let trackBBoxes = [];              // [{bbox:[minX,minY,maxX,maxY], line:Feature}, ...]
+let trackBBoxes = [];              // kept for future optimizations if needed
+
+// coverage numbers
 let coveredKm = 0, totalKm = 0;
-let coverageLayerGroup = null;
+
+// leaflet map and layers
 let map;
+let coverageLayerGroup = null;
 
 // summary panel DOM refs
 let coveragePanel, coverageNums, coverageBarFill;
@@ -104,8 +109,6 @@ function toLatLngsFromPolyline(encoded){
 }
 
 function ll_to_lnglat(ll){ return [ll[1], ll[0]]; }
-function latlng_to_lnglat(p){ return [p.lng, p.lat]; }
-function lnglat_to_latlng(c){ return [c[1], c[0]]; }
 
 /* ====================== COVERAGE SUMMARY (below map) =================== */
 function addCoveragePanel(){
@@ -145,6 +148,13 @@ function addCoveragePanel(){
         background: linear-gradient(90deg,#2DD4BF,#60A5FA);
         transition: width .4s ease;
       }
+      .hud-row {
+        display:flex; gap:8px; align-items:center; margin-top:8px;
+      }
+      .btn {
+        padding:6px 10px; border-radius:10px; border:1px solid rgba(255,255,255,.25);
+        background: rgba(255,255,255,.06); color:#E6FFFA; cursor:pointer;
+      }
       @media (max-width: 640px){
         .coverage-card { grid-template-columns: 1fr; }
       }
@@ -162,7 +172,12 @@ function addCoveragePanel(){
     panel.innerHTML = `
       <div class="coverage-card">
         <div class="coverage-nums">Loading…</div>
-        <div class="coverage-bar"><div class="fill"></div></div>
+        <div>
+          <div class="coverage-bar"><div class="fill"></div></div>
+          <div class="hud-row">
+            <button id="refreshCoverage" class="btn">Refresh coverage</button>
+          </div>
+        </div>
       </div>
     `;
     mapEl.insertAdjacentElement('afterend', panel);
@@ -170,6 +185,10 @@ function addCoveragePanel(){
   coveragePanel = panel;
   coverageNums = panel.querySelector('.coverage-nums');
   coverageBarFill = panel.querySelector('.coverage-bar .fill');
+
+  panel.querySelector('#refreshCoverage')?.addEventListener('click', ()=>{
+    reAuthorize();
+  });
 }
 
 function setHUD(coveredKmIn, totalKmIn){
@@ -202,15 +221,24 @@ function reAuthorize(){
 }
 
 function getActivities(res){
-  const link = `https://www.strava.com/api/v3/athlete/activities?access_token=${res.access_token}`;
+  const link = `https://www.strava.com/api/v3/athlete/activities?per_page=100&access_token=${res.access_token}`;
   fetch(link)
     .then(r=>r.json())
     .then(data=>{
-      const latestActivityId = data[0].id;
+      const latestActivityId = data[0]?.id;
       const storedActivityId = loadLatestActivityId();
-      if (latestActivityId !== storedActivityId) saveLatestActivityId(latestActivityId);
-      currentActivities = data;
-      addPolylinesToMap(data);
+      if (latestActivityId && latestActivityId !== storedActivityId) saveLatestActivityId(latestActivityId);
+
+      // reset state before rebuilding
+      currentActivities = data || [];
+      polylines.forEach(pl => pl.remove());
+      polylines = [];
+      lastPolyline = null;
+      trackLines = [];
+      trackBBoxes = [];
+      if (coverageLayerGroup){ map.removeLayer(coverageLayerGroup); coverageLayerGroup = null; }
+
+      addPolylinesToMap(currentActivities);
       prepareTrackLines();
       computeAndRenderCoverage();
     });
@@ -234,6 +262,7 @@ async function loadCoastline(){
       return;
     }
     coastlineLngLat = geom.coordinates; // [lng,lat]
+    coastlineLine = turf.lineString(coastlineLngLat);
     buildCoastlineSegments();
     computeAndRenderCoverage();
   }catch(e){
@@ -265,44 +294,47 @@ function prepareTrackLines(){
     if (!act.map || !act.map.summary_polyline) continue;
     const latlngs = toLatLngsFromPolyline(act.map.summary_polyline); // [[lat,lng],...]
     if (!latlngs.length) continue;
-    const lnglats = latlngs.map(ll => ll_to_lnglat(ll)); // -> [[lng,lat],...]
+    const lnglats = latlngs.map(([lat,lng]) => [lng, lat]); // -> [[lng,lat],...]
     const line = turf.lineString(lnglats);
     trackLines.push(line);
     trackBBoxes.push({bbox: turf.bbox(line), line});
   }
 }
 
-/* ====================== COVERAGE ========================= */
+/* ====================== COVERAGE (snapping) ============== */
+/* Count coastline as covered if any portion of a track projects onto it,
+   even when paddling miles offshore. We sample each track at ~100 m and
+   snap points to nearest coastline segment using nearestPointOnLine. */
 function computeAndRenderCoverage(){
-  if (!coastlineSegments.length || !trackLines.length) return;
+  if (!coastlineSegments.length || !trackLines.length || !coastlineLine || !map) return;
 
-  const degPad = degBufferForKm(COVERAGE_RADIUS_KM);
-  let coveredSegments = [];
-  coveredKm = 0;
+  // mark covered coastline segments
+  const coveredFlags = new Array(coastlineSegments.length).fill(false);
 
-  for (const seg of coastlineSegments){
-    if (seg.excluded) continue;
+  const stepKm = 0.1; // 100 m sampling along each track
+  for (const tLine of trackLines){
+    const lenKm = turf.length(tLine, {units: "kilometers"});
+    for (let d = 0; d <= lenKm; d += stepKm){
+      const pt = turf.along(tLine, d, {units: "kilometers"});
+      const snapped = turf.nearestPointOnLine(coastlineLine, pt, {units: "kilometers"});
+      // nearestPointOnLine(props): index = start vertex of closest segment, dist = km
+      const idx = snapped?.properties && Number.isFinite(snapped.properties.index)
+        ? snapped.properties.index
+        : null;
+      if (idx === null) continue;
+      if (idx < 0 || idx >= coastlineSegments.length) continue;
 
-    const bb = turf.bbox(seg.line);
-    const segBB = [bb[0]-degPad, bb[1]-degPad, bb[2]+degPad, bb[3]+degPad];
-
-    let isCovered = false;
-    for (const t of trackBBoxes){
-      const tb = t.bbox;
-      const tbPad = [tb[0]-degPad, tb[1]-degPad, tb[2]+degPad, tb[3]+degPad];
-      if (!bboxOverlap(segBB, tbPad)) continue;
-
-      const a = seg.line.geometry.coordinates[0];
-      const b = seg.line.geometry.coordinates[1];
-      const mid = turf.midpoint(turf.point(a), turf.point(b));
-      const dkm = turf.pointToLineDistance(mid, t.line, {units:"kilometers"});
-      if (dkm <= COVERAGE_RADIUS_KM){
-        isCovered = true;
-        break;
-      }
+      const seg = coastlineSegments[idx];
+      if (!seg.excluded) coveredFlags[idx] = true;
     }
+  }
 
-    if (isCovered){
+  coveredKm = 0;
+  const coveredSegments = [];
+  for (let i = 0; i < coastlineSegments.length; i++){
+    const seg = coastlineSegments[i];
+    if (seg.excluded) continue;
+    if (coveredFlags[i]){
       coveredKm += seg.lengthKm;
       coveredSegments.push(seg.line);
     }
@@ -313,9 +345,7 @@ function computeAndRenderCoverage(){
 
   if (RENDER_COVERAGE_SEGMENTS && coveredSegments.length){
     const fc = turf.featureCollection(coveredSegments);
-    L.geoJSON(fc, {
-      style: { color: "#2DD4BF", weight: 4, opacity: 0.7 }
-    }).addTo(coverageLayerGroup);
+    L.geoJSON(fc, { style: { color: "#2DD4BF", weight: 4, opacity: 0.7 } }).addTo(coverageLayerGroup);
   }
 
   setHUD(coveredKm, totalKm);
@@ -323,15 +353,15 @@ function computeAndRenderCoverage(){
 
 /* ====================== MAP & UI ========================= */
 function addPolylinesToMap(data) {
-  map = L.map('map').setView([21.466883, -157.942441], 10);
-  map.invalidateSize();
+  if (!map){
+    map = L.map('map').setView([21.466883, -157.942441], 10);
+    L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+      maxZoom: 20, subdomains: ['mt0', 'mt1', 'mt2', 'mt3'], attribution: '© Google'
+    }).addTo(map);
 
-  L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-    maxZoom: 20, subdomains: ['mt0', 'mt1', 'mt2', 'mt3'], attribution: '© Google'
-  }).addTo(map);
-
-  // create the below-map coverage panel instead of an on-map HUD
-  addCoveragePanel();
+    // create the below-map coverage panel
+    addCoveragePanel();
+  }
 
   data.forEach((activity, index) => {
     if (!activity.map || !activity.map.summary_polyline) return;
@@ -343,12 +373,12 @@ function addPolylinesToMap(data) {
     polylines.push(polyline);
     const popupContent = createPopupContent(index);
     polyline.bindPopup(popupContent);
-    if (index === currentActivities.length - 1) { lastPolyline = polyline; }
+    if (index === data.length - 1) { lastPolyline = polyline; }
   });
 
   if (polylines.length > 0) {
     polylines[polylines.length - 1].openPopup();
-    const firstActivity = currentActivities[polylines.length - 1];
+    const firstActivity = data[polylines.length - 1];
     const firstCoordinates = L.Polyline.fromEncoded(firstActivity.map.summary_polyline).getLatLngs()[0];
     const mileInDegrees = 10 / 69;
     const offsetCoordinates = { lat: firstCoordinates.lat + mileInDegrees, lng: firstCoordinates.lng };
@@ -406,11 +436,26 @@ function toggleMenu(){
   if (tools) tools.classList.toggle('open');
 }
 
-reAuthorize();   // fetch Strava + draw
-loadCoastline(); // fetch coastline
-
 document.addEventListener("DOMContentLoaded", function () {
+  // init map early so coverage can render when coastline and activities arrive
+  if (!map){
+    map = L.map('map').setView([21.466883, -157.942441], 10);
+    L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+      maxZoom: 20, subdomains: ['mt0', 'mt1', 'mt2', 'mt3'], attribution: '© Google'
+    }).addTo(map);
+    addCoveragePanel();
+  }
+
+  // hide any guide element after a moment if present
   const mapGuide = document.getElementById("mapGuide");
   setTimeout(() => { if (mapGuide) mapGuide.style.display = "none"; }, 6000);
+
+  // kick everything off
+  reAuthorize();   // fetch Strava + draw
+  loadCoastline(); // fetch coastline
 });
-/* ======================================================== */
+
+// Optional auto refresh every 3 minutes
+// setInterval(()=>{ reAuthorize(); }, 180000);
+
+/* ====================================================================== */
