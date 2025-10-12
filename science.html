@@ -80,83 +80,45 @@
       <div class="intro-hero__content">
         <h1>Open Oceanography</h1>
         <p class="lead">
-          Field‑driven lessons you can actually use — wind, swell, currents, water masses, and the physics that shape the coast.
+          Whether you’re here to learn, explore, or simply be inspired, I hope Open Oceanography sparks something in you. If you have a desire to understand the ocean, I can help you find the tools to explore it, and the curiosity and confidence to tackle big questions.
         </p>
+
+        <!-- Start here links pulled up from the slider -->
+        <div class="intro-links" style="display:flex; flex-wrap:wrap; gap:14px; margin-top:16px;">
+          <a class="btn"
+             href="https://medium.com/open-oceanography/open-oceanography-an-introduction-a64f286aa266?sk=43e96af8c21bd0224aac3d535c36d28a"
+             target="_blank" rel="noopener">
+            Introduction to Open Oceanography
+          </a>
+          <a class="btn btn-outline"
+             href="https://medium.com/@drew.burrier/oceanography-for-everyone-a-beginners-guide-to-open-oceanography-e554f27c950a?sk=38d34784080710bd997a953f68e7a67d"
+             target="_blank" rel="noopener">
+            Oceanography for Everyone
+          </a>
+        </div>
       </div>
     </section>
 
-    <!-- Topics row (horizontal scroll; no new CSS file needed) -->
+    <!-- Topics row (horizontal scroll) -->
     <section class="card" style="padding: clamp(18px,3.6vw,28px);">
       <h2 style="margin:0 0 12px;">Explore Topics</h2>
 
       <!-- Scroll track -->
       <div class="science-track"
            style="display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory; padding:6px 2px 2px;">
-        <!-- Card template for each topic -->
-        <!-- 1) Intro to Open Oceanography -->
-        <article class="topic"
-          style="flex:0 0 320px; scroll-snap-align:start; border:1px solid var(--stroke); border-radius:12px; background:rgba(255,255,255,.04); box-shadow:var(--shadow); overflow:hidden;">
-          <img src="photos/support_1.jpeg" alt="Introduction to Open Oceanography"
-               style="display:block; width:100%; height:160px; object-fit:cover;">
-          <div style="padding:12px;">
-            <h3 style="margin:0 0 10px; font-size:18px; border-bottom:1px solid rgba(255,255,255,.12); padding-bottom:8px;">
-              Introduction to Open Oceanography
-            </h3>
 
-            <div class="prose" style="padding:0; margin-bottom:10px;">
-              <p style="margin:0; color:var(--muted); font-size:14px;">
-                What this series is, how to use it, and how it rides along with the expedition.
-              </p>
-            </div>
-
-            <div style="display:flex; gap:8px; flex-wrap:wrap;">
-              <a class="btn btn-outline"
-                 href="https://medium.com/open-oceanography/open-oceanography-an-introduction-a64f286aa266?sk=43e96af8c21bd0224aac3d535c36d28a"
-                 target="_blank" rel="noopener">
-                Medium
-              </a>
-              <a class="btn" href="#" aria-disabled="true">YouTube (soon)</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- 2) Oceanography for Everyone -->
-        <article class="topic"
-          style="flex:0 0 320px; scroll-snap-align:start; border:1px solid var(--stroke); border-radius:12px; background:rgba(255,255,255,.04); box-shadow:var(--shadow); overflow:hidden;">
-          <img src="photos/introduction_1.jpg" alt="Oceanography for Everyone"
-               style="display:block; width:100%; height:160px; object-fit:cover;">
-          <div style="padding:12px;">
-            <h3 style="margin:0 0 10px; font-size:18px; border-bottom:1px solid rgba(255,255,255,.12); padding-bottom:8px;">
-              Oceanography for Everyone
-            </h3>
-            <div class="prose" style="padding:0; margin-bottom:10px;">
-              <p style="margin:0; color:var(--muted); font-size:14px;">
-                A beginner’s guide to the essential ideas and tools you’ll see on the map.
-              </p>
-            </div>
-            <div style="display:flex; gap:8px; flex-wrap:wrap;">
-              <a class="btn btn-outline"
-                 href="https://medium.com/@drew.burrier/oceanography-for-everyone-a-beginners-guide-to-open-oceanography-e554f27c950a?sk=38d34784080710bd997a953f68e7a67d"
-                 target="_blank" rel="noopener">
-                Medium
-              </a>
-              <a class="btn" href="#" aria-disabled="true">YouTube (soon)</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- 3) Plate Tectonics & Basin Shape -->
+        <!-- Plate Tectonics & Basin Shape -->
         <article class="topic"
           style="flex:0 0 320px; scroll-snap-align:start; border:1px solid var(--stroke); border-radius:12px; background:rgba(255,255,255,.04); box-shadow:var(--shadow); overflow:hidden;">
           <img src="photos/Plate_techtonics.jpg" alt="Plate tectonics and ocean basins"
                style="display:block; width:100%; height:160px; object-fit:cover;">
           <div style="padding:12px;">
             <h3 style="margin:0 0 10px; font-size:18px; border-bottom:1px solid rgba(255,255,255,.12); padding-bottom:8px;">
-              Plate Tectonics & Basin Shape
+              Plate Tectonics &amp; Basin Shape
             </h3>
             <div class="prose" style="padding:0; margin-bottom:10px;">
               <p style="margin:0; color:var(--muted); font-size:14px;">
-                Ridges, trenches, islands, and shelves: why the map looks the way it does.
+                Ridges, trenches, islands, and shelves. Why the map looks the way it does.
               </p>
             </div>
             <div style="display:flex; gap:8px; flex-wrap:wrap;">
@@ -166,7 +128,7 @@
           </div>
         </article>
 
-        <!-- 4) Physical Properties of Seawater -->
+        <!-- Physical Properties of Seawater -->
         <article class="topic"
           style="flex:0 0 320px; scroll-snap-align:start; border:1px solid var(--stroke); border-radius:12px; background:rgba(255,255,255,.04); box-shadow:var(--shadow); overflow:hidden;">
           <img src="photos/water_masses.jpg" alt="Physical properties of seawater"
@@ -187,14 +149,14 @@
           </div>
         </article>
 
-        <!-- 5) Air–Sea Interaction -->
+        <!-- Air Sea Interaction & Winds -->
         <article class="topic"
           style="flex:0 0 320px; scroll-snap-align:start; border:1px solid var(--stroke); border-radius:12px; background:rgba(255,255,255,.04); box-shadow:var(--shadow); overflow:hidden;">
-          <img src="photos/air_sea_interactions.jpg" alt="Air–sea interaction and atmospheric circulation"
+          <img src="photos/air_sea_interactions.jpg" alt="Air Sea interaction and atmospheric circulation"
                style="display:block; width:100%; height:160px; object-fit:cover;">
           <div style="padding:12px;">
             <h3 style="margin:0 0 10px; font-size:18px; border-bottom:1px solid rgba(255,255,255,.12); padding-bottom:8px;">
-              Air–Sea Interaction & Winds
+              Air Sea Interaction &amp; Winds
             </h3>
             <div class="prose" style="padding:0; margin-bottom:10px;">
               <p style="margin:0; color:var(--muted); font-size:14px;">
@@ -211,37 +173,38 @@
 
       <!-- Optional helper text -->
       <p class="prose" style="padding:10px 0 0; color:var(--muted); font-size:14px;">
-        Tip: swipe/drag sideways to browse topics. New lessons will roll out alongside the expedition.
+        Tip: swipe or drag sideways to browse topics. New lessons will roll out alongside the expedition.
       </p>
     </section>
   </main>
-<!-- Long watch: Thesis Defense, placed below the topics -->
-<section class="card" id="thesis-defense" style="padding: clamp(18px,3.6vw,28px);">
-  <h2 style="margin:0 0 10px; font-size:20px;">
-    If you have an hour to kill this is NOT the worst explanation of internal waves ever recorded
-  </h2>
 
-  <div class="prose" style="margin:0 0 10px; color:var(--muted);">
-    <p style="margin:0;">
-      Watch my thesis defense: THE INTERNAL WAVE DYNAMICS OF BARKLEY SUBMARINE CANYON.
-    </p>
-  </div>
+  <!-- Long watch: Thesis Defense, placed below the topics -->
+  <section class="card" id="thesis-defense" style="padding: clamp(18px,3.6vw,28px);">
+    <h2 style="margin:0 0 10px; font-size:20px;">
+      If you have an hour to kill this is NOT the worst explanation of internal waves ever recorded
+    </h2>
 
-  <div class="video-wrap" aria-label="Embedded video player for thesis defense"
-       style="position:relative; width:100%; aspect-ratio:16 / 9; background:rgba(255,255,255,.04); border:1px solid var(--stroke); border-radius:12px; overflow:hidden; box-shadow:var(--shadow);">
-    <iframe
-      src="https://www.youtube.com/embed/WBj7cJQoSZE"
-      title="Thesis Defense"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen
-      loading="lazy"
-      style="position:absolute; inset:0; width:100%; height:100%; border:0;"></iframe>
-  </div>
+    <div class="prose" style="margin:0 0 10px; color:var(--muted);">
+      <p style="margin:0;">
+        Watch my thesis defense: THE INTERNAL WAVE DYNAMICS OF BARKLEY SUBMARINE CANYON.
+      </p>
+    </div>
 
-  <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:10px;">
-    <a class="btn" href="https://www.youtube.com/watch?v=WBj7cJQoSZE" target="_blank" rel="noopener">Open on YouTube</a>
-  </div>
-</section>
+    <div class="video-wrap" aria-label="Embedded video player for thesis defense"
+         style="position:relative; width:100%; aspect-ratio:16 / 9; background:rgba(255,255,255,.04); border:1px solid var(--stroke); border-radius:12px; overflow:hidden; box-shadow:var(--shadow);">
+      <iframe
+        src="https://www.youtube.com/embed/WBj7cJQoSZE"
+        title="Thesis Defense"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+        loading="lazy"
+        style="position:absolute; inset:0; width:100%; height:100%; border:0;"></iframe>
+    </div>
+
+    <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:10px;">
+      <a class="btn" href="https://www.youtube.com/watch?v=WBj7cJQoSZE" target="_blank" rel="noopener">Open on YouTube</a>
+    </div>
+  </section>
 
   <!-- Shared footer -->
   <footer class="site-footer">
@@ -313,4 +276,3 @@
   </script>
 </body>
 </html>
-
