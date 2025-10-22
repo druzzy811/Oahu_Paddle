@@ -229,7 +229,6 @@
 
     let currentIndex = 0;
 
-    // Build Grid
     function buildGrid(list){
       gridEl.innerHTML = '';
       list.forEach((p,i)=>{
@@ -256,7 +255,6 @@
       if (active && mapPanel.hidden){ active.scrollIntoView({behavior:'smooth', block:'center'}); }
     }
 
-    // Map
     let map, markerGroup;
     function initMap(){
       if (map) return;
@@ -280,7 +278,7 @@
           iconSize: [40,40], iconAnchor: [20,20], popupAnchor: [0,-10]
         });
         const m = L.marker([lat, lon], { icon: div }).addTo(markerGroup);
-        m.on('click', ()=> { currentIndex = i; openPopup(i); highlightGrid(i); });
+        m.on('click', ()=> { currentIndex = i; openLightbox(i); highlightGrid(i); });
       });
 
       if (markerGroup.getLayers().length){
@@ -289,43 +287,27 @@
       countChip.textContent = `${DATA.length} photos`;
     }
 
-    function openPopup(i){
-      const p = DATA[i]; if (!p) return;
-      const lat = p.gps.latitude, lon = p.gps.longitude;
-      const html = `
-        <div style="display:flex;align-items:center;justify-content:space-between;width:300px;margin:0;padding:0;background:rgba(255,255,255,.5)">
-          <div style="width:0;height:0;border-top:12px solid transparent;border-bottom:12px solid transparent;border-right:12px solid #A3C6C4;cursor:pointer;margin-left:-5px;margin-right:6px;" onclick="navigatePhoto(${i-1})"></div>
-          <div style="text-align:center;flex-grow:1;margin:0;">
-            <img src="${imgPath(p.filename)}" alt="Photo ${fmtDate(p.datetime)}" style="cursor:zoom-in" onclick="openLightbox(${i})">
-          </div>
-          <div style="width:0;height:0;border-top:12px solid transparent;border-bottom:12px solid transparent;border-left:12px solid #A3C6C4;cursor:pointer;margin-right:-5px;margin-left:6px;" onclick="navigatePhoto(${i+1})"></div>
-        </div>
-      `;
-      L.popup({ maxWidth:420, autoPan:true })
-        .setLatLng([lat, lon]).setContent(html).openOn(map);
-      setTimeout(()=>{ map.panBy([0, -Math.round(map.getSize().y*0.18)], {animate:true}); }, 40);
-    }
-
     function focusOnMap(i){
       if (!map) return;
       const p = DATA[i]; if (!p) return;
       map.setView([p.gps.latitude, p.gps.longitude], Math.max(map.getZoom(), 11), { animate:true });
-      openPopup(i);
     }
 
-    // expose for popup arrows
     window.navigatePhoto = function(i){
       if (!DATA.length) return;
       if (i < 0) i = DATA.length - 1;
       if (i >= DATA.length) i = 0;
       currentIndex = i;
-      openPopup(i);
       highlightGrid(i);
       const el = document.querySelector(`.item[data-index="${i}"]`);
-      if (el && gridPanel && !gridPanel.hidden) el.scrollIntoView({behavior:'smooth', block:'center'});
+      if (el && gridPanel && !gridPanel.hidden) {
+        el.scrollIntoView({behavior:'smooth', block:'center'});
+      }
+      if (map && !mapPanel.hidden) {
+        focusOnMap(i);
+      }
     };
 
-    // Year filters
     const chips = $('#yearChips'); chips.innerHTML = '';
     const years = Array.from(new Set(DATA.map(yearOf).filter(Boolean))).sort();
     const activeYears = new Set(years);
@@ -337,12 +319,10 @@
     });
 
     function applyYearFilter(){
-      // Grid
       $$('.item').forEach(el=>{
         const show = activeYears.has(el.dataset.year);
         el.style.display = show ? '' : 'none';
       });
-      // Map
       if (map && markerGroup){
         markerGroup.clearLayers();
         DATA.forEach((p,i)=>{
@@ -355,7 +335,7 @@
             iconSize: [40,40], iconAnchor: [20,20], popupAnchor: [0,-10]
           });
           const m = L.marker([lat, lon], { icon: div }).addTo(markerGroup);
-          m.on('click', ()=> { currentIndex = i; openPopup(i); highlightGrid(i); });
+          m.on('click', ()=> { currentIndex = i; openLightbox(i); highlightGrid(i); });
         });
         if (markerGroup.getLayers().length) map.fitBounds(markerGroup.getBounds(), { padding:[40,40] });
       }
@@ -363,7 +343,6 @@
       countChip.textContent = `${visible} photos`;
     }
 
-    // Lightbox
     const lightbox = $('#lightbox');
     const lbImg    = $('#lbImg');
     $('#lbClose').onclick = closeLightbox;
@@ -387,7 +366,6 @@
       if (e.key === 'Escape' && open){ closeLightbox(); }
     });
 
-    // View tabs (Grid / Map)
     const tabGrid = $('#tabGrid');
     const tabMap  = $('#tabMap');
     function setTabs(active){
@@ -402,7 +380,6 @@
     tabGrid.onclick = ()=> setTabs(tabGrid);
     tabMap.onclick  = ()=> setTabs(tabMap);
 
-    // Boot
     buildGrid(DATA);
     applyYearFilter();
     setTabs(tabGrid);
@@ -467,9 +444,6 @@
   });
 </script>
 
-
-
-
   <!-- Drawer markup -->
   <aside id="drawer" class="drawer" role="dialog" aria-modal="true" aria-label="Site menu" hidden>
     <div class="drawer-header">
@@ -489,3 +463,4 @@
   <div id="backdrop" class="backdrop" hidden></div>
 </body>
 </html>
+
