@@ -146,8 +146,8 @@
     <!-- Controls -->
     <section class="card toolbar" role="region" aria-label="Gallery controls">
       <div class="view-tabs" role="tablist" aria-label="View mode">
-        <button class="btn-tab active" id="tabGrid" aria-selected="true">Grid</button>
-        <button class="btn-tab" id="tabMap" aria-selected="false">Map</button>
+        <button class="btn-tab" id="tabGrid" aria-selected="false">Grid</button>
+        <button class="btn-tab active" id="tabMap" aria-selected="true">Map</button>
       </div>
       <div style="flex:1"></div>
       <div class="chipbar" id="yearChips" aria-label="Filter by year"></div>
@@ -156,7 +156,7 @@
     <!-- Gallery + Map -->
     <section class="card gallery-shell" id="galleryShell">
       <!-- Map panel -->
-      <div class="panel map" id="mapPanel" hidden>
+      <div class="panel map" id="mapPanel">
         <div class="map-topbar">
           <span class="chip" id="countChip">0 photos</span>
         </div>
@@ -164,7 +164,7 @@
       </div>
 
       <!-- Grid panel -->
-      <div class="panel grid" id="gridPanel">
+      <div class="panel grid" id="gridPanel" hidden>
         <div class="grid" id="grid"></div>
       </div>
     </section>
@@ -382,7 +382,7 @@
 
     buildGrid(DATA);
     applyYearFilter();
-    setTabs(tabGrid);
+    setTabs(tabMap);   // Map on load
     if (DATA.length) highlightGrid(0);
   })();
 </script>
