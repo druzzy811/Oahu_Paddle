@@ -75,7 +75,8 @@ const linksData = {
   7: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-8-trust-the-process-c9e2c3d5cdff?sk=ea18e46234fac08a7bc5a5da6d9a5a6e",
   8: "https://medium.com/my-oceanic-odyssey/my-oceanic-odyssey-paddle-9-a-year-in-review-c1f858d1e6ab?sk=139c46cce2081306ee7f7c931f6f23dcc",
   9: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-10-survive-793227ec80b4?sk=204b6b20ad86838be0f9cdb662709473",
-  10: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-11-take-pride-a781a9299d9a?sk=2865b68c56d069b36d13b9f178f90c6f"
+  10: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-11-take-pride-a781a9299d9a?sk=2865b68c56d069b36d13b9f178f90c6f",
+  11: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-12-get-in-the-fight-0534ab27eca3?sk=cf71226db1a48880543f2b7c6afac3a0"
 };
 
 const paddle_titles = {
@@ -89,7 +90,8 @@ const paddle_titles = {
   7: "Trust the Process",
   8: "A Year in Review",
   9: "Survive",
-  10: "Take Pride"
+  10: "Take Pride",
+  11: "Get in the Fight"
 };
 
 /* ============== Leaflet + Turf helpers ==================== */
