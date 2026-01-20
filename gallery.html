@@ -218,7 +218,8 @@
     const DATA = window.__PHOTOS__;
     const $  = sel => document.querySelector(sel);
     const $$ = sel => Array.from(document.querySelectorAll(sel));
-    const imgPath = f => `Gallery/${f}`;
+    const fullPath  = f => `Gallery/${f}`;
+    const thumbPath = f => `Gallery/thumbs/${f}`;
     const yearOf  = p => (p?.datetime || '').slice(0,4);
     const fmtDate = s => (s||'').split(' ')[0].replaceAll(':','-');
 
@@ -237,7 +238,7 @@
         fig.dataset.index = i;
         fig.dataset.year  = yearOf(p)||'';
         fig.innerHTML = `
-          <img src="${imgPath(p.filename)}" alt="Photo ${fmtDate(p.datetime)}" loading="lazy">
+          <img src="${thumbPath(p.filename)}" alt="Photo ${fmtDate(p.datetime)}" loading="lazy">
           <figcaption class="stamp">${fmtDate(p.datetime)}</figcaption>
         `;
         fig.addEventListener('click', ()=>{
@@ -274,7 +275,7 @@
         if (typeof lat !== 'number' || typeof lon !== 'number') return;
         const div = L.divIcon({
           className: 'thumb-pin',
-          html: `<div class="pin" style="background-image:url('${imgPath(p.filename)}')"></div>`,
+          html: `<div class="pin" style="background-image:url('${thumbPath(p.filename)}')"></div>`,
           iconSize: [40,40], iconAnchor: [20,20], popupAnchor: [0,-10]
         });
         const m = L.marker([lat, lon], { icon: div }).addTo(markerGroup);
@@ -331,7 +332,7 @@
           if (typeof lat !== 'number' || typeof lon !== 'number') return;
           const div = L.divIcon({
             className: 'thumb-pin',
-            html: `<div class="pin" style="background-image:url('${imgPath(p.filename)}')"></div>`,
+            html: `<div class="pin" style="background-image:url('${thumbPath(p.filename)}')"></div>`,
             iconSize: [40,40], iconAnchor: [20,20], popupAnchor: [0,-10]
           });
           const m = L.marker([lat, lon], { icon: div }).addTo(markerGroup);
@@ -351,7 +352,7 @@
     function openLightbox(i){
       if (!DATA[i]) return;
       currentIndex = i;
-      lbImg.src = imgPath(DATA[i].filename);
+      lbImg.src = fullPath(DATA[i].filename);
       lightbox.classList.add('open'); lightbox.setAttribute('aria-hidden','false');
     }
     function closeLightbox(){
