@@ -144,6 +144,14 @@ const photoData = [
         }
     },
     {
+        "filename": "IMG_1750.jpeg",
+        "datetime": "2025:09:07 10:29:49",
+        "gps": {
+            "latitude": 21.65138333333333,
+            "longitude": -157.9129638888889
+        }
+    },
+    {
         "filename": "IMG_1752.jpeg",
         "datetime": "2025:09:07 10:29:51",
         "gps": {
@@ -152,11 +160,27 @@ const photoData = [
         }
     },
     {
+        "filename": "IMG_2025.jpeg",
+        "datetime": "2025:10:03 09:30:02",
+        "gps": {
+            "latitude": 21.478844444444444,
+            "longitude": -157.83517500000002
+        }
+    },
+    {
         "filename": "IMG_2042.jpeg",
         "datetime": "2025:10:03 09:31:23",
         "gps": {
             "latitude": 21.47888611111111,
             "longitude": -157.83523611111113
+        }
+    },
+    {
+        "filename": "IMG_2054 2.jpeg",
+        "datetime": "2025:10:03 10:20:20",
+        "gps": {
+            "latitude": 21.508122222222223,
+            "longitude": -157.82876666666667
         }
     },
     {
@@ -173,6 +197,14 @@ const photoData = [
         "gps": {
             "latitude": 21.553208333333334,
             "longitude": -158.2467333333333
+        }
+    },
+    {
+        "filename": "IMG_4141.jpeg",
+        "datetime": "2026:01:25 10:11:46",
+        "gps": {
+            "latitude": 21.35428888888889,
+            "longitude": -157.70211666666665
         }
     }
 ];
