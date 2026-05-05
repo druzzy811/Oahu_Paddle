@@ -32,6 +32,14 @@ const photoData = [
         }
     },
     {
+        "filename": "GPTempDownload.jpg",
+        "datetime": "2024:03:22 08:57:20",
+        "gps": {
+            "latitude": 21.354225000000003,
+            "longitude": -158.13653888888888
+        }
+    },
+    {
         "filename": "722490BB-0728-49D6-A6EB-7FAC4A4E7EBC.jpg",
         "datetime": "2024:03:25 18:49:43",
         "gps": {
@@ -61,6 +69,14 @@ const photoData = [
         "gps": {
             "latitude": 21.27259722222222,
             "longitude": -157.81634444444447
+        }
+    },
+    {
+        "filename": "IMG_3925.jpeg",
+        "datetime": "2024:06:26 08:58:51",
+        "gps": {
+            "latitude": 21.302872222222224,
+            "longitude": -157.9517361111111
         }
     },
     {
@@ -101,6 +117,14 @@ const photoData = [
         "gps": {
             "latitude": 21.28555277777778,
             "longitude": -157.67234722222221
+        }
+    },
+    {
+        "filename": "IMG_8262.jpeg",
+        "datetime": "2025:01:20 08:48:54",
+        "gps": {
+            "latitude": 21.307705555555557,
+            "longitude": -157.98176666666666
         }
     },
     {
@@ -197,6 +221,14 @@ const photoData = [
         "gps": {
             "latitude": 21.553208333333334,
             "longitude": -158.2467333333333
+        }
+    },
+    {
+        "filename": "IMG_4060.jpeg",
+        "datetime": "2026:01:10 07:40:55",
+        "gps": {
+            "latitude": 21.305319444444446,
+            "longitude": -158.0302888888889
         }
     },
     {
