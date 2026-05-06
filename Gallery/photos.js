@@ -24,6 +24,14 @@ const photoData = [
         }
     },
     {
+        "filename": "IMG_1791.jpeg",
+        "datetime": "2024:01:06 11:08:47",
+        "gps": {
+            "latitude": 21.41818888888889,
+            "longitude": -158.18303055555555
+        }
+    },
+    {
         "filename": "8EDBC605-1DD4-4A04-B0E9-6FE56D17BD4A.jpg",
         "datetime": "2024:03:09 14:32:18",
         "gps": {
