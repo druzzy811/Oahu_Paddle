@@ -32,6 +32,22 @@ const photoData = [
         }
     },
     {
+        "filename": "IMG_1882.jpeg",
+        "datetime": "2024:01:15 10:50:28",
+        "gps": {
+            "latitude": 21.277619444444444,
+            "longitude": -157.73255833333334
+        }
+    },
+    {
+        "filename": "475C000A-E73B-4B9D-8063-36C21F9AB118.jpg",
+        "datetime": "2024:02:10 09:42:46",
+        "gps": {
+            "latitude": 21.25186666666667,
+            "longitude": -157.8200388888889
+        }
+    },
+    {
         "filename": "8EDBC605-1DD4-4A04-B0E9-6FE56D17BD4A.jpg",
         "datetime": "2024:03:09 14:32:18",
         "gps": {
