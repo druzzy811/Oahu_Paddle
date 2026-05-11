@@ -262,5 +262,13 @@ const photoData = [
             "latitude": 21.35428888888889,
             "longitude": -157.70211666666665
         }
+    },
+    {
+        "filename": "IMG_5140.jpeg",
+        "datetime": "2026:05:09 11:20:16",
+        "gps": {
+            "latitude": 21.559697222222223,
+            "longitude": -157.856675
+        }
     }
 ];
