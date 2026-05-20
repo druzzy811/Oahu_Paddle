@@ -160,62 +160,7 @@
     <div class="legal">© My Oceanic Odyssey</div>
   </footer>
 
-  <!-- Drawer controls (a11y-safe; same as index) -->
-  <script>
-    window.addEventListener('DOMContentLoaded', () => {
-      const hamburger = document.getElementById('hamburger');
-      const drawer    = document.getElementById('drawer');
-      const closeBtn  = document.getElementById('drawerClose');
-      const backdrop  = document.getElementById('backdrop');
-      const main      = document.querySelector('main');
-      const footer    = document.querySelector('footer');
-
-      let lastFocused = null;
-
-      function setInert(on) {
-        if (on) { main?.setAttribute('inert',''); footer?.setAttribute('inert',''); }
-        else { main?.removeAttribute('inert'); footer?.removeAttribute('inert'); }
-      }
-
-      function openDrawer() {
-        lastFocused = document.activeElement;
-        drawer.hidden = false;
-        backdrop.hidden = false;
-        drawer.classList.add('open');
-        setInert(true);
-        hamburger.setAttribute('aria-expanded','true');
-        closeBtn.focus();
-        document.addEventListener('keydown', trapFocus);
-      }
-
-      function closeDrawer() {
-        (lastFocused || hamburger).focus();
-        drawer.classList.remove('open');
-        drawer.hidden = true;
-        backdrop.hidden = true;
-        setInert(false);
-        hamburger.setAttribute('aria-expanded','false');
-        document.removeEventListener('keydown', trapFocus);
-      }
-
-      function trapFocus(e) {
-        if (e.key !== 'Tab' || drawer.hidden) return;
-        const focusables = drawer.querySelectorAll(
-          'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
-        );
-        if (!focusables.length) return;
-        const first = focusables[0];
-        const last  = focusables[focusables.length - 1];
-        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-      }
-
-      hamburger.addEventListener('click', openDrawer);
-      closeBtn.addEventListener('click', closeDrawer);
-      backdrop.addEventListener('click', closeDrawer);
-      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDrawer(); });
-    });
-  </script>
+  <script src="ui.js"></script>
 </body>
 </html>
 
