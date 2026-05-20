@@ -114,49 +114,6 @@ function lnglat_to_latlng(c){ return [c[1], c[0]]; }
 
 /* ====================== COVERAGE SUMMARY (below map) =================== */
 function addCoveragePanel(){
-  if (!document.getElementById("coverage-summary-styles")){
-    const css = document.createElement("style");
-    css.id = "coverage-summary-styles";
-    css.textContent = `
-      #coverage-panel {
-        max-width: 1100px;
-        margin: 12px auto 0 auto;
-        padding: 0 12px;
-      }
-      .coverage-card {
-        background: #0b132b;
-        color: #E6FFFA;
-        border-radius: 16px;
-        box-shadow: 0 8px 24px rgba(0,0,0,.25);
-        padding: 12px 16px;
-        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto;
-        display: grid;
-        grid-template-columns: 1fr minmax(160px, 320px);
-        gap: 14px;
-        align-items: center;
-      }
-      .coverage-nums { font-weight: 600; line-height: 1.35; font-size: 14px; }
-      .coverage-nums .big { font-size: 18px; display:block; margin-bottom: 2px; }
-      .coverage-nums .small { opacity:.85; display:block; }
-      .coverage-bar {
-        height: 10px;
-        background: rgba(255,255,255,.12);
-        border-radius: 999px;
-        overflow: hidden;
-      }
-      .coverage-bar .fill {
-        height: 100%;
-        width: 0%;
-        background: linear-gradient(90deg,#2DD4BF,#60A5FA);
-        transition: width .4s ease;
-      }
-      @media (max-width: 640px){
-        .coverage-card { grid-template-columns: 1fr; }
-      }
-    `;
-    document.head.appendChild(css);
-  }
-
   const mapEl = document.getElementById('map');
   if (!mapEl) return;
 
