@@ -58,7 +58,7 @@ const linksData = {
   9: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-10-survive-793227ec80b4?sk=204b6b20ad86838be0f9cdb662709473",
   10: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-11-take-pride-a781a9299d9a?sk=2865b68c56d069b36d13b9f178f90c6f",
   11: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-12-get-in-the-fight-0534ab27eca3?sk=cf71226db1a48880543f2b7c6afac3a0",
-  12: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-13-brotherly-love-04b452686a7d?sk=d0dce77b0776befb890f4e7936e550a5"
+  12: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-13-brotherly-love-04b452686a7d?sk=d0dce77b0776befb890f4e7936e550a5",
   13: "https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-14-no-longer-immortal-3c1f914fe433?sk=dff5b5c455d590569742d24aac9cdb8c"
 };
 
