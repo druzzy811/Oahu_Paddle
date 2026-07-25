@@ -1,0 +1,62 @@
+[
+    {
+        "id": "zone_1",
+        "lat": 21.58384,
+        "lon": -158.30977,
+        "status": "pending"
+    },
+    {
+        "id": "zone_2",
+        "lat": 21.27843,
+        "lon": -157.63152,
+        "status": "pending"
+    },
+    {
+        "id": "zone_3",
+        "lat": 21.36264,
+        "lon": -157.67842,
+        "status": "pending"
+    },
+    {
+        "id": "zone_4",
+        "lat": 21.43102,
+        "lon": -157.70556,
+        "status": "pending"
+    },
+    {
+        "id": "zone_5",
+        "lat": 21.6294,
+        "lon": -157.8842,
+        "status": "pending"
+    },
+    {
+        "id": "zone_6",
+        "lat": 21.7036,
+        "lon": -157.92876,
+        "status": "pending"
+    },
+    {
+        "id": "zone_7",
+        "lat": 21.73567,
+        "lon": -157.99864,
+        "status": "pending"
+    },
+    {
+        "id": "zone_8",
+        "lat": 21.69164,
+        "lon": -158.06139,
+        "status": "pending"
+    },
+    {
+        "id": "zone_9",
+        "lat": 21.59612,
+        "lon": -158.21133,
+        "status": "pending"
+    },
+    {
+        "id": "zone_10",
+        "lat": 21.545,
+        "lon": -158.25,
+        "status": "pending"
+    }
+]
