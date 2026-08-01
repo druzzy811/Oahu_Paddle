@@ -1,16 +1,23 @@
+<!-- landing.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Choose Your Adventure</title>
+    <title>Choose Your Adventure — My Oceanic Odyssey</title>
+    
+    <!-- Bring in your site fonts to match the branding -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css">
+
     <style>
         body, html {
             margin: 0;
             padding: 0;
             overflow: hidden;
-            font-family: Arial, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
         }
 
         .container {
@@ -29,6 +36,7 @@
             text-align: center;
             cursor: pointer;
             overflow: hidden;
+            z-index: 1; /* Creates an isolated stacking container */
         }
 
         .section video {
@@ -38,7 +46,8 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            z-index: -1;
+            z-index: 0; /* Sits at the bottom of the section */
+            pointer-events: none; 
         }
 
         .section .overlay {
@@ -47,54 +56,76 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.45);
+            transition: background 0.3s ease;
+            z-index: 1; /* Sits above the video */
+        }
+
+        .section-content {
+            position: relative;
+            z-index: 2; /* Sits above the overlay */
         }
 
         .section h1 {
-            font-size: 3em;
-            z-index: 1;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+            margin: 0;
+            padding: 0 20px;
             transition: transform 0.3s ease;
         }
 
+        .section p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 600;
+            margin-top: 10px;
+            opacity: 0.9;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+            transform: translateY(10px);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
         .section:hover h1 {
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
         .section:hover .overlay {
-            background: rgba(0, 0, 0, 0.6);
-        }
-
-        @media (max-width: 768px) {
-            .section h1 {
-                font-size: 2em;
-            }
+            background: rgba(0, 0, 0, 0.2); 
         }
     </style>
 </head>
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZKS4VZRVKZ"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-ZKS4VZRVKZ');
 </script>
+
 <body>
     <div class="container">
         <!-- My Oceanic Odyssey Section -->
         <div class="section" onclick="location.href='index.html'">
-            <video src="my-oceanic-odyssey.mp4" autoplay muted loop></video>
+            <video src="my-oceanic-odyssey.mp4" autoplay loop muted playsinline></video>
             <div class="overlay"></div>
-            <h1>My Oceanic Odyssey</h1>
+            <div class="section-content">
+                <h1>My Oceanic Odyssey</h1>
+                <p>The Narrative & Map</p>
+            </div>
         </div>
 
         <!-- Open Oceanography Section -->
         <div class="section" onclick="location.href='science.html'">
-            <video src="open-oceanography.mp4" autoplay muted loop></video>
+            <video src="open-oceanography.mp4" autoplay loop muted playsinline></video>
             <div class="overlay"></div>
-            <h1>Open Oceanography</h1>
+            <div class="section-content">
+                <h1>Open Oceanography</h1>
+                <p>The Science & Data Tools</p>
+            </div>
+        </div>
+    </div>
         </div>
     </div>
 </body>
