@@ -1,4 +1,3 @@
-<!-- introduction.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,17 +7,85 @@
 
   <meta name="description" content="Start here: why paddle Oʻahu? The vision behind My Oceanic Odyssey and how to follow along." />
 
-  <!-- Fonts & vendor CSS (same as index) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-  <!-- Your site CSS (same file as index) -->
   <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    /* Lock the reading column so it doesn't get too wide on desktop */
+    .intro-body {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 2rem 20px;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+    }
+
+    /* Apply the classic serif font for extreme readability */
+    .intro-body .prose {
+      font-family: 'Lora', serif;
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 2rem;
+    }
+
+    /* The Adventure Drop-Cap */
+    .intro-body > .prose:first-of-type p:first-child::first-letter {
+      float: left;
+      font-family: 'Inter', sans-serif;
+      font-size: 4.8rem;
+      line-height: 0.7;
+      font-weight: 800;
+      color: white;
+      padding-right: 12px;
+      padding-top: 8px;
+    }
+
+    /* Cinematic Editorial Images (Overrides the global grid) */
+    .editorial-figure {
+      width: 100%;
+      margin: 4rem 0; /* Gives nice breathing room around the photos */
+      padding: 0;
+    }
+
+    .editorial-figure img {
+      width: 100%; /* Expands the image to fill the exact width of the text column */
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.6); 
+    }
+
+    /* Cleanly aligned CTAs */
+    .editorial-cta {
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column; /* Stacks the buttons vertically */
+      align-items: center; /* Centers everything perfectly */
+      gap: 20px;
+    }
+
+    .editorial-cta .btn-sun {
+      padding: 14px 28px;
+      font-size: 1.1rem;
+    }
+
+    .editorial-cta-secondary {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  </style>
 </head>
 
-<!-- GA (unchanged) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZKS4VZRVKZ"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -27,19 +94,16 @@
 </script>
 
 <body>
-  <!-- Ocean backdrop layers -->
   <div class="ocean-bg" aria-hidden="true"></div>
   <div class="ocean-noise" aria-hidden="true"></div>
 
-  <!-- Header (same as index, no standalone Sponsor button) -->
   <header class="site-header">
     <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
 
     <a class="brand" href="index.html" aria-label="My Oceanic Odyssey">
-      <!-- Inline Oʻahu trace logo -->
-<svg class="brand-icon" viewBox="0 0 64 64" aria-hidden="true">
+      <svg class="brand-icon" viewBox="0 0 64 64" aria-hidden="true">
         <path d="M4.00,16.20 L6.84,17.85 L7.55,18.82 L8.35,19.50 L8.63,20.96 L8.40,24.35 L9.39,24.97 L9.52,25.67 L9.98,26.16 L9.83,26.37 L10.29,26.26 L10.83,26.51 L10.89,26.88 L12.02,27.60 L12.09,27.83 L11.85,28.11 L12.09,28.08 L12.64,29.02 L12.94,29.20 L13.05,31.09 L13.29,31.62 L14.78,32.26 L16.24,33.70 L16.37,34.15 L16.81,34.42 L17.34,35.59 L17.98,38.41 L18.84,40.27 L19.44,40.85 L21.23,40.91 L21.84,40.68 L24.32,40.45 L30.93,39.04 L31.36,38.64 L31.49,38.12 L31.33,38.02 L30.91,38.47 L31.35,37.94 L31.30,37.40 L30.50,36.25 L29.58,36.23 L29.44,35.81 L28.68,35.92 L28.17,35.48 L28.00,35.61 L27.61,35.41 L27.03,35.49 L27.14,35.43 L26.84,35.10 L26.98,34.76 L27.43,34.71 L27.11,34.41 L27.05,34.00 L27.35,34.07 L27.63,33.62 L27.72,34.05 L27.92,33.69 L27.79,34.03 L28.09,33.99 L28.16,34.23 L28.28,34.07 L28.59,34.31 L28.44,34.58 L28.84,35.03 L28.87,35.47 L29.96,35.02 L29.91,35.41 L29.48,35.48 L29.86,35.96 L30.57,35.94 L31.41,36.83 L31.28,36.12 L31.47,35.85 L31.00,35.12 L31.10,34.72 L30.37,34.68 L29.65,33.62 L29.56,32.84 L30.28,32.69 L30.38,33.20 L31.07,33.59 L30.99,33.87 L31.55,34.33 L31.83,33.78 L31.60,32.91 L32.30,32.72 L34.06,33.48 L33.94,33.74 L34.08,33.87 L34.69,33.73 L34.75,33.90 L34.19,34.63 L34.60,34.86 L35.50,34.22 L36.05,34.42 L35.53,34.22 L34.70,34.91 L34.15,34.69 L33.72,35.01 L33.72,35.24 L33.42,35.42 L33.60,35.63 L34.03,35.22 L34.14,35.31 L33.88,35.68 L34.20,35.86 L33.87,35.89 L33.92,36.10 L33.27,35.73 L33.09,35.88 L33.21,35.63 L33.04,35.85 L33.15,35.56 L33.04,35.69 L32.92,35.48 L32.64,35.91 L32.08,35.89 L31.73,36.13 L32.01,36.85 L31.71,37.15 L31.66,37.74 L32.10,38.08 L32.48,39.00 L33.56,39.08 L33.64,39.67 L33.41,39.68 L33.41,40.18 L33.28,40.19 L37.13,40.16 L37.12,39.64 L36.12,39.59 L36.01,39.38 L37.83,38.09 L37.79,37.89 L38.39,37.74 L38.49,37.94 L38.18,38.28 L38.51,38.74 L38.55,39.24 L39.23,39.02 L39.30,38.76 L39.31,39.01 L39.40,38.77 L39.46,39.04 L39.67,38.83 L39.56,39.05 L39.85,39.02 L39.69,39.30 L40.43,39.76 L40.34,39.44 L40.61,39.61 L40.77,39.31 L40.89,39.71 L40.72,40.03 L40.86,39.96 L40.97,40.23 L40.42,40.93 L41.18,41.38 L41.52,41.02 L41.73,41.14 L41.67,41.27 L41.33,41.35 L42.41,41.57 L42.32,41.93 L42.52,42.17 L42.69,41.90 L42.91,42.19 L44.32,42.71 L44.71,43.96 L45.33,44.44 L46.00,44.53 L46.95,44.31 L47.35,44.52 L47.49,44.11 L48.37,43.63 L48.73,43.19 L49.74,42.74 L50.09,42.64 L50.55,42.85 L50.63,42.65 L51.64,42.32 L53.45,42.19 L53.80,41.83 L54.64,42.50 L54.71,43.21 L54.48,43.99 L54.84,44.16 L55.42,44.09 L56.20,43.75 L55.94,43.36 L55.72,43.34 L55.88,42.95 L56.40,43.31 L56.68,42.67 L59.85,40.60 L60.00,39.55 L59.14,39.63 L58.89,39.12 L58.34,39.06 L57.77,38.54 L56.08,37.68 L55.07,36.17 L54.69,35.22 L54.61,34.66 L54.96,33.42 L54.08,32.24 L52.39,31.56 L51.82,30.80 L51.54,29.76 L51.73,29.45 L52.09,29.38 L52.29,28.65 L52.22,27.75 L53.17,27.30 L53.46,26.41 L52.81,26.32 L51.70,26.94 L50.18,26.55 L49.82,26.35 L49.87,26.09 L49.41,26.67 L49.00,26.58 L48.91,26.89 L48.53,27.12 L48.64,27.80 L49.79,28.28 L49.96,28.12 L49.94,28.26 L50.56,28.59 L50.38,28.51 L50.10,28.75 L50.04,29.15 L49.79,29.17 L49.59,30.26 L48.24,30.68 L47.46,30.07 L47.65,29.62 L47.36,29.53 L47.33,29.13 L47.08,29.09 L47.07,29.40 L46.72,29.51 L46.31,29.28 L46.05,28.86 L46.10,28.38 L45.83,28.11 L45.95,27.87 L45.53,27.79 L45.18,26.82 L44.77,27.00 L44.37,26.93 L44.25,26.67 L43.82,26.53 L43.71,26.11 L42.99,26.30 L42.79,25.91 L42.88,25.62 L42.66,25.41 L42.88,24.91 L42.88,24.18 L42.27,23.97 L42.42,23.44 L42.15,23.19 L41.98,22.45 L42.09,22.14 L42.41,22.27 L43.47,21.95 L43.57,20.46 L43.39,20.02 L41.96,17.78 L40.90,17.44 L40.32,17.84 L39.84,17.62 L39.95,16.33 L39.10,15.80 L38.74,14.88 L38.17,14.38 L37.91,13.70 L36.99,13.20 L36.61,12.64 L36.62,12.17 L35.88,11.57 L36.13,9.82 L36.65,9.63 L35.79,9.64 L35.32,9.29 L35.34,8.52 L34.71,8.26 L34.47,7.85 L34.49,7.57 L34.83,7.37 L34.19,7.05 L33.73,6.44 L33.75,6.14 L31.76,4.22 L30.70,4.23 L30.28,4.00 L30.27,4.21 L29.75,4.63 L29.16,4.43 L29.06,4.60 L28.92,4.42 L29.00,4.75 L28.77,5.04 L28.04,5.00 L28.14,5.21 L27.90,5.42 L27.64,5.21 L26.18,6.23 L25.95,6.66 L25.52,6.74 L25.30,7.33 L23.29,9.02 L23.40,9.37 L23.22,9.46 L23.09,10.07 L23.30,10.17 L23.20,10.42 L22.79,10.58 L22.14,11.62 L19.36,13.66 L19.66,13.92 L19.73,14.30 L19.49,14.37 L19.67,14.52 L19.45,14.55 L19.39,14.36 L18.90,14.89 L18.34,14.87 L18.57,15.33 L18.29,15.53 L18.09,15.27 L17.44,15.50 L16.63,15.34 L13.99,15.78 L13.51,15.55 L12.94,15.68 L11.06,15.45 L9.44,15.80 L6.45,15.74 L4.62,16.10 L4.18,16.02 L4.00,16.20"
               fill="none" vector-effect="non-scaling-stroke" />
       </svg>
@@ -55,11 +119,10 @@
     </nav>
   </header>
 
-  <!-- Drawer (same link set as index; Sponsor lives here) -->
   <aside id="drawer" class="drawer" role="dialog" aria-modal="true" aria-label="Site menu" hidden>
     <div class="drawer-header">
       <strong>Navigate</strong>
-      <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+      <button class="drawer-close" id="drawerClose" aria-label="Close menu">×</button>
     </div>
 
     <div class="drawer-section">
@@ -91,64 +154,74 @@
   </aside>
   <div id="backdrop" class="backdrop" hidden></div>
 
-  <!-- MAIN -->
   <main class="wrap">
-    <!-- Oceanic hero card -->
-    <section class="card intro-hero">
-      <div class="intro-hero__content">
-        <h1>New Beginnings</h1>
-        <p class="lead">
-          A data scientist and oceanographer sets out to circumnavigate Oʻahu on a paddle board —
-          blending endurance, storytelling, and open science into a single living expedition.
+    
+    <div style="text-align: center; max-width: 800px; margin: 2rem auto 1rem; padding: 0 20px;">
+        <h1 style="font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 800; margin-bottom: 10px;">New Beginnings</h1>
+        <p style="font-size: 1.1rem; color: rgba(255,255,255,0.5); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">By Drew Burrier</p>
+    </div>
+
+    <section class="intro-body">
+      
+      <div class="prose">
+        <p>
+          I moved to the island of Oahu from California in August of 2023. Over the course of that year I had completely burned my life to the ground. I had cheated on the mother of my children (multiple times), lost 3 jobs over the course of the prior 2 years, and generally alienated myself from everyone that loved and or respected me. I was in the depths of feeling that I had ruined my life and hurt everyone that I cared about. When out of the blue came a lifeline in the form of a job opportunity in Hawaii. I agonized over the decision. I may have ruined my marriage but, certainly I had the opportunity still to salvage my relationship with my daughter, the one shining light in my otherwise dark existence. Adding to the weight of that decision, my wife was pregnant. What would my relationship with my son be like with me an ocean away? For all of my faults, and they are many, one thing I know for certain is that I am a good father. The reality was that I hated what I had become in California. I have had the good fortune in my life to have lived some pretty incredible places. I grew up in Ohio, went to college on a charming mountain top in Tennessee, moved to an even more charming mountain town in Colorado, had a brief dalliance with Chicago before heading West to Santa Cruz. What I learned from all of those places was that its not places that can make you happy or sad (except Michigan). I alone have the power to determine my own emotional state. But there is certainly something about changing your environment that can help you see yourself more clearly. I was miserable that summer living on my own constantly reminded of all that I had lost. I also desperately needed a purpose in my life. The tech crunch of the previous year had seen what I thought was my dream job simply evaporate, and it had been a brutal year of rejection after rejection after rejection with no end in sight.
         </p>
+        <p>
+          I delayed a decision as long as I could but ultimately decided that as hard as it would be to move away from my children, it would be the best for everyone involved if I could continue to financially support them, while also rediscovering myself and my own happiness in life. If there was anywhere on earth that I could envision myself doing that it, it was in Hawaii. I had never been before, but I have been captivated by the ocean since I first saw it as a 5 year old on vacation in Florida. From that first moment my feet touched the water the only thing I ever wanted to be was a marine biologist. That would change in graduate school to physical oceanographer, but I never lost that magnetism to the sea. For all of the things that northern California was for me, it was the first place that I had ever lived by the ocean, and there was no going back. I loved California, but was no use to anyone in the position that I had gotten myself. Leaving was the most difficult thing I have ever done, but as crazy as it sounds it might have also been the best decision I ever made.
+        </p>
+        <p>
+          When I arrived on the island, I felt like a weight had been lifted. The self-loathing and shame that I felt about how everything went down was starting to wash away and in the space that was left behind I could see the opportunity for peace and forgiveness. That is, as of this writing, an unfinished pursuit, I suspect it always will be. But when my feet touched sand and I saw those blue green tropical waters, I felt that innocent kid still inside of me longing to be let free. For all of the pain and hurt that I had caused, I was starting to see that it was coming from that hurt child inside of me and that I could never hope to repair my relationships until I helped heal that inner child. Diving into these inviting waters and seeing all of the tropical reef fish that I had read so much about as a kid, I finally felt that was possible.
+        </p>
+        <p>
+          The introduction was slow at first, living out of a hotel in Waikiki has its advantages and slightly more numerable disadvantages, but after a month of it, I was ready to settle into my life here. The prospect of living on my own without roommates or family for the first time in my life had a certain excitement about it. I have always had a solitary streak in me. I suppose that comes from growing up in a large family with 3 brothers. I’ve gained an appreciation for the calm and quiet that comes with solitude. I think that’s the thing I love most about paddle boarding. I have had friends that accompany me on occasion, but for most of my forays, I am alone with my thoughts and the sea.
+        </p>
+      </div>
+
+      <figure class="editorial-figure">
+        <img src="photos/introduction_1.jpg" alt="Board prepped on the sand before launch">
+      </figure>
+
+      <div class="prose">
+        <p>
+          I found an apartment that suited me, and with the delivery of my belongings I finally felt I could start spreading my wings (or in this case fins) and begin the adventure of making this island my home. Most key amongst my possessions for that purpose was my ISLE inflatable paddle board, a trusty companion since 2016 when my previous version of the same board was stolen from my car in San Francisco (if you ever see me ask me to tell you that story). When inflated it is 11 feet long, but uninflated fits in the roof box of my car, a bit of rolling storage that informs the previous sentence. Larceny aside, in the small spaces I’ve lived with very limited stowage, inflatable paddle boards are a necessity. The other advantage is that its portablility allows me to take it with me whereever life takes me. Whether those waters are in Alaska or the Florida Keys, whenever I go somewhere, I want to get the lay of the land from the water. I have been drawn to “adventure” sports for as long as I can remember. I think the biggest part of that is a lifelong wonder for the planet and its many environs, coupled with a passion for seeing as many of its nooks and crannies as possible. For me those pursuits are simply the most intimate way that I can find to acquaint myself with the marvelously dynamic planet we inhabit. I might have mentioned that I’ve had the good fortune to have lived in some beautiful places, and each of those places brought an outdoor fixation for me to pursue. From backcountry skiing in Colorado, to surfing in Santa Cruz and mountain biking in Monterey, I have gotten to know some spectacular places intimately. As much as it is an endeavor to explore what is outside, each of these pursuits are also an opportunity to explore within. My most difficult challenges in life have been measured, tussled with, and ultimately overcome after contemplation on a bike, a pair of skis or board of some sort. I have found that only by caring for my body, moving it, pushing it, testing its limits, can I truly care for my mind and heart. This too is a Sisyphean task.
+        </p>
+      </div>
+
+      <figure class="editorial-figure">
+        <img src="photos/introduction_2.jpeg" alt="Coastline stretch with offshore trades">
+      </figure>
+
+      <div class="prose">
+        <p>
+          Its hard to articulate the calm that comes over me when I am out on the water. Its similar to that I’ve experienced hiking in wild space. Even if you are still able to see evidence of humanity, the sounds of the forest, or mountain or ocean overwhelm the human cacophony. On the ocean I find there is an added component, we’ll call it the “fish out of water” element that requires one to be present in the moment and aware of the conditions at all time. While I have been places where this was not the case, when I am hiking I am generally on a trail, in fairly hospitable climates such that I’m never in real danger of getting lost, or at risk of anything malevolent happening. When one is on the ocean however one’s agency is severally limited. Waves, wind, currents can all seriously threaten, and it requires careful planning and constant vigilance. One of the great costs of the access to infinite information is that it is a challenge to be present. We are constantly whiplashed between all the things that compete for our consciousness. Even in sleep it is hard to escape this battlefield. The sea has a way of putting me back in control of my attention, once again able to harness and guide my craft where it needs to be both literally and metaphorically.
+        </p>
+        <p>
+          My first paddle in Hawaii was in Kaneohe bay. I have been tracking my paddles since basically the time I started paddling back in monterey using my iwatch but was never really happy with the apple fitness app that I was using to do so. Mainly for the reason that their wasn’t a “paddle” setting. The best option for getting some sense I’ve where I’d been, how far I’d paddled, and how long I’d been out was the “outdoor swim” option. But I never really had a reason to look for anything better until I got to Hawaii, and really wanted to document where I’d been.
+        </p>
+        <p>
+          Its constantly on my mind that my kids wont have the daily access to me that my daughter once had, seeing me everyday, goofing around and just generally featuring in her everyday experience of the world. To the extent anyone truly knows me, my daughter has glimpsed the truest and purest version of me. I no longer have the ability to share that with her. It is my greatest fear that I never will. My son will not grow up knowing me in that same way. It haunts me every day. I am terrified that he never will know that me. But I’m done being governed by my fears. That shit is crippling. I can not change anything about the past, but I can do something proactive, right now to make sure those fears are not realized. It wont be easy. It will take effort, and endurance, probably some degree of core strength, all of which as it happens are benefits of stand up paddling. SO I’ve got that going for me.
+        </p>
+        <p>
+          So here it is, some effort to make myself knowable. Perhaps a way to share something personal, some window into who I am at my best and preserve it so that they can find it when they are ready. In the meantime, dear reader, I hope that you find something of interst in my journey around the island and maybe even in my journey within myself as well.
+        </p>
+      </div>
+
+      <div class="editorial-cta">
         <a class="btn btn-sun" href="https://medium.com/@drew.burrier/my-oceanic-odyssey-new-beginnings-a6ffd4f60d44" target="_blank" rel="noopener">
           Read the full introduction on Medium
-          <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+          <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true" style="margin-left: 8px;"></i>
         </a>
-      </div>
-    </section>
-      <div class="intro-grid">
-        <figure class="intro-photo">
-          <img src="photos/introduction_1.jpg" alt="Board prepped on the sand before launch">
-        </figure>
+        
+        <div class="editorial-cta-secondary">
+          <a class="btn" href="index.html">Back to the live map</a>
+          <a class="btn btn-outline" href="gallery.html">View the Photo Map</a>
         </div>
-    <!-- Story + images -->
-    <section class="card intro-body">
-      <div class="prose">
-        <p>
-          Welcome aboard. This project follows Drew’s bid to paddle around Oʻahu — not only to trace a line on the map,
-          but to explore the currents between adventure and meaning. The route is real, the conditions are real,
-          and so is the reflection that comes from long hours over blue water.
-        </p>
-        <p>
-          The Odyssey also opens the science: wind, swell, currents, and wildlife sightings feed into shared tools and
-          visualizations. Sponsors help us keep the stories generous — essays, maps, and code released openly so
-          anyone can learn from (or build on) what the ocean teaches.
-        </p>
       </div>
 
-
-      <div class="intro-grid">
-        <figure class="intro-photo">
-          <img src="photos/introduction_2.jpeg" alt="Coastline stretch with offshore trades">
-        </figure>
-      </div>
-
-      <div class="prose">
-        <p>
-          If you’re here to follow along, tap the map on the homepage and ride segment by segment. If you’re here to
-          help, the “Sponsor the Journey” link in the menu keeps fuel in the tank and pages in the logbook.
-        </p>
-      </div>
-
-      <div class="intro-cta">
-        <a class="btn" href="index.html">Back to the live map</a>
-        <a class="btn btn-outline" href="gallery.html">View the Photo Map</a>
-      </div>
     </section>
   </main>
 
-  <!-- Footer (same as index) -->
   <footer class="site-footer">
     <div class="social">
       <a aria-label="Instagram" href="https://www.instagram.com/drewski1003" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -163,4 +236,3 @@
   <script src="ui.js"></script>
 </body>
 </html>
-
