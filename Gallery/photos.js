@@ -270,5 +270,21 @@ const photoData = [
             "latitude": 21.559697222222223,
             "longitude": -157.856675
         }
+    },
+    {
+        "filename": "IMG_1102.jpeg",
+        "datetime": "2026:08:21 10:15:15",
+        "gps": {
+            "latitude": 21.31224166666667,
+            "longitude": -157.64695833333332
+        }
+    },
+    {
+        "filename": "IMG_1105.jpeg",
+        "datetime": "2026:08:21 10:16:13",
+        "gps": {
+            "latitude": 21.312380555555556,
+            "longitude": -157.64701944444442
+        }
     }
 ];
