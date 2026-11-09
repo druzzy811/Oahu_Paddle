@@ -11,7 +11,7 @@
   <!-- Fonts & vendor CSS -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <link rel="stylesheet" href="styles.css" />
@@ -135,6 +135,7 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="odyssey-theme.css" />
 </head>
 
 <!-- Google tag (gtag.js) -->
@@ -165,10 +166,10 @@
 
     <nav class="main-nav">
       <a href="introduction.html">Introduction</a>
-      <a href="science.html">Science</a>
       <a href="gallery.html">Gallery</a>
       <a href="support.html">Support</a>
       <a href="about.html">About</a>
+      <a class="open-science-nav" href="https://openoceanography.science/">Open Oceanography ↗</a>
     </nav>
   </header>
 
@@ -184,9 +185,9 @@
       <a href="TableofContents.html" aria-current="page">All Published Entries</a>
       <a href="about.html">About the Author</a>
       <a href="landing.html">Landing Page</a>
-      <a href="science.html">Open Oceanography</a>
       <a href="gallery.html">Photo Map</a>
       <a href="freelance.html">Work With Me</a>
+      <a class="sibling-drawer-link" href="https://openoceanography.science/">Open Oceanography ↗</a>
       <a class="sponsor-cta" href="support.html">Sponsor the Journey</a>
     </div>
 
@@ -214,8 +215,9 @@
     <div class="toc-container">
       
       <div class="toc-header">
-        <h1>All Published Entries</h1>
-        <p>Complete list of essays and field logs. Free friend links to read without a Medium paywall.</p>
+        <p class="odyssey-eyebrow">THE JOURNAL</p>
+        <h1>The paddles</h1>
+        <p>Every chapter of the journey around Oʻahu, from the beginning to the latest paddle. These links let you read the stories on Medium.</p>
       </div>
 
       <div class="toc-list">
@@ -233,7 +235,7 @@
         </a>
 
         <!-- Entry 1 -->
-        <a href="https://medium.com/my-oceanic-odyssey/my-oceanic-odyssey-paddle-1-735333d7ceac?source=friends_link&sk=118db82e6e50c5652b2dd068630a2677" target="_blank" rel="noopener" class="toc-item">
+        <a id="paddle-1" href="https://medium.com/my-oceanic-odyssey/my-oceanic-odyssey-paddle-1-735333d7ceac?source=friends_link&sk=118db82e6e50c5652b2dd068630a2677" target="_blank" rel="noopener" class="toc-item">
           <div class="toc-thumb">
             <img src="photos/paddle_1.jpeg" alt="Paddle 1 thumbnail">
           </div>
@@ -245,7 +247,7 @@
         </a>
 
         <!-- Entry 2 -->
-        <a href="https://medium.com/my-oceanic-odyssey/my-oceanic-odyssey-paddle-2-charting-paths-e8defcab9e6a?source=friends_link&sk=8f0eb0cf25e7a395c7fd4f53958c3748" target="_blank" rel="noopener" class="toc-item">
+        <a id="paddle-2" href="https://medium.com/my-oceanic-odyssey/my-oceanic-odyssey-paddle-2-charting-paths-e8defcab9e6a?source=friends_link&sk=8f0eb0cf25e7a395c7fd4f53958c3748" target="_blank" rel="noopener" class="toc-item">
           <div class="toc-thumb">
             <img src="photos/paddle_2.jpeg" alt="Paddle 2 thumbnail">
           </div>
@@ -257,7 +259,7 @@
         </a>
 
         <!-- Entry 3 -->
-        <a href="https://medium.com/my-oceanic-odyssey/my-oceanic-odyssey-paddle-3-respecting-limits-6db2507fc650?source=friends_link&sk=6018a3921560cb307e3c277038e18da8" target="_blank" rel="noopener" class="toc-item">
+        <a id="paddle-3" href="https://medium.com/my-oceanic-odyssey/my-oceanic-odyssey-paddle-3-respecting-limits-6db2507fc650?source=friends_link&sk=6018a3921560cb307e3c277038e18da8" target="_blank" rel="noopener" class="toc-item">
           <div class="toc-thumb">
             <img src="photos/paddle_3.jpeg" alt="Paddle 3 thumbnail">
           </div>
@@ -269,7 +271,7 @@
         </a>
 
         <!-- Entry 4 -->
-        <a href="https://medium.com/my-oceanic-odyssey/my-oceanic-odyssey-paddle-4-be-patient-d63aa25284f8?source=friends_link&sk=f56119232386c42f402572a81b53ba99" target="_blank" rel="noopener" class="toc-item">
+        <a id="paddle-4" href="https://medium.com/my-oceanic-odyssey/my-oceanic-odyssey-paddle-4-be-patient-d63aa25284f8?source=friends_link&sk=f56119232386c42f402572a81b53ba99" target="_blank" rel="noopener" class="toc-item">
           <div class="toc-thumb">
             <img src="photos/paddle_4.jpeg" alt="Paddle 4 thumbnail">
           </div>
@@ -281,7 +283,7 @@
         </a>
 
         <!-- Entry 5 -->
-        <a href="https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-5-pushing-boundaries-63fc4b555cc7?source=friends_link&sk=4c060cedb51cf8b5ec3c4bb1f32c9364" target="_blank" rel="noopener" class="toc-item">
+        <a id="paddle-5" href="https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-5-pushing-boundaries-63fc4b555cc7?source=friends_link&sk=4c060cedb51cf8b5ec3c4bb1f32c9364" target="_blank" rel="noopener" class="toc-item">
           <div class="toc-thumb">
             <img src="photos/paddle_5.jpeg" alt="Paddle 5 thumbnail">
           </div>
@@ -293,7 +295,7 @@
         </a>
 
         <!-- Entry 6 -->
-        <a href="https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-6-trust-yourself-1f95d2e8411e?sk=944d5a6f7664c5f134a23b5c9649255a" target="_blank" rel="noopener" class="toc-item">
+        <a id="paddle-6" href="https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-6-trust-yourself-1f95d2e8411e?sk=944d5a6f7664c5f134a23b5c9649255a" target="_blank" rel="noopener" class="toc-item">
           <div class="toc-thumb">
             <img src="photos/paddle_6.jpeg" alt="Paddle 6 thumbnail">
           </div>
@@ -305,7 +307,7 @@
         </a>
 
         <!-- Entry 7 -->
-        <a href="https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-7-worlds-collide-8c962574e2c4?sk=80c26d0e3fdc50a98c933b5731e0d213" target="_blank" rel="noopener" class="toc-item">
+        <a id="paddle-7" href="https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-7-worlds-collide-8c962574e2c4?sk=80c26d0e3fdc50a98c933b5731e0d213" target="_blank" rel="noopener" class="toc-item">
           <div class="toc-thumb">
             <img src="photos/paddle_7.jpeg" alt="Paddle 7 thumbnail">
           </div>
@@ -317,7 +319,7 @@
         </a>
 
         <!-- Entry 8 -->
-        <a href="https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-8-trust-the-process-c9e2c3d5cdff?sk=ea18e46234fac08a7bc5a5da6d9a5a6e" target="_blank" rel="noopener" class="toc-item">
+        <a id="paddle-8" href="https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-8-trust-the-process-c9e2c3d5cdff?sk=ea18e46234fac08a7bc5a5da6d9a5a6e" target="_blank" rel="noopener" class="toc-item">
           <div class="toc-thumb">
             <img src="photos/paddle_8.jpeg" alt="Paddle 8 thumbnail">
           </div>
@@ -329,7 +331,7 @@
         </a>
 
         <!-- Entry 9 -->
-        <a href="https://medium.com/my-oceanic-odyssey/my-oceanic-odyssey-paddle-9-a-year-in-review-c1f858d1e6ab?sk=139c46cce2081306ee7f7c931f6f23dcc" target="_blank" rel="noopener" class="toc-item">
+        <a id="paddle-9" href="https://medium.com/my-oceanic-odyssey/my-oceanic-odyssey-paddle-9-a-year-in-review-c1f858d1e6ab?sk=139c46cce2081306ee7f7c931f6f23dcc" target="_blank" rel="noopener" class="toc-item">
           <div class="toc-thumb">
             <img src="photos/paddle_9.jpeg" alt="Paddle 9 thumbnail">
           </div>
@@ -341,7 +343,7 @@
         </a>
 
         <!-- Entry 10 -->
-        <a href="https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-10-survive-793227ec80b4?sk=204b6b20ad86838be0f9cdb662709473" target="_blank" rel="noopener" class="toc-item">
+        <a id="paddle-10" href="https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-10-survive-793227ec80b4?sk=204b6b20ad86838be0f9cdb662709473" target="_blank" rel="noopener" class="toc-item">
           <div class="toc-thumb">
             <img src="photos/paddle_10.jpeg" alt="Paddle 10 thumbnail">
           </div>
@@ -353,7 +355,7 @@
         </a>
 
         <!-- Entry 11 -->
-        <a href="https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-11-take-pride-a781a9299d9a?sk=2865b68c56d069b36d13b9f178f90c6f" target="_blank" rel="noopener" class="toc-item">
+        <a id="paddle-11" href="https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-11-take-pride-a781a9299d9a?sk=2865b68c56d069b36d13b9f178f90c6f" target="_blank" rel="noopener" class="toc-item">
           <div class="toc-thumb">
             <img src="photos/paddle_11.jpeg" alt="Paddle 11 thumbnail">
           </div>
@@ -365,7 +367,7 @@
         </a>
 
         <!-- Entry 12 -->
-        <a href="https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-12-get-in-the-fight-0534ab27eca3?sk=cf71226db1a48880543f2b7c6afac3a0" target="_blank" rel="noopener" class="toc-item">
+        <a id="paddle-12" href="https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-12-get-in-the-fight-0534ab27eca3?sk=cf71226db1a48880543f2b7c6afac3a0" target="_blank" rel="noopener" class="toc-item">
           <div class="toc-thumb">
             <img src="photos/paddle_12.jpeg" alt="Paddle 12 thumbnail">
           </div>
@@ -377,7 +379,7 @@
         </a>
 
         <!-- Entry 13 -->
-        <a href="https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-13-brotherly-love-04b452686a7d?sk=d0dce77b0776befb890f4e7936e550a5" target="_blank" rel="noopener" class="toc-item">
+        <a id="paddle-13" href="https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-13-brotherly-love-04b452686a7d?sk=d0dce77b0776befb890f4e7936e550a5" target="_blank" rel="noopener" class="toc-item">
           <div class="toc-thumb">
             <img src="photos/paddle_13.jpeg" alt="Paddle 13 thumbnail">
           </div>
@@ -389,7 +391,7 @@
         </a>
 
         <!-- Entry 14 -->
-        <a href="https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-14-no-longer-immortal-3c1f914fe433?sk=dff5b5c455d590569742d24aac9cdb8c" target="_blank" rel="noopener" class="toc-item">
+        <a id="paddle-14" href="https://medium.com/@drew.burrier/my-oceanic-odyssey-paddle-14-no-longer-immortal-3c1f914fe433?sk=dff5b5c455d590569742d24aac9cdb8c" target="_blank" rel="noopener" class="toc-item">
           <div class="toc-thumb">
             <img src="photos/paddle_14.jpeg" alt="Paddle 14 thumbnail">
           </div>
@@ -413,16 +415,29 @@
   </main>
 
   <!-- Footer -->
-  <footer class="site-footer">
-    <div class="social">
-      <a aria-label="Instagram" href="https://www.instagram.com/drewski1003" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a aria-label="Medium" href="https://medium.com/my-oceanic-odyssey" target="_blank"><i class="fab fa-medium"></i></a>
-      <a aria-label="Substack" href="https://substack.com/@drewburrier" target="_blank"><i class="fas fa-newspaper"></i></a>
-      <a aria-label="LinkedIn" href="https://www.linkedin.com/in/drew-burrier-90092067/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-      <a aria-label="Spotify" href="https://open.spotify.com/user/12148616871" target="_blank"><i class="fab fa-spotify"></i></a>
+  <footer class="site-footer odyssey-footer">
+  <div class="footer-inner">
+    <div class="footer-identity">
+      <a class="footer-wordmark" href="index.html">MY OCEANIC ODYSSEY</a>
+      <p>A personal journey around Oʻahu, one paddle at a time.</p>
+      <div class="footer-social" aria-label="Follow My Oceanic Odyssey">
+        <a aria-label="Instagram" href="https://www.instagram.com/drewski1003" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+        <a aria-label="Medium" href="https://medium.com/my-oceanic-odyssey" target="_blank" rel="noopener noreferrer"><i class="fab fa-medium" aria-hidden="true"></i></a>
+        <a aria-label="Substack" href="https://substack.com/@drewburrier" target="_blank" rel="noopener noreferrer"><i class="fas fa-newspaper" aria-hidden="true"></i></a>
+        <a aria-label="LinkedIn" href="https://www.linkedin.com/in/drew-burrier-90092067/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+        <a aria-label="Spotify" href="https://open.spotify.com/user/12148616871" target="_blank" rel="noopener noreferrer"><i class="fab fa-spotify" aria-hidden="true"></i></a>
+      </div>
     </div>
-    <div class="legal">© My Oceanic Odyssey</div>
-  </footer>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="introduction.html">Introduction</a>
+      <a href="TableofContents.html">The paddles</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="about.html">About</a>
+      <a href="https://openoceanography.science/">Open Oceanography ↗</a>
+    </nav>
+  </div>
+  <div class="footer-bottom"><small>© My Oceanic Odyssey</small><small>Oʻahu, Hawaiʻi</small></div>
+</footer>
 
   <script src="ui.js"></script>
 </body>

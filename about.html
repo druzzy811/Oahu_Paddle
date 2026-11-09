@@ -11,11 +11,12 @@
   <!-- Shared fonts/vendor CSS -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <!-- Your shared site stylesheet -->
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="odyssey-theme.css" />
 </head>
 
 <!-- GA -->
@@ -47,10 +48,10 @@
 
     <nav class="main-nav">
       <a href="introduction.html">Introduction</a>
-      <a href="science.html">Science</a>
       <a href="gallery.html">Gallery</a>
       <a href="support.html">Support</a>
       <a href="about.html" aria-current="page">About</a>
+      <a class="open-science-nav" href="https://openoceanography.science/">Open Oceanography ↗</a>
     </nav>
   </header>
 
@@ -65,9 +66,9 @@
       <a href="introduction.html">Introduction</a>
       <a href="about.html" aria-current="page">About the Author</a>
       <a href="landing.html">Landing Page</a>
-      <a href="science.html">Open Oceanography</a>
       <a href="gallery.html">Photo Map</a>
       <a href="freelance.html">Work With Me</a>
+      <a class="sibling-drawer-link" href="https://openoceanography.science/">Open Oceanography ↗</a>
       <a class="sponsor-cta" href="support.html">Sponsor the Journey</a>
     </div>
   </aside>
@@ -119,16 +120,29 @@
   </main>
 
   <!-- Shared footer -->
-  <footer class="site-footer">
-    <div class="social">
-      <a aria-label="Instagram" href="https://www.instagram.com/drewski1003" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a aria-label="Medium" href="https://medium.com/my-oceanic-odyssey" target="_blank"><i class="fab fa-medium"></i></a>
-      <a aria-label="Substack" href="https://substack.com/@drewburrier" target="_blank"><i class="fas fa-newspaper"></i></a>
-      <a aria-label="LinkedIn" href="https://www.linkedin.com/in/drew-burrier-90092067/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-      <a aria-label="Spotify" href="https://open.spotify.com/user/12148616871" target="_blank"><i class="fab fa-spotify"></i></a>
+  <footer class="site-footer odyssey-footer">
+  <div class="footer-inner">
+    <div class="footer-identity">
+      <a class="footer-wordmark" href="index.html">MY OCEANIC ODYSSEY</a>
+      <p>A personal journey around Oʻahu, one paddle at a time.</p>
+      <div class="footer-social" aria-label="Follow My Oceanic Odyssey">
+        <a aria-label="Instagram" href="https://www.instagram.com/drewski1003" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+        <a aria-label="Medium" href="https://medium.com/my-oceanic-odyssey" target="_blank" rel="noopener noreferrer"><i class="fab fa-medium" aria-hidden="true"></i></a>
+        <a aria-label="Substack" href="https://substack.com/@drewburrier" target="_blank" rel="noopener noreferrer"><i class="fas fa-newspaper" aria-hidden="true"></i></a>
+        <a aria-label="LinkedIn" href="https://www.linkedin.com/in/drew-burrier-90092067/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+        <a aria-label="Spotify" href="https://open.spotify.com/user/12148616871" target="_blank" rel="noopener noreferrer"><i class="fab fa-spotify" aria-hidden="true"></i></a>
+      </div>
     </div>
-    <div class="legal">© My Oceanic Odyssey</div>
-  </footer>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="introduction.html">Introduction</a>
+      <a href="TableofContents.html">The paddles</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="about.html">About</a>
+      <a href="https://openoceanography.science/">Open Oceanography ↗</a>
+    </nav>
+  </div>
+  <div class="footer-bottom"><small>© My Oceanic Odyssey</small><small>Oʻahu, Hawaiʻi</small></div>
+</footer>
 
   
 </body>

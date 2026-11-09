@@ -11,11 +11,12 @@
   <!-- Fonts & vendor CSS -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="odyssey-theme.css" />
 </head>
 
 <!-- Google tag (gtag.js) -->
@@ -26,7 +27,7 @@
   gtag('js', new Date()); gtag('config', 'G-ZKS4VZRVKZ');
 </script>
 
-<body>
+<body class="odyssey-home">
   <!-- Ocean backdrop layers -->
   <div class="ocean-bg" aria-hidden="true"></div>
   <div class="ocean-noise" aria-hidden="true"></div>
@@ -48,10 +49,10 @@
 
     <nav class="main-nav">
       <a href="introduction.html">Introduction</a>
-      <a href="science.html">Science</a>
       <a href="gallery.html">Gallery</a>
       <a href="support.html">Support</a>
       <a href="about.html">About</a>
+      <a class="open-science-nav" href="https://openoceanography.science/">Open Oceanography ↗</a>
     </nav>
   </header>
 
@@ -66,9 +67,9 @@
       <a href="introduction.html">Introduction</a>
       <a href="about.html">About the Author</a>
       <a href="landing.html">Landing Page</a>
-      <a href="science.html">Open Oceanography</a>
       <a href="gallery.html">Photo Map</a>
       <a href="freelance.html">Work With Me</a>
+      <a class="sibling-drawer-link" href="https://openoceanography.science/">Open Oceanography ↗</a>
       <a class="sponsor-cta" href="support.html">Sponsor the Journey</a>
     </div>
 
@@ -94,47 +95,88 @@
   <!-- Main: your map untouched -->
   <main class="wrap">
     
-    <section class="card intro-hero" style="margin-top: 0; margin-bottom: 8px; padding: 0;">
-  <div class="intro-hero__content" style="padding: 8px 16px;">
-    <h1 style="margin: 0; padding: 0; font-size: clamp(18px, 2.5vw, 24px); line-height: 1.1;">
-      The Expedition Map
-    </h1>
-    
-    <p class="lead" style="margin: 4px 0 8px 0; font-size: clamp(13px, 1.4vw, 15px); line-height: 1.35;">
-      This interactive map tracks my 200-mile stand-up paddleboard circumnavigation around Oʻahu. Click the markers to explore the stats and stories from individual paddles, or start from the very beginning.
-    </p>
+    <section class="odyssey-opening" aria-labelledby="journey-heading">
+      <div class="odyssey-opening__story">
+        <p class="odyssey-eyebrow">MY OCEANIC ODYSSEY · OʻAHU, HAWAIʻI</p>
+        <h1 id="journey-heading">One island.<br>One paddle at a time.</h1>
+        <p class="odyssey-opening__lead">A personal journey around Oʻahu by stand up paddleboard, told through the water, the places, and the people along the way.</p>
+        <p class="odyssey-opening__detail">Follow the route on the interactive map, or begin with the story that started it.</p>
+        <div class="odyssey-actions">
+          <a class="odyssey-primary" href="introduction.html">Read the introduction <span aria-hidden="true">↗</span></a>
+          <a class="odyssey-secondary" href="TableofContents.html">Browse the paddles <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <a class="odyssey-opening__image" href="TableofContents.html" aria-label="Explore the paddling stories">
+        <img src="photos/introduction_1.jpg" alt="Photograph from My Oceanic Odyssey" fetchpriority="high">
+        <span class="odyssey-photo-caption">THE JOURNEY IN STORIES <span aria-hidden="true">↗</span></span>
+      </a>
+    </section>
 
-    <div class="intro-links" style="display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0;">
-      <a class="btn" href="introduction.html" style="padding: 5px 10px; font-size: 13px; background: rgba(0, 179, 198, 0.15); color: white; border: 1px solid rgba(0, 179, 198, 0.5);">
-        <i class="fas fa-book-open" style="margin-right: 6px;"></i> Read the Introduction
-      </a>
-      <a class="btn" href="TableofContents.html" style="padding: 5px 10px; font-size: 13px; background: rgba(0, 179, 198, 0.15); color: white; border: 1px solid rgba(0, 179, 198, 0.5);">
-        <i class="fas fa-book-open" style="margin-right: 6px;"></i> All Published Entries
-      </a>
+    <div class="odyssey-section-heading">
+      <div><p class="odyssey-eyebrow">THE EXPEDITION</p><h2>Follow the route</h2></div>
+      <p>Select a marker to see a paddle and follow the journey around Oʻahu.</p>
     </div>
-  </div>
-</section>
 
-    <section class="card" style="overflow: hidden;">
+    <section class="card expedition-map" style="overflow: hidden;">
       <div id="map"></div>
       <div id="mapGuide" class="map-guide">
         <p>Click markers to explore paddle routes and cycle through the journey.</p>
       </div>
     </section>
-    
+
+    <section class="odyssey-chapters-preview" aria-labelledby="journal-heading">
+      <div class="odyssey-section-heading">
+        <div><p class="odyssey-eyebrow">FROM THE JOURNAL</p><h2 id="journal-heading">The stories behind the miles</h2></div>
+        <a class="odyssey-text-link" href="TableofContents.html">All published entries <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="odyssey-preview-grid">
+        <a class="odyssey-preview-card" href="TableofContents.html#paddle-14">
+          <img src="photos/paddle_14.jpeg" alt="Photograph from Paddle 14" loading="lazy">
+          <span class="odyssey-preview-meta">PADDLE 14</span>
+          <strong>No Longer Immortal</strong>
+          <span class="odyssey-preview-more">Read this chapter <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="odyssey-preview-card" href="TableofContents.html#paddle-13">
+          <img src="photos/paddle_13.jpeg" alt="Photograph from Paddle 13" loading="lazy">
+          <span class="odyssey-preview-meta">PADDLE 13</span>
+          <strong>Brotherly Love</strong>
+          <span class="odyssey-preview-more">Read this chapter <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="odyssey-preview-card" href="TableofContents.html#paddle-12">
+          <img src="photos/paddle_12.jpeg" alt="Photograph from Paddle 12" loading="lazy">
+          <span class="odyssey-preview-meta">PADDLE 12</span>
+          <strong>Get in the Fight</strong>
+          <span class="odyssey-preview-more">Read this chapter <span aria-hidden="true">→</span></span>
+        </a>
+      </div>
+    </section>
+
   </main>
 
   <!-- Footer -->
-  <footer class="site-footer">
-    <div class="social">
-      <a aria-label="Instagram" href="https://www.instagram.com/drewski1003" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a aria-label="Medium" href="https://medium.com/my-oceanic-odyssey" target="_blank"><i class="fab fa-medium"></i></a>
-      <a aria-label="Substack" href="https://substack.com/@drewburrier" target="_blank"><i class="fas fa-newspaper"></i></a>
-      <a aria-label="LinkedIn" href="https://www.linkedin.com/in/drew-burrier-90092067/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-      <a aria-label="Spotify" href="https://open.spotify.com/user/12148616871" target="_blank"><i class="fab fa-spotify"></i></a>
+  <footer class="site-footer odyssey-footer">
+  <div class="footer-inner">
+    <div class="footer-identity">
+      <a class="footer-wordmark" href="index.html">MY OCEANIC ODYSSEY</a>
+      <p>A personal journey around Oʻahu, one paddle at a time.</p>
+      <div class="footer-social" aria-label="Follow My Oceanic Odyssey">
+        <a aria-label="Instagram" href="https://www.instagram.com/drewski1003" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+        <a aria-label="Medium" href="https://medium.com/my-oceanic-odyssey" target="_blank" rel="noopener noreferrer"><i class="fab fa-medium" aria-hidden="true"></i></a>
+        <a aria-label="Substack" href="https://substack.com/@drewburrier" target="_blank" rel="noopener noreferrer"><i class="fas fa-newspaper" aria-hidden="true"></i></a>
+        <a aria-label="LinkedIn" href="https://www.linkedin.com/in/drew-burrier-90092067/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+        <a aria-label="Spotify" href="https://open.spotify.com/user/12148616871" target="_blank" rel="noopener noreferrer"><i class="fab fa-spotify" aria-hidden="true"></i></a>
+      </div>
     </div>
-    <div class="legal">© My Oceanic Odyssey</div>
-  </footer>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="introduction.html">Introduction</a>
+      <a href="TableofContents.html">The paddles</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="about.html">About</a>
+      <a href="https://openoceanography.science/">Open Oceanography ↗</a>
+    </nav>
+  </div>
+  <div class="footer-bottom"><small>© My Oceanic Odyssey</small><small>Oʻahu, Hawaiʻi</small></div>
+</footer>
 
   <!-- Vendor JS (keep your map logic intact) -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin></script>
