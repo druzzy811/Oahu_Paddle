@@ -1,0 +1,189 @@
+/* My Oceanic Odyssey / Open Oceanography shared visual language.
+   Visual overrides only: no map, gallery, route, or application logic changed. */
+:root {
+  --deep:#061b2b;
+  --mid:#092c3b;
+  --aqua:#9ce5dd;
+  --sun:#9ce5dd;
+  --foam:#f5f6f2;
+  --text:#f3f7f6;
+  --muted:#b6cdd3;
+  --card:rgba(255,255,255,.045);
+  --stroke:rgba(177,221,225,.21);
+  --radius:10px;
+  --shadow:0 16px 44px rgba(1,16,26,.24);
+}
+html, body {font-family:'DM Sans',sans-serif;background:#061b2b;color:var(--text);line-height:1.65}
+h1,h2,h3,h4,.brand-text,.drawer-header strong {font-family:Manrope,sans-serif;letter-spacing:-.038em}
+h1,h2,h3,h4 {line-height:1.16}
+.ocean-bg {background:
+  radial-gradient(circle at 77% 12%,rgba(31,156,156,.21),transparent 41%),
+  radial-gradient(circle at 15% 90%,rgba(44,102,121,.14),transparent 47%),
+  linear-gradient(180deg,#061b2b 0%,#092c3b 56%,#061b2b 100%)}
+.ocean-noise {opacity:.06}
+/* Match the sibling site's compact cartographic header. Keep the actual Oahu trace. */
+.site-header {min-height:86px;padding:4px clamp(12px,2.2vw,32px);
+ background:#061b2b;border-bottom:1px solid #29414f;
+ backdrop-filter:none;gap:18px}
+.brand {gap:12px;letter-spacing:.01em;min-width:0}
+.brand-icon {width:67px;height:67px;flex-shrink:0;stroke:#9ce5dd;filter:none}
+.brand-icon path {stroke:#9ce5dd;stroke-width:2.4;filter:none}
+.brand-text {font-size:clamp(16px,1.45vw,21px);font-weight:800;letter-spacing:-.038em;line-height:1.16;text-shadow:none}
+.main-nav {gap:clamp(7px,1.2vw,19px);align-items:center;flex-wrap:wrap}
+.main-nav a {font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:#c8dce1;padding:8px 6px;border-radius:4px;transform:none}
+.main-nav a:hover,.main-nav a[aria-current=page] {color:#9ce5dd;background:transparent;transform:none}
+.main-nav .open-science-nav {color:#9ce5dd;border-left:1px solid #375967;padding-left:16px;margin-left:3px}
+.hamburger {width:36px;flex-shrink:0}
+.hamburger span {background:#d5eeec}
+.drawer {background:#061b2b;border-right-color:#29414f}
+.drawer-section h3 {color:#9ce5dd}
+.drawer a {border-radius:5px}
+.drawer .sibling-drawer-link {color:#9ce5dd;border-top:1px solid #29414f;margin-top:7px;padding-top:16px}
+.sponsor-cta,.btn-sun {background:#9ce5dd!important;color:#06343b!important;border-radius:5px!important}
+/* Editorial surfaces and restrained section accents. */
+.wrap {max-width:1160px;margin:28px auto 90px;padding:0 20px}
+.card {background:rgba(255,255,255,.045);border:1px solid var(--stroke);border-radius:10px;box-shadow:var(--shadow)}
+.intro-hero {background:
+ radial-gradient(circle at 85% 5%,rgba(31,156,156,.17),transparent 52%),
+ linear-gradient(135deg,rgba(15,62,79,.7),rgba(6,27,43,.8))}
+.intro-hero h1 {font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(31px,4.4vw,52px);letter-spacing:-.055em;line-height:1.12;text-shadow:none}
+.intro-hero__content {max-width:940px;padding:clamp(24px,4.5vw,52px)}
+.lead {font-family:'DM Sans',sans-serif;color:#c8e1e8;line-height:1.8}
+.prose {line-height:1.85}
+.prose p {margin-bottom:20px}
+.btn {border-radius:5px;font-size:13px;transition:background .2s,border-color .2s,transform .2s}
+.btn:not(.btn-sun) {background:rgba(255,255,255,.045);border:1px solid #52717a}
+.btn:not(.btn-sun):hover {background:rgba(156,229,221,.12);border-color:#9ce5dd}
+.site-footer {background:#061b2b;border-top:1px solid #29414f;gap:16px;flex-wrap:wrap}
+.site-footer .social a:hover {color:#9ce5dd}
+/* Retain every Leaflet/route/gallery element, marker, and sizing rule. */
+#map {border-radius:0}
+@media(max-width:900px){.site-header {grid-template-columns:40px minmax(0,1fr);min-height:76px;gap:10px}
+ .brand-icon{width:54px;height:54px}.brand-text{font-size:clamp(15px,3.4vw,19px)}
+ .main-nav{display:none}}
+@media(max-width:440px){.site-header{padding:5px 9px}.brand{gap:7px}.brand-icon{width:46px;height:46px}.brand-text{font-size:15px}.wrap{padding:0 12px}}
+
+
+/* Visual refresh v2: aligned to the Open Oceanography editorial layout.
+   Existing third-party UI, Leaflet, and gallery logic are deliberately untouched. */
+:root {--odyssey-line:#29414f;--odyssey-paper:#f5f6f2;--odyssey-soft:#c8d8de;}
+/* Retain the readable dark body but add rhythm and structure to the editorial content. */
+.wrap{width:min(1160px,calc(100% - 40px));padding:0;margin:42px auto 100px}
+.wrap > .intro-hero{margin-bottom:22px;border-color:rgba(156,229,221,.22)}
+.intro-hero__content{max-width:100%;padding:clamp(30px,5.5vw,70px)}
+.intro-hero h1{font-size:clamp(36px,5.1vw,62px);font-weight:800;line-height:1.07;max-width:900px;margin:0 0 22px}
+.intro-hero .lead{max-width:790px;font-size:clamp(15px,1.7vw,18px);line-height:1.75;margin:0 0 24px}
+.intro-links,.intro-cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.intro-links .btn,.intro-cta .btn{padding:13px 19px;font-size:13px;font-weight:700;min-height:46px}
+.intro-links .btn:first-child{background:var(--aqua);border-color:var(--aqua);color:#06343b}
+.intro-links .btn:first-child:hover{background:#c2fff1}
+.intro-links .btn:not(:first-child){background:rgba(255,255,255,.045);border:1px solid #52717a;color:#e4f8f7}
+.card{box-shadow:0 14px 42px rgba(1,16,26,.14)}
+/* Larger, quieter photo framing, without changing images, ordering or gallery event handlers. */
+.intro-grid{gap:18px}
+.intro-photo{border-radius:9px;box-shadow:0 12px 30px rgba(1,16,26,.13)}
+.intro-photo figcaption{font-size:12px;line-height:1.55;padding:13px 15px}
+.prose{max-width:880px;font-size:clamp(15px,1.22vw,17px);line-height:1.9}
+.prose p{margin-bottom:1.25em}
+/* Editorial home: a substantial introduction anchored to the existing live map. */
+.odyssey-home .wrap{margin-top:40px}
+.odyssey-home .expedition-intro{background:radial-gradient(circle at 82% 18%,rgba(31,156,156,.17),transparent 45%),linear-gradient(130deg,#092c3b,#061b2b);margin-bottom:18px}
+.odyssey-home .expedition-intro .intro-hero__content{padding:clamp(32px,5.2vw,64px)}
+.odyssey-home .expedition-intro h1{font-size:clamp(39px,5.2vw,66px);letter-spacing:-.06em}
+.odyssey-home .expedition-map{border-radius:9px;border-color:rgba(156,229,221,.26)}
+.odyssey-home #map{margin:0;min-height:440px}
+/* Chapter collection: clearer panels, existing thumbnails and hrefs preserved. */
+.toc-header{max-width:780px;margin:52px auto 36px;text-align:left}
+.toc-header h1{font-size:clamp(35px,4.4vw,56px);letter-spacing:-.055em}
+.toc-container{max-width:1000px}
+.toc-item{padding:17px 19px;border-radius:8px;border-color:var(--stroke);box-shadow:0 8px 23px rgba(1,16,26,.08)}
+.toc-item:hover{border-color:var(--aqua);background:rgba(156,229,221,.06)}
+.toc-number{font-family:'DM Sans',sans-serif}
+/* Match Open Oceanography footer anatomy, spacing and link treatment. */
+.site-footer.odyssey-footer{display:block!important;background:#061b2b;color:#c8d8de;border-top:1px solid var(--odyssey-line);padding:62px max(22px,calc((100vw - 1160px)/2)) 25px;margin:0;line-height:1.55}
+.odyssey-footer .footer-inner{display:flex;justify-content:space-between;align-items:flex-start;gap:45px;padding:0 0 49px}
+.odyssey-footer .footer-wordmark{font:800 16px Manrope,sans-serif;letter-spacing:.11em;color:#fff;text-decoration:none}
+.odyssey-footer .footer-identity p{font-size:12px;line-height:1.7;color:#9ab5bf;margin:13px 0 17px;max-width:310px}
+.odyssey-footer .footer-social{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.odyssey-footer .footer-social a{font-size:18px;color:#a9c4c9;text-decoration:none;transition:color .2s}
+.odyssey-footer .footer-social a:hover,.odyssey-footer .footer-links a:hover{color:var(--aqua)}
+.odyssey-footer .footer-links{display:flex;justify-content:flex-end;align-items:center;gap:24px;flex-wrap:wrap;max-width:620px}
+.odyssey-footer .footer-links a{font:600 13px 'DM Sans',sans-serif;text-decoration:none;color:#c8d8de;transition:color .2s}
+.odyssey-footer .footer-links a:last-child{color:var(--aqua)}
+.odyssey-footer .footer-bottom{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-top:24px;border-top:1px solid #2e4a56;color:#829faa}
+.odyssey-footer .footer-bottom small{font-size:11px}
+@media(max-width:900px){
+ .wrap{width:calc(100% - 30px);margin:26px auto 75px}
+ .odyssey-footer .footer-inner{gap:25px;flex-wrap:wrap}
+ .odyssey-footer .footer-links{justify-content:flex-start}
+}
+@media(max-width:600px){
+ .wrap{width:calc(100% - 24px)}
+ .intro-hero__content,.odyssey-home .expedition-intro .intro-hero__content{padding:26px 22px}
+ .intro-hero h1,.odyssey-home .expedition-intro h1{font-size:clamp(33px,9vw,48px)}
+ .intro-links,.intro-cta{align-items:stretch}
+ .intro-links .btn{justify-content:center}
+ .toc-item{gap:11px;padding:12px}
+ .site-footer.odyssey-footer{padding:48px 22px 24px}
+ .odyssey-footer .footer-inner{display:block;padding-bottom:35px}
+ .odyssey-footer .footer-links{justify-content:flex-start;gap:16px;margin-top:30px}
+ .odyssey-footer .footer-bottom{display:flex;flex-direction:column;align-items:flex-start;gap:9px}
+}
+@media(prefers-reduced-motion:reduce){.toc-item,.intro-links .btn{transition:none!important}}
+
+
+/* Visual refresh v4: stronger journey presentation, real existing photos, no app logic changes. */
+.odyssey-home .wrap{max-width:1200px}
+.odyssey-opening{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(320px,.88fr);min-height:480px;border:1px solid var(--stroke);border-radius:11px;overflow:hidden;background:linear-gradient(135deg,#0c3444,#061b2b 77%);margin-bottom:64px}
+.odyssey-opening__story{padding:clamp(36px,5.5vw,74px) clamp(30px,5vw,70px);display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+.odyssey-eyebrow{font:700 11px 'DM Sans',sans-serif;letter-spacing:.17em;color:var(--aqua);margin:0 0 17px;text-transform:uppercase}
+.odyssey-opening h1{font:800 clamp(43px,5vw,72px)/1.06 Manrope,sans-serif;letter-spacing:-.065em;color:#f3f7f6;margin:0 0 25px;max-width:700px}
+.odyssey-opening__lead{font-size:clamp(17px,1.5vw,21px);line-height:1.65;max-width:590px;color:#e2f1f0;margin:0 0 14px}
+.odyssey-opening__detail{font-size:15px;line-height:1.8;color:#a9c4ce;max-width:540px;margin:0 0 31px}
+.odyssey-actions{display:flex;gap:12px;flex-wrap:wrap}
+.odyssey-primary,.odyssey-secondary{display:inline-flex;align-items:center;justify-content:center;gap:18px;min-height:47px;padding:12px 19px;border-radius:5px;font:700 13px 'DM Sans',sans-serif;text-decoration:none;transition:background .2s,color .2s,border-color .2s}
+.odyssey-primary{background:var(--aqua);color:#062b35}
+.odyssey-primary:hover{background:#c2fff1;color:#062b35}
+.odyssey-secondary{border:1px solid #5a7b86;color:#e1f3f2}
+.odyssey-secondary:hover{border-color:var(--aqua);color:var(--aqua)}
+.odyssey-opening__image{display:block;position:relative;overflow:hidden;min-height:380px;background:#103648}
+.odyssey-opening__image img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;position:absolute;inset:0;transition:transform .35s}
+.odyssey-opening__image:hover img{transform:scale(1.03)}
+.odyssey-opening__image:after{content:'';position:absolute;inset:35% 0 0;background:linear-gradient(transparent,rgba(1,19,28,.7));pointer-events:none}
+.odyssey-photo-caption{position:absolute;bottom:22px;left:24px;right:24px;z-index:1;color:#fff;letter-spacing:.13em;font-size:11px;font-weight:700;display:flex;justify-content:space-between}
+.odyssey-section-heading{display:flex;align-items:end;justify-content:space-between;gap:28px;margin:0 0 20px}
+.odyssey-section-heading h2{font:800 clamp(27px,3.1vw,40px)/1.2 Manrope,sans-serif;letter-spacing:-.045em;margin:0}
+.odyssey-section-heading .odyssey-eyebrow{margin-bottom:10px}
+.odyssey-section-heading>p{font-size:14px;line-height:1.6;color:#b6cdd3;max-width:330px;margin:0 0 3px}
+.odyssey-home .expedition-map{margin-bottom:76px}
+.odyssey-chapters-preview{margin-bottom:75px}
+.odyssey-text-link{color:var(--aqua);font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap}
+.odyssey-text-link:hover{text-decoration:underline}
+.odyssey-preview-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.odyssey-preview-card{display:flex;flex-direction:column;text-decoration:none;color:#f3f7f6;border:1px solid var(--stroke);background:rgba(255,255,255,.04);border-radius:9px;overflow:hidden;transition:border-color .2s,transform .2s}
+.odyssey-preview-card:hover{border-color:var(--aqua);transform:translateY(-3px)}
+.odyssey-preview-card img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:#16394a}
+.odyssey-preview-meta{margin:20px 21px 7px;font-size:10px;font-weight:700;color:var(--aqua);letter-spacing:.15em}
+.odyssey-preview-card strong{font:800 clamp(18px,2vw,24px)/1.25 Manrope,sans-serif;letter-spacing:-.04em;margin:0 21px 18px}
+.odyssey-preview-more{font-size:12px;color:#b6cdd3;margin:auto 21px 21px}
+/* The journal is now an image-led chronicle, retaining every actual href. */
+.toc-container{max-width:1100px}
+.toc-header{max-width:790px;margin:48px 0 35px;text-align:left}
+.toc-header h1{font-size:clamp(39px,5vw,66px);line-height:1.08;margin:0 0 16px}
+.toc-header p:not(.odyssey-eyebrow){font-size:16px;line-height:1.8;max-width:690px;color:#b6cdd3}
+.toc-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.toc-item{display:flex;flex-direction:column;align-items:stretch;gap:0;padding:0;border-radius:9px;overflow:hidden;min-width:0;scroll-margin-top:110px}
+.toc-item:hover{transform:translateY(-3px)}
+.toc-thumb{width:100%;height:auto;aspect-ratio:16/10;border-radius:0;overflow:hidden}
+.toc-thumb img{height:100%;width:100%;object-fit:cover}
+.toc-item-main{display:flex;flex:1;flex-direction:column;gap:9px;padding:20px 22px 24px;min-height:120px}
+.toc-number{font:700 11px 'DM Sans',sans-serif;letter-spacing:.15em;color:var(--aqua)}
+.toc-title{font:800 clamp(18px,1.8vw,23px)/1.3 Manrope,sans-serif;color:#f3f7f6;white-space:normal;overflow:visible;text-overflow:clip;letter-spacing:-.04em}
+.toc-icon{display:none}
+.toc-list .toc-item:first-child{grid-column:span 2;display:grid;grid-template-columns:1.08fr 1fr;min-height:260px}
+.toc-list .toc-item:first-child .toc-thumb{height:100%;aspect-ratio:auto}
+.toc-list .toc-item:first-child .toc-item-main{justify-content:center;padding:32px}
+.toc-list .toc-item:first-child .toc-title{font-size:clamp(25px,3vw,40px)}
+@media(max-width:900px){.odyssey-opening{grid-template-columns:1fr}.odyssey-opening__image{min-height:310px}.toc-list{grid-template-columns:repeat(2,minmax(0,1fr))}.odyssey-preview-grid{gap:13px}}
+@media(max-width:640px){.odyssey-opening{margin-bottom:45px}.odyssey-opening__story{padding:32px 23px}.odyssey-opening h1{font-size:clamp(39px,11vw,58px)}.odyssey-opening__image{min-height:240px}.odyssey-section-heading{align-items:flex-start;flex-direction:column;gap:10px}.odyssey-preview-grid,.toc-list{grid-template-columns:1fr}.toc-list .toc-item:first-child{grid-column:auto;display:flex;min-height:0}.toc-list .toc-item:first-child .toc-thumb{aspect-ratio:16/10;height:auto}.toc-list .toc-item:first-child .toc-title{font-size:23px}.toc-list .toc-item:first-child .toc-item-main{padding:20px 22px 24px}.toc-item-main{min-height:0}.odyssey-home .expedition-map{margin-bottom:56px}}
+@media(prefers-reduced-motion:reduce){.odyssey-opening__image img,.odyssey-preview-card{transition:none}}
