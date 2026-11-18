@@ -1,0 +1,22 @@
+/* Shared navigation v1 — use in both sites.  Navigation only. */
+.site-header:has(.shared-header-row){display:block;grid-template-columns:none;position:sticky;top:0;z-index:1000;padding:0;min-height:0;overflow:visible;background:#061b2b;color:#fff;border-bottom:1px solid #29414f}
+.shared-header-row{display:flex;align-items:center;gap:22px;min-height:98px;width:100%;max-width:1400px;margin:0 auto;padding:8px clamp(16px,2.5vw,34px)}
+.shared-header-row .brand,.shared-header-row .wordmark{display:flex;align-items:center;flex:0 1 auto;min-width:0;text-decoration:none;gap:12px;margin:0}
+.shared-header-row .brand-icon{height:67px;width:67px;flex-shrink:0}
+.shared-header-row .header-projection{height:72px;width:132px;flex-shrink:0;object-fit:contain}
+.shared-header-row .brand-text,.shared-header-row .wordmark-title{font-family:Manrope,sans-serif;font-size:clamp(17px,1.65vw,23px);line-height:1.2;font-weight:800;letter-spacing:-.04em;white-space:nowrap;color:#fff}
+.shared-desktop-nav{display:flex;align-items:center;gap:clamp(10px,1.45vw,24px);margin-left:auto;flex-wrap:nowrap;min-width:0}
+.shared-desktop-nav a{color:#c8dce1;text-decoration:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;white-space:nowrap;padding:10px 0;transition:color .16s;background:transparent!important;border-radius:0}
+.shared-desktop-nav a:hover,.shared-desktop-nav a[aria-current=page]{color:#9ce5dd}
+.shared-desktop-nav .shared-sibling{color:#9ce5dd;border-left:1px solid #375967;padding-left:16px}
+.shared-menu-button{display:none;align-items:center;gap:9px;margin-left:auto;padding:9px 12px;border:1px solid #577782;border-radius:5px;background:transparent;color:#fff;font:600 13px 'DM Sans',sans-serif;cursor:pointer}
+.shared-menu-button:hover,.shared-menu-button:focus-visible{border-color:#9ce5dd;color:#9ce5dd}
+.shared-mobile-menu[hidden]{display:none!important}
+.shared-mobile-menu{position:absolute;top:100%;left:0;right:0;z-index:350;background:#092c3b;padding:8px clamp(18px,3vw,38px) 18px;box-shadow:0 16px 30px rgba(0,0,0,.23);border-bottom:1px solid #355c67}
+.shared-mobile-menu a{display:block;font:600 14px 'DM Sans',sans-serif;color:#fff;text-decoration:none;padding:13px 4px;border-top:1px solid #294e59}
+.shared-mobile-menu a:hover,.shared-mobile-menu a[aria-current=page]{color:#9ce5dd}
+.shared-mobile-menu .shared-sibling{color:#9ce5dd}
+.shared-mobile-menu .shared-menu-secondary{font-size:12px;color:#b9d4db}
+@media(max-width:1100px){.shared-header-row{min-height:84px}.shared-header-row .header-projection{width:95px;height:57px}.shared-header-row .brand-icon{width:56px;height:56px}.shared-desktop-nav{display:none}.shared-menu-button{display:inline-flex}}
+@media(max-width:500px){.shared-header-row{padding:7px 14px;min-height:76px;gap:9px}.shared-header-row .brand-icon{width:49px;height:49px}.shared-header-row .header-projection{width:69px;height:48px}.shared-header-row .brand-text,.shared-header-row .wordmark-title{font-size:clamp(15px,4vw,19px);white-space:normal}.shared-menu-button{flex-shrink:0}}
+@media(prefers-reduced-motion:reduce){.shared-desktop-nav a{transition:none}}
